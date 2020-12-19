@@ -13,10 +13,21 @@ function clear(){
 
 clear();
 
-var OriginalPosition = (0, 0);
-context.moveTo(0, 0);
-context.lineTo(100, 800);
-context.stroke();
-while (true) {
-    var AngleDeg = Math.atan2
+var OriginalPosition = {
+    x: 0,
+    y: 0
 }
+
+var FuturePosition = {
+    x: 100,
+    y: 600
+}
+
+var ang = Math.atan2((FuturePosition.y - OriginalPosition.y), (FuturePosition.x - OriginalPosition.x)) * 180 / Math.PI;
+var NewAng = 180 - ang;
+
+console.log(String(ang))
+
+context.moveTo(OriginalPosition.x, OriginalPosition.y);
+context.lineTo(FuturePosition.x, FuturePosition.y);
+context.stroke();
