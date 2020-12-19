@@ -17,3 +17,6 @@ var OriginalPosition = (0, 0);
 context.moveTo(0, 0);
 context.lineTo(100, 800);
 context.stroke();
+while (true) {
+    var AngleDeg = Math.atan2
+}
