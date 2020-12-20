@@ -85,7 +85,7 @@ context.fill();
 ComputerCircle();
 
 // to write text:
-context.fillText("use w a s d to move the circle", 200, 125);
+context.fillText("Use w a s d to move the circle. You must cover the red circle as much as you.", 200, 125);
 
 document.addEventListener("keydown", Level); // function f defined below:
 

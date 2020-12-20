@@ -26,7 +26,7 @@ var BallPosition = {x:700, y:10};
 
 //Slope
 var Slope = {
-    y: 1,
+    y: 2,
     x: 10
 }
 
@@ -39,14 +39,14 @@ var HumanX = 400;
 //Human Movement
 function Movement(e) {
     if (e.key === "d") {
-        HumanX += 10;
-        if (HumanX === 750) {
-            HumanX -= 10;
+        HumanX += 20;
+        if (HumanX >= 750) {
+            HumanX -= 20;
         }
     } else if (e.key === "a") {
-        HumanX -= 10;
-        if (HumanX === 0) {
-            HumanX += 10
+        HumanX -= 20;
+        if (HumanX <= 0) {
+            HumanX += 20
         }
     }
 

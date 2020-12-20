@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 
 img {
@@ -12,8 +13,17 @@ img {
 }
 
 #TagGame {
-    background-image: linear-gradient(to right, red, rgb(33,66,99));
+    background-image: white;
     display: flex;
     width: 150px;
     height: auto;
+}
+
+body {
+    background-color: black;
+}
+
+p {
+    color: rgb(255, 255, 255);
+    text-decoration-line: none;
 }
