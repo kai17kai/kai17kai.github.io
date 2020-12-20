@@ -21,7 +21,6 @@ function Event() {
     //Radio Buttons
     var KyleButton = document.getElementById("Kyle");
     var EthanButton = document.getElementById("Ethan");
-    var Remove = document.getElementById("Remove");
 
     if (KyleButton.checked === true) {
         if (Audio.length > 0) {
@@ -39,13 +38,6 @@ function Event() {
         }
         document.body.appendChild(EthanAudio);
         Paragraph.innerHTML = Words(2);
-    } else if (Remove.checked === true) {
-        Paragraph.innerHTML = " ";
-        if (Audio.length > 0) {
-            for (let i = 0; i <= Audio.length; ++i) {
-                Audio[i].remove();
-            }
-        }
     }
 }
 
