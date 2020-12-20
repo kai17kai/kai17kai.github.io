@@ -22,7 +22,7 @@ clear();
 context.fillStyle = "rgb(255, 255, 255)"
 
 //Current ball position
-var BallPosition = {x:100, y:10};
+var BallPosition = {x:700, y:10};
 
 //Slope
 var Slope = {
@@ -61,22 +61,41 @@ function Visibility() {
 }
 
 //Ball Movement
-var Down = true;
+var Down = true, Right = true;
 function BallMovement() {
     if (Down === true) {
-        BallPosition.x += Slope.x;
-        BallPosition.y += Slope.y;
+        if (Right === true) {
+            BallPosition.x += Slope.x;
+            BallPosition.y += Slope.y;
+        } else {
+            BallPosition.x -= Slope.x;
+            BallPosition.y += Slope.y;
+        }
     } else {
-        BallPosition.x -= Slope.x;
-        BallPosition.y -= Slope.y;
+        if (Right === false) {
+            BallPosition.x -= Slope.x;
+            BallPosition.y -= Slope.y;
+        } else {
+            BallPosition.x += Slope.x;
+            BallPosition.y -= Slope.y;
+        }
     }
 
-    if (BallPosition.x > 790 || BallPosition.x < 0) {
-        Slope.x = Reverse(Slope.x);
+    if (BallPosition.x > 790) {
+        Right = false;
+    } else if (BallPosition.x < 0) {
+        Right = true;
     }
 
-    if (BallPosition.y === 490 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 50) {
+
+    if (BallPosition.y === 490 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 25) {
         Down = false;
+        Right = false;
+        Slope.x = Reverse(Slope.x);
+    } else if (BallPosition.y === 490 && BallPosition.x >= HumanX + 25 && BallPosition.x <= HumanX + 50) {
+        Down = false;
+        Right = true;
+        Slope.x = Reverse(Slope.x);
     }
 
     if (BallPosition.y <= 0) {
