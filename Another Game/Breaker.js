@@ -30,9 +30,6 @@ var Slope = {
     x: 10
 }
 
-//Creates board
-context.fillRect(400, 500, 50, 10)
-
 //Human Position
 var HumanX = 400;
 
@@ -72,11 +69,27 @@ function BallMovement() {
         
     if (BallPosition.x > 790 || BallPosition.x < 0) {
         Slope.x = Reverse(Slope.x)
-    } 
-
+    }
 
     if (BallPosition.y === 500 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 50) {
         Down = false;
+        if (BallPosition.x < HumanX + 25) {
+            if (Slope.x < 0) {
+                Slope.x -= 1
+            } else if (Slope.x > 0) {
+                Slope.x = Reverse(Slope.x);
+                Slope.x -= 1
+            }
+        } else if (BallPosition.x > HumanX + 25) {
+            if (Slope.x > 0) {
+                Slope.x += 1;
+            } else if (Slope.x < 0) {
+                Slope.x = Reverse(Slope.x);
+                Slope.x += 1;
+            }
+        }
+        
+        Slope.y += 1;
     }
 
     if (BallPosition.y <= 0) {
