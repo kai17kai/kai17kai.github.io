@@ -3,6 +3,11 @@ canvas.height = 600; // pick whatever dimensions fit on your screen
 canvas.width = 800;
 const context = canvas.getContext("2d");
 
+//Returns oposite value
+function Reverse(number) {
+    return (number * -1);
+}
+
 //clears canvas
 function clear(){
     let temp = context.fillStyle;
@@ -13,12 +18,25 @@ function clear(){
 
 clear();
 
+//Sets color white
 context.fillStyle = "rgb(255, 255, 255)"
-context.fillRect(10, 10, 10, 10);
-var BallPosition = [100, 10];
+
+//Current ball position
+var BallPosition = {x:100, y:10};
+
+//Slope
+var Slope = {
+    y: 1,
+    x: 10
+}
+
+//Creates board
 context.fillRect(400, 500, 50, 10)
 
+//Human Position
 var HumanX = 400;
+
+//Human Movement
 function Movement(e) {
     if (e.key === "d") {
         HumanX += 10;
@@ -35,38 +53,38 @@ function Movement(e) {
     console.log(String(HumanX))
 }
 
+//Visibility of the board and ball
 function Visibility() {
     clear();
     context.fillRect(HumanX, 500, 60, 10);
-    context.fillRect(BallPosition[0], BallPosition[1], 10, 10)
+    context.fillRect(BallPosition.x, BallPosition.y, 10, 10)
 }
 
-var Up, Down = true, Left, Right;
-
+//Ball Movement
+var Down = true;
 function BallMovement() {
-    if (Up === true) {
-        BallPosition[1] -= 10;
-        if (BallPosition[1] === 0) {
-            Up = false;
-            Down = true;
-        }
-    }
     if (Down === true) {
-        BallPosition[1] += 10;
-        if (BallPosition[1] === 500 && BallPosition[0] >= HumanX && BallPosition[0] <= HumanX + 50) {
-            Down = false;
-            Up = true;
-        }
+        BallPosition.x += Slope.x;
+        BallPosition.y += Slope.y;
+    } else {
+        BallPosition.x -= Slope.x;
+        BallPosition.y -= Slope.y;
     }
-    if (Left === true) {
-        BallPosition[0] -= 10;
+
+    if (BallPosition.x > 790 || BallPosition.x < 0) {
+        Slope.x = Reverse(Slope.x);
     }
-    if (Right === true) {
-        BallPosition[0] += 10;
+
+    if (BallPosition.y === 490 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 50) {
+        Down = false;
+    }
+
+    if (BallPosition.y <= 0) {
+        Down = true;
     }
 }
 
+//Sets up shit
 document.addEventListener("keydown", Movement);
 var BallVisibility = setInterval(Visibility, 1);
-var Ball = setInterval(BallMovement, 100);
-
+var Ball = setInterval(BallMovement, 60);
