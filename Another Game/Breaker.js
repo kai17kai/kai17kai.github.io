@@ -5,7 +5,7 @@ const context = canvas.getContext("2d");
 
 //Returns oposite value
 function Reverse(number) {
-    return (number * -1);
+    return (-number);
 }
 
 //clears canvas
@@ -40,7 +40,7 @@ var HumanX = 400;
 function Movement(e) {
     if (e.key === "d") {
         HumanX += 10;
-        if (HumanX === 800) {
+        if (HumanX === 750) {
             HumanX -= 10;
         }
     } else if (e.key === "a") {
@@ -63,43 +63,32 @@ function Visibility() {
 //Ball Movement
 var Down = true, Right = true;
 function BallMovement() {
+    BallPosition.x += Slope.x;
     if (Down === true) {
-        if (Right === true) {
-            BallPosition.x += Slope.x;
-            BallPosition.y += Slope.y;
-        } else {
-            BallPosition.x -= Slope.x;
-            BallPosition.y += Slope.y;
-        }
-    } else {
-        if (Right === false) {
-            BallPosition.x -= Slope.x;
-            BallPosition.y -= Slope.y;
-        } else {
-            BallPosition.x += Slope.x;
-            BallPosition.y -= Slope.y;
-        }
+        BallPosition.y += Slope.y;
+    } else if (Down === false){
+        BallPosition.y -= Slope.y;
     }
-
-    if (BallPosition.x > 790) {
-        Right = false;
-    } else if (BallPosition.x < 0) {
-        Right = true;
-    }
+        
+    if (BallPosition.x > 790 || BallPosition.x < 0) {
+        Slope.x = Reverse(Slope.x)
+    } 
 
 
-    if (BallPosition.y === 490 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 25) {
+    if (BallPosition.y === 500 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 50) {
         Down = false;
-        Right = false;
-        Slope.x = Reverse(Slope.x);
-    } else if (BallPosition.y === 490 && BallPosition.x >= HumanX + 25 && BallPosition.x <= HumanX + 50) {
-        Down = false;
-        Right = true;
-        Slope.x = Reverse(Slope.x);
     }
 
     if (BallPosition.y <= 0) {
         Down = true;
+    }
+
+    if (BallPosition.y >= 600) {
+        clearInterval(BallVisibility);
+        clearInterval(Ball);
+        clear();
+        context.font = "30px Arial";
+        context.fillText("You Died", 400, 300);
     }
 }
 
