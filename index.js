@@ -24,14 +24,24 @@ function Event() {
     var Remove = document.getElementById("Remove");
 
     if (KyleButton.checked === true) {
+        if (Audio.length > 0) {
+            for (let i = 0; i <= Audio.length; ++i) {
+                Audio[i].remove();
+            }
+        }
         document.body.appendChild(KyleAudio);
          Paragraph.innerHTML = Words(1);
     } else if (EthanButton.checked === true) {
+        if (Audio.length > 0) {
+            for (let i = 0; i <= Audio.length; ++i) {
+                Audio[i].remove();
+            }
+        }
         document.body.appendChild(EthanAudio);
         Paragraph.innerHTML = Words(2);
     } else if (Remove.checked === true) {
         Paragraph.innerHTML = " ";
-        if (Audio != null) {
+        if (Audio.length > 0) {
             for (let i = 0; i <= Audio.length; ++i) {
                 Audio[i].remove();
             }
