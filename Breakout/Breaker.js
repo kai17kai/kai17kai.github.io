@@ -60,7 +60,7 @@ function Visibility() {
 }
 
 //Ball Movement
-var Down = true, y1, y2, y3 = true;
+var Down = false, y1, y2, y3 = true;
 function BallMovement() {
     BallPosition.x += Slope.x;
     if (y3 === true) {
