@@ -59,6 +59,9 @@ function Visibility() {
     context.fillRect(BallPosition.x, BallPosition.y, 10, 10)
 }
 
+
+
+
 //Ball Movement
 var Down = false, y1, y2, y3 = true;
 function BallMovement() {
