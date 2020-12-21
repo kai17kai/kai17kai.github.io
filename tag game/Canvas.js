@@ -129,7 +129,7 @@ function Timer() {
 			OriginalMinTime = MinTime;
 		}
 
-		if (OriginalMinTime > MinTime && OriginalSecTime > SecTime) {
+		if (OriginalMinTime >= MinTime && OriginalSecTime >= SecTime) {
 			if (SecTime < 10) {
 				TimeTaken.innerHTML = String(MinTime) + ":0" + String(SecTime);
 			} else {
