@@ -24,6 +24,102 @@ context.fillStyle = "rgb(255, 255, 255)";
 //Current ball position
 var BallPosition = {x:400, y:400};
 
+//Obstacle Locations
+var ObstacleLocations = [
+    60,
+    20,
+    140,
+    20,
+    220,
+    20,
+    300,
+    20,
+    380,
+    20,
+    460,
+    20,
+    540,
+    20,
+    620,
+    20,
+    700,
+    20,
+    60,
+    60,
+    140,
+    60,
+    220,
+    60,
+    300,
+    60,
+    380,
+    60,
+    460,
+    60,
+    540,
+    60,
+    620,
+    60,
+    700,
+    60,
+    60,
+    100,
+    60,
+    100,
+    140,
+    100,
+    220,
+    100,
+    300,
+    100,
+    380,
+    100,
+    460,
+    100,
+    540,
+    100,
+    620,
+    100,
+    700,
+    100,
+    60,
+    140,
+    140,
+    140,
+    220,
+    140,
+    300,
+    140,
+    380,
+    140,
+    460,
+    140,
+    540,
+    140,
+    620,
+    140,
+    700,
+    140,
+    60,
+    180,
+    140,
+    180,
+    220,
+    180,
+    300,
+    180,
+    380,
+    180,
+    460,
+    180,
+    540,
+    180,
+    620,
+    180,
+    700,
+    180,
+]
+
 //Slope
 var Slope = {
     y1: 1,
@@ -44,7 +140,7 @@ function Movement(e) {
         }
     } else if (e.key === "a") {
         HumanX -= 20;
-        if (HumanX <= 0) {
+        if (HumanX < 0) {
             HumanX += 20
         }
     }
@@ -55,15 +151,30 @@ function Movement(e) {
 //Visibility of the board and ball
 function Visibility() {
     clear();
-    context.fillRect(HumanX, 500, 80, 10);
+    context.fillRect(HumanX, 500, 60, 10);
     context.fillRect(BallPosition.x, BallPosition.y, 10, 10)
+    for (let i = 0; i <= ObstacleLocations.length; i += 2) {
+        context.fillRect(ObstacleLocations[i], ObstacleLocations[i + 1], 50, 10);
+    }
 }
 
-
-
-
 //Ball Movement
-var Down = false, y1, y2, y3 = true;
+var Down = false, y1, y2, y3;
+
+var Choice = Math.floor(Math.random() * 3) + 1;
+if (Choice === 1) {
+    y1 = true;
+} else if (Choice === 2) {
+    y2 = true;
+} else if (Choice === 3) {
+    y3 = true
+}
+
+Choice = Math.floor(Math.random() * 2);
+if (Choice === 1) {
+    Slope.x = Reverse(Slope.x);
+}
+
 function BallMovement() {
     BallPosition.x += Slope.x;
     if (y3 === true) {
@@ -90,7 +201,7 @@ function BallMovement() {
         Slope.x = Reverse(Slope.x)
     }
 
-    if (BallPosition.y >= 500 && BallPosition.y <= 510 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 50) {
+    if (BallPosition.y >= 490 && BallPosition.y <= 510 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 50) {
         y1 = false, y2 = false, y3 = false;
         Down = false;
         if (BallPosition.x < HumanX + 10 || BallPosition.x > HumanX + 40) {
@@ -140,5 +251,5 @@ function BallMovement() {
 //Sets up shit
 document.addEventListener("keydown", Movement);
 var BallAndBoardVisibility = setInterval(Visibility, 1);
-var Ball = setInterval(BallMovement, 60);
+//var Ball = setInterval(BallMovement, 60);
 
