@@ -154,6 +154,7 @@ function Visibility() {
     context.fillRect(HumanX, 500, 60, 10);
     context.fillRect(BallPosition.x, BallPosition.y, 10, 10)
     for (let i = 0; i <= ObstacleLocations.length; i += 2) {
+        if (ObstacleLocations[i] > 0 && ObstacleLocations[i + 1] > 0)
         context.fillRect(ObstacleLocations[i], ObstacleLocations[i + 1], 50, 10);
     }
 }
@@ -201,7 +202,7 @@ function BallMovement() {
         Slope.x = Reverse(Slope.x)
     }
 
-    if (BallPosition.y >= 490 && BallPosition.y <= 510 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 50) {
+    if (BallPosition.y >= 490 && BallPosition.y <= 500 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 50) {
         y1 = false, y2 = false, y3 = false;
         Down = false;
         if (BallPosition.x < HumanX + 10 || BallPosition.x > HumanX + 40) {
@@ -209,24 +210,32 @@ function BallMovement() {
                 if (Slope.x < 0) {
                     y1 = true;
                 } else if (Slope.x > 0) {
-                    Slope.x = Reverse(Slope.x);
                     y1 = true;
+                    Slope.x = Reverse(Slope.x);
                 }
             } else {
                 if (Slope.x < 0) {
-                    Slope.x = Reverse(Slope.x);
                     y1 = true;
+                    Slope.x = Reverse(Slope.x);
                 } else if (Slope.x > 0) {
                     y1 = true;
+                    
                 }
             }
         } else if ((BallPosition.x > HumanX + 10 && BallPosition.x < HumanX + 20) || (BallPosition.x > HumanX + 30 && BallPosition.x < HumanX + 40)) {
             if (BallPosition.x > HumanX + 10 && BallPosition.x < HumanX + 20) {
                 if (Slope.x > 0) {
-                    y2 = true;
-                } else if (Slope.x < 0) {
                     Slope.x = Reverse(Slope.x);
                     y2 = true;
+                } else if (Slope.x < 0) {
+                    y2 = true;
+                }
+            } else {
+                if (Slope.x > 0) {
+                    y2 = true;
+                } else if (Slope.x < 0) {
+                    y2 = true;
+                    Slope.x = Reverse(Slope.x);
                 }
             }
         } else {
@@ -246,10 +255,16 @@ function BallMovement() {
         context.font = "40px Arial";
         context.fillText("You Died", 400, 300);
     }
+
+    if (BallPosition.y <= 190) {
+        for (let i = 0; i <= ObstacleLocations.length; i += 2) {
+            
+        }
+    }
 }
 
 //Sets up shit
 document.addEventListener("keydown", Movement);
 var BallAndBoardVisibility = setInterval(Visibility, 1);
-//var Ball = setInterval(BallMovement, 60);
+var Ball = setInterval(BallMovement, 45);
 
