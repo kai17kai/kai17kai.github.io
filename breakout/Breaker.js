@@ -154,8 +154,9 @@ function Visibility() {
     context.fillRect(HumanX, 500, 60, 10);
     context.fillRect(BallPosition.x, BallPosition.y, 10, 10)
     for (let i = 0; i <= ObstacleLocations.length; i += 2) {
-        if (ObstacleLocations[i] > 0 && ObstacleLocations[i + 1] > 0)
-        context.fillRect(ObstacleLocations[i], ObstacleLocations[i + 1], 50, 10);
+        if (ObstacleLocations[i] > 0 && ObstacleLocations[i + 1] > 0) {
+            context.fillRect(ObstacleLocations[i], ObstacleLocations[i + 1], 50, 10);
+        }
     }
 }
 
@@ -254,12 +255,6 @@ function BallMovement() {
         context.fillStyle = "white"
         context.font = "40px Arial";
         context.fillText("You Died", 400, 300);
-    }
-
-    if (BallPosition.y <= 190) {
-        for (let i = 0; i <= ObstacleLocations.length; i += 2) {
-            
-        }
     }
 }
 
