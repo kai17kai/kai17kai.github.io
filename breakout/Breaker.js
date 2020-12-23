@@ -16,8 +16,6 @@ function clear(){
     context.fillStyle = temp;
 }
 
-clear();
-
 //Sets color white
 context.fillStyle = "rgb(255, 255, 255)";
 
@@ -26,6 +24,7 @@ var BallPosition = {x:400, y:400};
 
 //Obstacle Locations
 var ObstacleLocations = [
+    //First
     60,
     20,
     140,
@@ -44,6 +43,7 @@ var ObstacleLocations = [
     20,
     700,
     20,
+    //Second
     60,
     60,
     140,
@@ -62,6 +62,7 @@ var ObstacleLocations = [
     60,
     700,
     60,
+    //Third
     60,
     100,
     60,
@@ -82,6 +83,7 @@ var ObstacleLocations = [
     100,
     700,
     100,
+    //Fourth
     60,
     140,
     140,
@@ -100,6 +102,7 @@ var ObstacleLocations = [
     140,
     700,
     140,
+    //Fifth
     60,
     180,
     140,
