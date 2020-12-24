@@ -10,7 +10,6 @@ function Reaction(i) {
         ObstacleLocations[i] = 0;
         ObstacleLocations[i + 1] = 0;
         Down = true;
-        Slope.x = Reverse(Slope.x);
     }
     //Left
     if (BallPosition.x <= ObstacleLocations[i] + 25 && BallPosition.y >= ObstacleLocations[i + 1] - 5 && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
@@ -23,7 +22,6 @@ function Reaction(i) {
         ObstacleLocations[i] = 0;
         ObstacleLocations[i + 1] = 0;
         Down = false;
-        Slope.x = Reverse(Slope.x);
     }
     //Right
     if (BallPosition.x >= ObstacleLocations[i] + 25 && BallPosition.y >= ObstacleLocations[i + 1] && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
