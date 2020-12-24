@@ -3,6 +3,36 @@ canvas.height = 600; // pick whatever dimensions fit on your screen
 canvas.width = 800;
 const context = canvas.getContext("2d");
 
+//Used when block is hit
+function Reaction(i) {
+    //Bottom
+    if (BallPosition.x >= ObstacleLocations[i] - 5 && BallPosition.x <= ObstacleLocations[i] + 55 && BallPosition.y >= ObstacleLocations[i + 1] + 5) {
+        ObstacleLocations[i] = 0;
+        ObstacleLocations[i + 1] = 0;
+        Down = true;
+        Slope.x = Reverse(Slope.x);
+    }
+    //Left
+    if (BallPosition.x <= ObstacleLocations[i] + 25 && BallPosition.y >= ObstacleLocations[i + 1] - 5 && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
+        ObstacleLocations[i] = 0;
+        ObstacleLocations[i + 1] = 0;
+        Slope.x = Reverse(Slope.x);
+    }
+    //Top
+    if (BallPosition.x >= ObstacleLocations[i] && BallPosition.x <= ObstacleLocations[i] && BallPosition <= ObstacleLocations[i + 1] - 5) {
+        ObstacleLocations[i] = 0;
+        ObstacleLocations[i + 1] = 0;
+        Down = false;
+        Slope.x = Reverse(Slope.x);
+    }
+    //Right
+    if (BallPosition.x >= ObstacleLocations[i] + 25 && BallPosition.y >= ObstacleLocations[i + 1] && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
+        ObstacleLocations[0] = 0;
+        ObstacleLocations[1] = 0;
+        Slope.x = Reverse(Slope.x);
+    }
+}
+
 //Returns oposite value
 function Reverse(number) {
     return (-number);
@@ -157,7 +187,7 @@ function Visibility() {
     context.fillRect(HumanX, 500, 60, 10);
     context.fillRect(BallPosition.x, BallPosition.y, 10, 10)
     for (let i = 0; i <= ObstacleLocations.length; i += 2) {
-        if (ObstacleLocations[i] > 0 && ObstacleLocations[i + 1] > 0) {
+        if (ObstacleLocations[i] != 0 && ObstacleLocations[i + 1] != 0) {
             context.fillRect(ObstacleLocations[i], ObstacleLocations[i + 1], 50, 10);
         }
     }
@@ -258,6 +288,12 @@ function BallMovement() {
         context.fillStyle = "white"
         context.font = "40px Arial";
         context.fillText("You Died", 400, 300);
+    }
+
+    for (let i = 0; i <= ObstacleLocations.length; i += 2) {
+        if (ObstacleLocations[i] != 0 && ObstacleLocations[i + 1] != 0 && BallPosition.x >= ObstacleLocations[i] - 5 && BallPosition.x <= ObstacleLocations[i] + 55 && BallPosition.y >= ObstacleLocations[i + 1] - 5 && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
+            Reaction(i);
+        }
     }
 }
 
