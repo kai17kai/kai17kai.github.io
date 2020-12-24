@@ -23,6 +23,10 @@ body {
     background-color: black;
 }
 
+.Items {
+    display: flex;
+}
+
 p {
     color: rgb(255, 255, 255);
     text-decoration-line: none;
