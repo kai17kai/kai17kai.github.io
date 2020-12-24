@@ -291,6 +291,7 @@ function BallMovement() {
     for (let i = 0; i <= ObstacleLocations.length; i += 2) {
         if (ObstacleLocations[i] != 0 && ObstacleLocations[i + 1] != 0 && BallPosition.x >= ObstacleLocations[i] - 5 && BallPosition.x <= ObstacleLocations[i] + 55 && BallPosition.y >= ObstacleLocations[i + 1] - 5 && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
             Reaction(i);
+            break;
         }
     }
 }
@@ -299,4 +300,3 @@ function BallMovement() {
 document.addEventListener("keydown", Movement);
 var BallAndBoardVisibility = setInterval(Visibility, 1);
 var Ball = setInterval(BallMovement, 45);
-
