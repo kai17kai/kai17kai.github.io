@@ -12,7 +12,7 @@ img {
     object-fit: cover;
 }
 
-#TagGame {
+.game {
     background-image: white;
     display: flex;
     width: 150px;
