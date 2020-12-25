@@ -21,6 +21,7 @@ function Reaction(i) {
     if (BallPosition.x >= ObstacleLocations[i] && BallPosition.x <= ObstacleLocations[i] && BallPosition <= ObstacleLocations[i + 1] - 5) {
         ObstacleLocations[i] = 0;
         ObstacleLocations[i + 1] = 0;
+        Slope.x = Reverse(Slope.x);
         Down = false;
     }
     //Right
@@ -29,6 +30,12 @@ function Reaction(i) {
         ObstacleLocations[1] = 0;
         Slope.x = Reverse(Slope.x);
     }
+
+    clearInterval(Ball);
+    if (Speed > 35) {
+        Speed -= 1;
+    }
+    Ball = setInterval(BallMovement, Speed);
 }
 
 //Returns oposite value
@@ -299,4 +306,5 @@ function BallMovement() {
 //Sets up shit
 document.addEventListener("keydown", Movement);
 var BallAndBoardVisibility = setInterval(Visibility, 1);
-var Ball = setInterval(BallMovement, 45);
+var Ball, Speed = 45;
+Ball = setInterval(BallMovement, Speed);
