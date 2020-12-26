@@ -179,7 +179,7 @@ function Movement(e) {
     } else if (e.key === "a") {
         HumanX -= 20;
         if (HumanX < 0) {
-            HumanX += 20
+            HumanX += 20;
         }
     }
 

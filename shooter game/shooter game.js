@@ -51,7 +51,7 @@ function Shoot(e) {
 }
 
 function BulletMovement() {
-	for (let i = 0; i <= BulletPosition.length; i += 2) {
+	for (let i = 0; i < BulletPosition.length; i += 2) {
 		BulletPosition[i] += 10;
 	}
 }
@@ -74,7 +74,7 @@ function Visibility() {
 	}
 
 	//Bullet
-	for (let i = 0; i <= BulletPosition.length; i += 2) {
+	for (let i = 0; i < BulletPosition.length; i += 2) {
 		context.arc(BulletPosition[i], BulletPosition[i + 1], 10, 0, 2*Math.PI, false);
 		context.closePath();
 		context.fill();
