@@ -1,10 +1,10 @@
-const canvas = document.querySelector("#canvas");
-canvas.height = 600; // pick whatever dimensions fit on your screen
+const canvas = document.getElementById("canvas");
+canvas.height = 600;
 canvas.width = 800;
 const context = canvas.getContext("2d");
 
-//sets color
-context.fillStyle = "rgb(0, 0, 0)";
+//set color
+context.fillStyle = "rgb(255, 255, 255)";
 
 function clear() {
     let temp = context.fillStyle;
@@ -12,12 +12,15 @@ function clear() {
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = temp;
 }
-clear();
 
-//Position of Player, Computer, and Ball
-var Human = 300, Computer = 300, BallX = 400, BallY = 300;
+function Reverse(number) {
+    return (-number);
+}
 
-function Movement(e) {
+//Position of the boards and ball
+var Human = 270, Computer = 270, BallX = 390, BallY = 290;
+
+function HumanMovement(e) {
     if (e.key === "w") {
         Human -= 20;
         if (Human <= 0) {
@@ -32,11 +35,85 @@ function Movement(e) {
 }
 
 function Visibility() {
-    clear();
-    context.fillRect(100, Human, 10, 50);
-    context.fillRect(700, Computer, 10, 50);
-    context.fillRect(BallX, BallY, 10, 10);
+    clear()
+    context.fillRect(20, Human, 10, 60);
+    context.fillRect(770, Computer, 10, 60);
+    context.fillRect(BallX, BallY, 20, 20);
 }
 
-var V = setInterval(Visibility, 1);
-document.addEventListener("keydown", Movement);
+//All the posible movements for the ball
+var Down, Slope = {y1: 1, y2: 3, y3: 5, x:10}, Choice = Math.floor(Math.random() * 3) + 1, y1, y2, y3;
+
+//Slope Choice
+if (Choice === 1) {
+    y1 = true;
+} else if (Choice === 2) {
+    y2 = true;
+} else if (Choice === 3) {
+    y3 = true;
+}
+
+//Up or down
+Choice = Math.floor(Math.random() * 2);
+if (Choice === 0) {
+    Down = true;
+} else {
+    Down === false;
+}
+
+//Left or right
+Choice = Math.floor(Math.random() * 2);
+if (Choice === 0) {
+    Slope.x = Reverse(Slope.x);
+}
+
+
+function BallMovement() {
+    BallX += Slope.x;
+    if (Down === true) {
+        if (y1 === true) {
+            BallY += Slope.y1;
+        } else if (y2 === true) {
+            BallY += Slope.y2;
+        } else {
+            BallY += Slope.y3
+        }
+    } else {
+        if (y1 === true) {
+            BallY -= Slope.y1;
+        } else if (y2 === true) {
+            BallY -= Slope.y2;
+        } else {
+            BallY -= Slope.y3
+        }
+    }
+
+    //Checks if the ball is at the top or bottom
+    if (BallY <= 0) {
+        Down = true
+    } else if (BallY >= 580) {
+        Down = false;
+    }
+
+    //Checks if the ball is at the edge of the map on both sides
+    if (BallX <= 0 || BallX >= 800) {
+        IsDead();
+    }
+
+    //Checks if the ball is hitting the Human or Computer board and chooses what the reaction will be
+    if ((BallY >= Human || BallY >= Computer) && (BallY <= Human + 60 || BallY <= Computer + 60) && (BallX <= 30 || BallX >= 770) && (BallX >= 2 || BallX <= 780)) {
+        Slope.x = Reverse(Slope.x);
+    }
+}
+
+document.addEventListener("keydown", HumanMovement);
+var Visibility = setInterval(Visibility, 1);
+var BallMovement = setInterval(BallMovement, 45);
+
+function IsDead() {
+    clearInterval(Visibility);
+    clearInterval(BallMovement);
+    clear();
+    context.font = "40px Arial";
+    context.fillText("You Died", 380, 280);
+}
