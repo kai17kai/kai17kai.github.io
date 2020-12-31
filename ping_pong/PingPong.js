@@ -42,15 +42,13 @@ function Visibility() {
 }
 
 //All the posible movements for the ball
-var Down, Slope = {y1: 1, y2: 3, y3: 5, x:10}, Choice = Math.floor(Math.random() * 3) + 1, y1, y2, y3;
+var Down, Slope = {y1: 3, y2: 5, x:10}, Choice = Math.floor(Math.random() * 2) + 1, y1, y2;
 
 //Slope Choice
 if (Choice === 1) {
     y1 = true;
 } else if (Choice === 2) {
     y2 = true;
-} else if (Choice === 3) {
-    y3 = true;
 }
 
 //Up or down
@@ -71,16 +69,12 @@ function BallMovement() {
             BallY += Slope.y1;
         } else if (y2 === true) {
             BallY += Slope.y2;
-        } else {
-            BallY += Slope.y3
         }
     } else {
         if (y1 === true) {
             BallY -= Slope.y1;
         } else if (y2 === true) {
             BallY -= Slope.y2;
-        } else {
-            BallY -= Slope.y3
         }
     }
 
@@ -101,7 +95,13 @@ function BallMovement() {
         Slope.x = Reverse(Slope.x);
         if (BallY + 10 <= Human + 20 || BallY + 10 <= Computer + 20) {
             Down = false;
-            y1 = false, y2 = false, y3 = true;
+            y1 = false, y2 = true;
+        } else if ((BallY + 10 <= Human + 60 || BallY + 10 <= Computer + 60) && (BallY + 10 >= Human + 30 || BallY + 10 >= Computer + 30)) {
+            Down = true;
+            y1 = false, y2 = true;
+        } else {
+            y1 = true;
+            y2 = false;
         }
     }
 
