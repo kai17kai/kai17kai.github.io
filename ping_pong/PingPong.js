@@ -6,6 +6,10 @@ const context = canvas.getContext("2d");
 //set color
 context.fillStyle = "rgb(255, 255, 255)";
 
+//Score
+var Score = 0;
+var ScoreText = document.getElementById("Score");
+
 function clear() {
     let temp = context.fillStyle;
     context.fillStyle = "rgb(0, 0, 0)";
@@ -102,6 +106,8 @@ function BallMovement() {
 
         if (BallY >= Human && BallY <= Human + 60 && BallX <= 50 && BallX >= 30) {
             Slope.x = Reverse(Slope.x);
+            ++Score;
+            ScoreText.innerHTML = "Score: " + String(Score);
         }
     }
 
