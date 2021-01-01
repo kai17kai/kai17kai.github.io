@@ -104,16 +104,16 @@ function BallMovement() {
             Slope.x = Reverse(Slope.x);
         }
     }
+
+    function IsDead() {
+        clearInterval(Visibility);
+        clearInterval(BallMovement);
+        clear();
+        context.font = "40px Arial";
+        context.fillText("You Died", 380, 280);
+    }
 }
 
 document.addEventListener("keydown", HumanMovement);
 var Visibility = setInterval(Visibility, 1);
 var BallMovement = setInterval(BallMovement, 45);
-
-function IsDead() {
-    clearInterval(Visibility);
-    clearInterval(BallMovement);
-    clear();
-    context.font = "40px Arial";
-    context.fillText("You Died", 380, 280);
-}
