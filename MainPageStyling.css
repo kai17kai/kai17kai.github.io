@@ -20,7 +20,7 @@ img {
 }
 
 body {
-    background-color: black;
+    background-image: linear-gradient(to left, aquamarine, blueviolet);
 }
 
 .Items {
