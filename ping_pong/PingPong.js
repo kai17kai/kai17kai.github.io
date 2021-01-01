@@ -91,12 +91,12 @@ function BallMovement() {
     }
 
     //Checks if the ball is hitting the Human or Computer board and chooses what the reaction will be
-    if ((BallY + 10 >= Human || BallY + 10 >= Computer) && (BallY + 10 <= Human + 60 || BallY + 10 <= Computer + 60) && (BallX <= 40 || BallX >= 780) && (BallX >= 20 || BallX <= 780)) {
+    if ((BallY >= Human || BallY >= Computer) && (BallY <= Human + 60 || BallY <= Computer + 60) && (BallX <= 40 || BallX >= 780) && (BallX >= 30 || BallX <= 770)) {
         Slope.x = Reverse(Slope.x);
     }
 
-    if (BallX <= 780 && BallX >= 750) {
-        Computer = BallY;
+    if (BallX <= 780) {
+        Computer = BallY - 25;
     }
 }
 
