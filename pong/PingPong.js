@@ -3,6 +3,12 @@ canvas.height = 600;
 canvas.width = 800;
 const context = canvas.getContext("2d");
 
+//Interval for Ball Movement
+var Ball;
+
+//Speed for the Ball
+var Speed = 45;
+
 //set color
 context.fillStyle = "rgb(255, 255, 255)";
 
@@ -50,7 +56,7 @@ var Down, Slope = {y1: 3, y2: 5, x:10}, Choice = Math.floor(Math.random() * 2) +
 //Slope Choice
 if (Choice === 1) {
     y1 = true;
-} else if (Choice === 2) {
+} else{
     y2 = true;
 }
 
@@ -62,8 +68,11 @@ if (Choice === 0) {
     Down === false;
 }
 
-Slope.x = Reverse(Slope.x);
-
+//Left or right
+Choice = Math.floor(Math.random() * 2);
+if (Choice === 0) {
+    Slope.x = Reverse(Slope.x);
+}
 
 function BallMovement() {
     BallX += Slope.x;
@@ -99,14 +108,39 @@ function BallMovement() {
     Computer = BallY - 25;
 
     function Reaction() {
-        if (BallY >= Computer && BallY <= Computer + 60 && BallX >= 740) {
+        if ((BallY >= Computer || BallY + 20 >= Computer) && BallY <= Computer + 60 && BallX + 20 >= 740) {
             Slope.x = Reverse(Slope.x);
+            IncreaseSpeed();
+            ChangeSlope();
         }
 
-        if (BallY >= Human && BallY <= Human + 60 && BallX <= 50) {
+        if ((BallY >= Human || BallY + 20 >= Human) && BallY <= Human + 60 && BallX <= 50) {
             Slope.x = Reverse(Slope.x);
             ++Score;
             document.getElementById("Score").innerHTML = "Your Score is " + String(Score);
+            IncreaseSpeed();
+            ChangeSlope()
+        }
+
+        function IncreaseSpeed() {
+            Speed -= 1;
+            clearInterval(Ball);
+            Ball = setInterval(BallMovement, Speed);
+        }
+
+        function ChangeSlope() {
+            if (/*Top for Computer*/(BallY <= Computer + 20 || BallY + 20 <= Computer + 20) || /*Top for Human*/(BallY <= Human + 20 || BallY + 20 <= Human + 20) || /*Bottom for Human*/BallY >= Human + 40 || /*Bottom for Computer*/BallY >= Computer + 40) {
+                y1 = false;
+                y2 = true;
+                if (BallY >= Human + 40 || BallY >= Computer + 40) {
+                    Down = true;
+                } else {
+                    Down = false;
+                }
+            } else {
+                y1 = true;
+                y2 = false;
+            }
         }
     }
 
@@ -121,4 +155,4 @@ function BallMovement() {
 
 document.addEventListener("keydown", HumanMovement);
 var Visibility = setInterval(Visibility, 1);
-var BallMovement = setInterval(BallMovement, 45);
+//Ball = setInterval(BallMovement, 45);

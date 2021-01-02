@@ -13,3 +13,12 @@ function clear() {
     context.fillStyle = temp;
 }
 clear();
+
+//Bird Position
+var BirdPosition = {
+    x: 
+}
+
+function Jump() {
+
+}
