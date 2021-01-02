@@ -99,11 +99,11 @@ function BallMovement() {
     Computer = BallY - 25;
 
     function Reaction() {
-        if (BallY >= Computer && BallY <= Computer + 60 && BallX >= 740 && BallX <= 770) {
+        if (BallY >= Computer && BallY <= Computer + 60 && BallX >= 740) {
             Slope.x = Reverse(Slope.x);
         }
 
-        if (BallY >= Human && BallY <= Human + 60 && BallX <= 50 && BallX >= 30) {
+        if (BallY >= Human && BallY <= Human + 60 && BallX <= 50) {
             Slope.x = Reverse(Slope.x);
             ++Score;
             document.getElementById("Score").innerHTML = "Your Score is " + String(Score);
