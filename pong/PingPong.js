@@ -155,4 +155,4 @@ function BallMovement() {
 
 document.addEventListener("keydown", HumanMovement);
 var Visibility = setInterval(Visibility, 1);
-//Ball = setInterval(BallMovement, 45);
+Ball = setInterval(BallMovement, 45);

@@ -19,7 +19,7 @@ var ObstaclesPositions = new Array;
 var CreateObstacles = setInterval(() => {    
     ObstaclesPositions.push(730);
     ObstaclesPositions.push(Math.floor(Math.random() * 450 - 300 + 1) + 100);
-}, 1500);
+}, 1000);
 
 context.fillStyle = "rgb(0, 0, 0)";
 
