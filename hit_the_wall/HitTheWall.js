@@ -27,7 +27,7 @@ context.fillRect(0, 0, 40, canvas.height);
 var Score = 0;
 
 function Reaction() {
-    HumanX = 250;
+    HumanX += 210;
     HumanY = 150;
     Score += 1;
     document.getElementById("p").innerHTML = "You Have Hit The Wall " + String(Score) + " Times";
