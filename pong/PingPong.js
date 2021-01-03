@@ -6,6 +6,8 @@ const context = canvas.getContext("2d");
 //Interval for Ball Movement
 var Ball;
 
+var V;
+
 //Speed for the Ball
 var Speed = 45;
 
@@ -108,13 +110,13 @@ function BallMovement() {
     Computer = BallY - 25;
 
     function Reaction() {
-        if ((BallY >= Computer || BallY + 20 >= Computer) && BallY <= Computer + 60 && BallX + 20 >= 740) {
+        if (BallY >= Computer && BallY + 20 >= Computer && BallY <= Computer + 60 && BallX + 20 >= 770) {
             Slope.x = Reverse(Slope.x);
             IncreaseSpeed();
             ChangeSlope();
         }
 
-        if ((BallY >= Human || BallY + 20 >= Human) && BallY <= Human + 60 && BallX <= 50) {
+        if ((BallY >= Human && BallY + 20 >= Human) && BallY <= Human + 60 && BallX <= 40) {
             Slope.x = Reverse(Slope.x);
             ++Score;
             document.getElementById("Score").innerHTML = "Your Score is " + String(Score);
@@ -143,16 +145,16 @@ function BallMovement() {
             }
         }
     }
-
-    function IsDead() {
-        clearInterval(Visibility);
-        clearInterval(BallMovement);
-        clear();
-        context.font = "40px Arial";
-        context.fillText("You Died", 380, 280);
-    }
 }
 
 document.addEventListener("keydown", HumanMovement);
-var Visibility = setInterval(Visibility, 1);
+V = setInterval(Visibility, 1);
 Ball = setInterval(BallMovement, 45);
+
+function IsDead() {
+    clearInterval(V);
+    clearInterval(Ball);
+    clear();
+    context.font = "40px Arial";
+    context.fillText("You Died", 380, 280);
+}
