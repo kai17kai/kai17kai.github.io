@@ -1,3 +1,5 @@
+'use strict';
+
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
 canvas.width = 800;
@@ -60,5 +62,4 @@ var Visibility = setInterval(() => {
     context.fill();
 
     temp = null;
-    delete temp;
 }, 30);
