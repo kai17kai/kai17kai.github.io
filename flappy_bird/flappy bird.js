@@ -48,7 +48,7 @@ var Visibility = setInterval(() => {
     for (let x = 0; x < ObstaclesPositions.length; x += 2) {
         if (ObstaclesPositions[x] > 0) {
             context.fillRect(ObstaclesPositions[x], 0, 50, ObstaclesPositions[x + 1]);
-            context.fillRect(ObstaclesPositions[x], ObstaclesPositions[x + 1] + 125, 50, canvas.height);
+            context.fillRect(ObstaclesPositions[x], ObstaclesPositions[x + 1] + 125, 50, canvas.height - ObstaclesPositions[x + 1] + 100);
         }
     }
 

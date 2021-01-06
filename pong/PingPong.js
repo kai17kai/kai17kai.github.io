@@ -147,7 +147,9 @@ function BallMovement() {
     }
 }
 
-document.addEventListener("keydown", HumanMovement);
+document.addEventListener("mousemove", (e) => {
+    Human = e.clientY - 30;
+});
 V = setInterval(Visibility, 1);
 Ball = setInterval(BallMovement, 45);
 
