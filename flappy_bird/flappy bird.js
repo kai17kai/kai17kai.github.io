@@ -31,7 +31,7 @@ var Visibility = setInterval(() => {
     for (let x = 0; x < ObstaclesPositions.length; x += 2) {
         if (ObstaclesPositions[x] >= 0) {
             context.clearRect(ObstaclesPositions[x] + 4, 0, 50, ObstaclesPositions[x + 1]);
-            context.clearRect(ObstaclesPositions[x] + 4, ObstaclesPositions[x + 1] + 100, 50, canvas.height);
+            context.clearRect(ObstaclesPositions[x] + 4, ObstaclesPositions[x + 1] + 100, 50, canvas.height - ObstaclesPositions[x + 1] + 100);
             AtEdge(x);
         }
     }
