@@ -32,17 +32,14 @@ var Visibility = setInterval(() => {
         if (ObstaclesPositions[x] >= 0) {
             context.clearRect(ObstaclesPositions[x] + 4, 0, 50, ObstaclesPositions[x + 1]);
             context.clearRect(ObstaclesPositions[x] + 4, ObstaclesPositions[x + 1] + 100, 50, canvas.height);
-            if (ObstaclesPositions[x] < 0) {
-                ObstaclesPositions[x] = null;
-                ObstaclesPositions[x + 1] = null;
-                for (let i = 0; i < 1; ++i) {
-                    ObstaclesPositions.shift();
-                }
-            }
+            AtEdge(x);
         }
     }
 
-    context.arc(100, Player, 20, 0, 2 * Math.PI, false);
+    context.fillStyle = "rgb(255, 255, 255)";
+    context.beginPath();
+    context.arc(100, Player - 10, 30, 0, 2 * Math.PI, false);
+    context.closePath();
     context.fill();
 
     context.fillStyle = "rgb(50, 205, 50)";
@@ -57,8 +54,20 @@ var Visibility = setInterval(() => {
 
     context.fillStyle = temp;
 
+    context.beginPath();
     context.arc(100, Player, 20, 0, 2 * Math.PI, false);
+    context.closePath();
     context.fill();
 
     temp = null;
+
+    function AtEdge(x) {
+        if (ObstaclesPositions[x] < 0) {
+            ObstaclesPositions[x] = null;
+            ObstaclesPositions[x + 1] = null;
+            for (let i = 0; i < 1; ++i) {
+                ObstaclesPositions.shift();
+            }
+        }
+    }
 }, 30);
