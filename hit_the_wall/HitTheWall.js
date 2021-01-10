@@ -33,22 +33,22 @@ function Reaction() {
 }
 
 function Movement(e) {
-    if (e.key === "w") {
+    if (e.key === "w" || e.key === "ArrowUp") {
         HumanY -= 10;
         if (HumanY <= 0) {
             HumanY += 10;
         }
-    } else if (e.key === "s") {
+    } else if (e.key === "s" || e.key === "ArrowDown") {
         HumanY += 10;
         if (HumanY >= 190) {
             HumanY -= 10;
         }
-    } else if (e.key === "d") {
+    } else if (e.key === "d" || e.key === "ArrowRight") {
         HumanX += 10;
         if (HumanX >= 290) {
             HumanX -= 10;
         }
-    } else if (e.key === "a") {
+    } else if (e.key === "a" || e.key === "ArrowLeft") {
         HumanX -= 10;
         if (HumanX < -10) {
             HumanX += 10;

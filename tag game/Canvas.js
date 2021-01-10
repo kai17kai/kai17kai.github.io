@@ -33,25 +33,25 @@ clear();
 var HumanY = 125, HumanX = 125; // coordinates for the moving circle
 
 function Level(e){ // basic key-press function to move the circle around
-	if (e.key === "w") { // reset center of circle based on key pressed
+	if (e.key === "w" || e.key === "ArrowUp") { // reset center of circle based on key pressed
 		HumanY -= 6;
 		if (HumanY <= 0) {
 			HumanY += 6;
 		}
 	}
-	if (e.key === "s") {
+	if (e.key === "s" || e.key === "ArrowDown") {
 		HumanY += 6;
 		if (HumanY >= 600) {
 			HumanY -= 6;
 		}
 	}
-	if (e.key === "a") {
+	if (e.key === "a" || e.key === "ArrowLeft") {
 		HumanX -= 6;
 		if (HumanX <= 0) {
 			HumanX += 6;
 		}
 	}
-	if (e.key === "d") {
+	if (e.key === "d" || e.key === "ArrowRight") {
 		HumanX += 6;
 		if (HumanX >= 800) {
 			HumanX -= 6;

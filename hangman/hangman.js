@@ -9,7 +9,7 @@ context.fillStyle = "rgb(0, 0, 0)";
 context.font = " 20px Arial";
 
 //Creates arrays that holds the word list, right guess, and wrong guess
-var WordList = ["because", "world", "school", "schools", "military", "python", "text", "programming", "program", "electric", "computers", "computer", "ball", "soccer", "smash", "board", "white", "black", "blackboard", "whiteboard", "aim", "alive", "all", "alcohol", "airport", "ahead", "afternoon", "afraid", "air", "agency", "agricultural", "mochi", "museum", "sad", "king", "echo", "little", "kiwi", "toast", "weather", "toaster", "the", "map", "gummy", "bear", "fox", "army"];
+var WordList = ["because", "world", "school", "schools", "military", "python", "text", "programming", "program", "electric", "computers", "computer", "ball", "soccer", "smash", "board", "white", "black", "blackboard", "whiteboard", "aim", "alive", "all", "alcohol", "airport", "ahead", "afternoon", "afraid", "air", "agency", "agricultural", "mochi", "museum", "sad", "king", "echo", "little", "kiwi", "toast", "weather", "toaster", "the", "map", "gummy", "bear", "fox", "army", "beer", "shoe", "shoes", "shoot", "shooting"];
 var RightGuess = new Array();
 var WrongGuess = new Array();
 
@@ -40,7 +40,7 @@ function DisplayShit() {
         context.moveTo(LinePositions[i], 350);
         if (RightGuess.indexOf(ChosenWord[i]) > -1) {
             if (UsePositions.length <= 0 || UsePositions.indexOf(LinePositions[i]) === -1) {
-                context.fillText(ChosenWord[i], LinePositions[i], 350);
+                context.fillText(ChosenWord[i], LinePositions[i] + 5, 350);
                 UsePositions.push(LinePositions[i]);
             }
         }
@@ -72,31 +72,22 @@ function DisplayShit() {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.fillText("You Have Lost To The Easiest Game Ever.", 300, 300);
             context.fillText("The Word Was: " + ChosenWord, 300, 350);
-            document.removeEventListener("keydown", Game);
+            document.removeEventListener("keypress", Game);
         }, 2000)
     }
 }
 
 DisplayShit();
 
-document.addEventListener("keydown", Game);
+document.addEventListener("keypress", Game);
 
 function Game(e) {
     let i = ChosenWord.indexOf(e.key);
-    let restart = false;
+
     if (i >= 0) {
         RightGuess.push(e.key);
     } else {
         WrongGuess.push(e.key);
-    }
-    if (RightGuess.length == ChosenWord.length) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.fillText("You have won. Press Y to restart", 300, 300);
-        restart = true;
-    }
-
-    if (restart) {
-        window.location.reload();
     }
 
     console.log(RightGuess);
@@ -104,4 +95,17 @@ function Game(e) {
     DisplayShit();
     let l = WrongGuess.join(", ");
     document.getElementById("list").innerHTML = l;
+
+    if (LinePositions.length == UsePositions.length) {
+        setTimeout(() => {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillText("You Have Won The Game. Press y to restart the game", 300, 300);
+            document.removeEventListener("keydown", Game);
+            document.addEventListener("keydown", (e) => {
+                if (e.key == "y" || e.key == "Y") {
+                    window.location.reload();
+                }
+            })
+        }, 1000);
+    }
 }

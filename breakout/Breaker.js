@@ -171,12 +171,12 @@ var HumanX = 400;
 
 //Human Movement
 function Movement(e) {
-    if (e.key === "d") {
+    if (e.key === "d" || e.key === "ArrowRight") {
         HumanX += 20;
         if (HumanX >= 750) {
             HumanX -= 20;
         }
-    } else if (e.key === "a") {
+    } else if (e.key === "a" || e.key === "ArrowLeft") {
         HumanX -= 20;
         if (HumanX < 0) {
             HumanX += 20;
