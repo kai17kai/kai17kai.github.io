@@ -71,7 +71,7 @@ function DisplayShit() {
         setTimeout(function() {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.fillText("You Have Lost To The Easiest Game Ever.", 300, 300);
-            context.fillText("The Word Was: " + ChosenWord, 300, 350);;
+            context.fillText("The Word Was: " + ChosenWord, 300, 350);
             document.removeEventListener("keydown", Game);
         }, 2000)
     }
@@ -91,7 +91,7 @@ function Game(e) {
     }
     if (RightGuess.length == ChosenWord.length) {
         context.clearRect(0, 0, canvas.width, canvas.height);
-        context.fillText("You have won. Press Y to restart");
+        context.fillText("You have won. Press Y to restart", 300, 300);
         restart = true;
     }
 
