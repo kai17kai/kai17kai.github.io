@@ -9,7 +9,7 @@ context.fillStyle = "rgb(0, 0, 0)";
 context.font = " 20px Arial";
 
 //Creates arrays that holds the word list, right guess, and wrong guess
-var WordList = ["because", "world", "school", "schools", "military", "python", "text", "programming", "program", "electric", "computers", "computer", "ball", "soccer", "smash", "board", "white", "black", "blackboard", "whiteboard", "aim", "alive", "all", "alcohol", "airport", "ahead", "afternoon", "afriad", "air", "agency", "agricultural", "mochi", "museum", "sad", "king", "echo", "little", "kiwi", "toast", "weather", "toaster", "the", "map", "gummy", "bear", "fox", "army"];
+var WordList = ["because", "world", "school", "schools", "military", "python", "text", "programming", "program", "electric", "computers", "computer", "ball", "soccer", "smash", "board", "white", "black", "blackboard", "whiteboard", "aim", "alive", "all", "alcohol", "airport", "ahead", "afternoon", "afraid", "air", "agency", "agricultural", "mochi", "museum", "sad", "king", "echo", "little", "kiwi", "toast", "weather", "toaster", "the", "map", "gummy", "bear", "fox", "army"];
 var RightGuess = new Array();
 var WrongGuess = new Array();
 
