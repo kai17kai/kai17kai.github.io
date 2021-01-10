@@ -10,26 +10,26 @@ var ObstaclesPositions = new Array;
 
 //Holds player's y location
 var Player = 280;
+var Up = false;
 
 //Moves the obstacles
 function MoveObstacles() {
     for (let x = 0; x < ObstaclesPositions.length; x += 2) {
         ObstaclesPositions[x] -= 4;
     }
-    Player += 4;
 }
 
 //creates obstacles at 2.5 seconds
 var CreateObstacles = setInterval(() => {    
     ObstaclesPositions.push(800);
-    ObstaclesPositions.push(Math.floor(Math.random() * 450 - 400 + 1) + 400);
+    ObstaclesPositions.push(Math.floor(Math.random() * 200 + 1) + 150);
 }, 2500);
 
-const FunctionShit = () => {
+const Game = () => {
     MoveObstacles();
     let temp = context.fillStyle;
     context.fillStyle = "rgb(255, 255, 255)";
-    clear(AtEdge);
+    clear();
 
     context.fillStyle = "rgb(50, 205, 50)";
 
@@ -48,7 +48,7 @@ const FunctionShit = () => {
     context.closePath();
     context.fill();
 
-    if (Player >= canvas.height) {
+    if (Player >= canvas.height || Player <= 0) {
         context.fillStyle = "rgb(255, 255, 255)";
 
         for (let x = 0; x < ObstaclesPositions.length; x += 2) {
@@ -60,12 +60,12 @@ const FunctionShit = () => {
         }
     
         context.beginPath();
-        context.arc(100, Player - 4, 30, 0, 2 * Math.PI, false);
+        context.arc(100, Player - 2, 30, 0, 2 * Math.PI, false);
         context.closePath();
         context.fill();
 
         clearInterval(Visibility);
-        clear(AtEdge);
+        clear();
         context.fillStyle = temp;
         context.font = "40px Arial";
         context.fillText("You Died", 380, 280);
@@ -83,7 +83,7 @@ const FunctionShit = () => {
         }
     }
 
-    function clear(AtEdge) {
+    function clear() {
         for (let x = 0; x < ObstaclesPositions.length; x += 2) {
             if (ObstaclesPositions[x] >= 0) {
                 context.clearRect(ObstaclesPositions[x] + 4, 0, 50, ObstaclesPositions[x + 1]);
@@ -92,20 +92,41 @@ const FunctionShit = () => {
             }
         }
     
-        context.beginPath();
-        context.arc(100, Player - 4, 30, 0, 2 * Math.PI, false);
-        context.closePath();
-        context.fill();
+        if (Up == false) {
+            context.beginPath();
+            context.arc(100, Player - 4, 30, 0, 2 * Math.PI, false);
+            context.closePath();
+            context.fill();
+        } else {
+            context.beginPath();
+            context.arc(100, Player + 4, 30, 0, 2 * Math.PI, false);
+            context.closePath();
+            context.fill();
+        }
     }
 };
 //allows player to see themselves and the obstacles
 var Visibility;
-Visibility = setInterval(FunctionShit, 30);
+Visibility = setInterval(Game, 30);
 
-document.addEventListener("keydown",() => {
-    clearInterval(Visibility);
+var Velocity = 4;
+var Gravity = setInterval(() => {
+    if (Up == false) {
+        Player += Velocity;
+    } else {
+        Player -= Velocity;
+    }
+}, 30);
+
+document.addEventListener("keydown", (e) => {
+    if (Visibility != null) {
+        Up = true;
+        console.log(e.key);
+    }
 });
 
-document.addEventListener("keyup",() => {
-    Visibility = setInterval(FunctionShit, 30);
+document.addEventListener("keyup", (e) => {
+    if (Visibility != null) {
+        Up = false;
+    }
 })
