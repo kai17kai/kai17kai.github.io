@@ -79,9 +79,7 @@ function DisplayShit() {
 
 DisplayShit();
 
-document.addEventListener("keypress", Game);
-
-function Game(e) {
+var Game = (e) => {
     let i = ChosenWord.indexOf(e.key);
 
     if (i >= 0) {
@@ -100,12 +98,19 @@ function Game(e) {
         setTimeout(() => {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.fillText("You Have Won The Game. Press y to restart the game", 300, 300);
-            document.removeEventListener("keydown", Game);
-            document.addEventListener("keydown", (e) => {
-                if (e.key == "y" || e.key == "Y") {
-                    window.location.reload();
-                }
-            })
+            Restart();
         }, 1000);
     }
 }
+
+document.addEventListener("keypress", Game);
+
+function Restart() {
+    document.removeEventListener("keydown", Game);
+    document.addEventListener("keydown", (e) => {
+        if (e.key == "y" || e.key == "Y") {
+            window.location.reload();
+        }
+    });
+}
+
