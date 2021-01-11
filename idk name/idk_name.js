@@ -29,12 +29,18 @@ for (let i = 0; i < 10; ++i) {
     }
 }
 
+draw();
+
 var PositionColor = grid[9][9];
+
+grid[9][9] = -1;
 
 var PlayerPos = {
     x: 9,
     y: 9
 }
+
+draw();
 
 function move(event) {
     if (event.key === "w") {
@@ -89,8 +95,6 @@ function draw() {
         }
     }
 }
-
-draw();
 
 document.addEventListener("keydown", (e) => {
     move(e);
