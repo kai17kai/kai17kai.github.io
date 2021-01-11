@@ -5,6 +5,9 @@ canvas.height = 600;
 canvas.width = 800;
 const context = canvas.getContext("2d");
 
+const image = document.createElement("img");
+image.src = "background.png";
+
 context.font = "20px Arial";
 
 /*----------------------------------------------------------------*/
@@ -44,6 +47,7 @@ const Game = () => {
     let temp = context.fillStyle;
     context.fillStyle = "rgb(255, 255, 255)";
     clear();
+    context.drawImage(image, 0, 0);
 
     context.fillStyle = "rgb(50, 205, 50)";
 
@@ -62,14 +66,10 @@ const Game = () => {
     context.closePath();
     context.fill();
 
-    if (sectime < 9 && mintime < 9) {
-        context.fillText(`0${mintime}:0${sectime}`, 0, 50);
-    } else if (sectime < 9 && mintime > 9) {
+    if (sectime < 10) {
         context.fillText(`${mintime}:0${sectime}`, 0, 50);
-    } else if (sectime > 9 && mintime < 9) {
-        context.fillText(`0${mintime}:${sectime}`, 0, 50);
-    } else if (sectime > 9 && mintime > 9) {
-        context.fillText(`${mintime}:${mintime}`, 0, 50);
+    } else {
+        context.fillText(`${mintime}:${sectime}`, 0, 50);
     }
 
 
