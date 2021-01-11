@@ -84,9 +84,6 @@ context.fill();
 
 ComputerCircle();
 
-// to write text:
-context.fillText("Use w a s d to move the circle. You must cover the red circle as much as you.", 200, 150);
-
 document.addEventListener("keydown", Level); // function f defined below:
 
 //for animations, you can use:
