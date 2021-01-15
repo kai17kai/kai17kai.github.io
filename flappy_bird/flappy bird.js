@@ -66,6 +66,13 @@ const Game = () => {
     context.closePath();
     context.fill();
 
+    for (let x = 0; x < ObstaclesPositions.length; x += 2) {
+        if ((Player >= 0 && Player <= 50 && 100 - ObstaclesPositions[x] >= -20) || (Player >= ObstaclesPositions[x + 1] + 125 && Player <= canvas.height - ObstaclesPositions[x + 1] + 125 && ObstaclesPositions[x] - 100 <= 20)) {
+            document.removeEventListener("keydown", Jump);
+            document.removeEventListener("keyup", Down);
+        }
+    }
+
     if (sectime < 10) {
         context.fillText(`${mintime}:0${sectime}`, 0, 50);
     } else {
@@ -128,14 +135,18 @@ var Gravity = setInterval(() => {
     }
 }, 30); 
 
-document.addEventListener("keydown", (e) => {
+function Jump(e) {
     if (e.key === " ") {
         Up = true;
     }
-});
+}
 
-document.addEventListener("keyup", (e) => {
+function Down(e) {
     if (e.key === " ") {
         Up = false;
     }
-});
+}
+
+document.addEventListener("keydown", Jump);
+
+document.addEventListener("keyup", Down);

@@ -16,11 +16,6 @@ let grid = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
-var positions = {
-    x: 9,
-    y: 9
-}
-
 const colors = 	["orange", "aquamarine", "green", "blue", "blueviolet", "brown"];
 
 for (let i = 0; i < 10; ++i) {
@@ -32,6 +27,11 @@ for (let i = 0; i < 10; ++i) {
 draw();
 
 var PositionColor = grid[9][9];
+
+var positions = {
+    x: 9,
+    y: 9
+}
 
 grid[9][9] = -1;
 
