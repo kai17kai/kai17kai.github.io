@@ -18,7 +18,9 @@
         <label for="Kendrick">Kendrick</label><br>
         <input type="radio" name="Note" value="Kyle" onclick="button(3, this.checked)">
         <label for="Kyle">Kyle</label><br>
-        <input type="radio" name="Note" value="Remove" onclick="document.getElementById('note').innerHTML = ' ' ">
+        <input type="radio" name="Note" value="Allie" ondclick="button(4, this.checked)">
+        <label for="Allie">Allie</label><br>
+        <input type="radio" name="Note" value="Remove" onclick="document.getElementById('note').innerHTML = ' '">
         <label for="Remove">Remove</label><br>
         <p id="note"></p>
         <script>
@@ -38,6 +40,8 @@
                     return "Dear Nathan, I, a Chinese Communist, wish you a happy and a very merry birthday. Sincerely, a Chinese Communist";
                 } else if (number === 3) {
                     return "Dear Nathan, I hope you like this gift. Sorry for the horrible quality. I just created this yesterday. The code behind this is pretty cool but I think I could've done better if I worked on this for longer. But Happy Birthday Nathan."
+                } else if (number === 4) {
+                    return "Dear Nathan, You're a good animator than me. Sincerely Allie";
                 }
             }
         </script>
