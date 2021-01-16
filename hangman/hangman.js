@@ -80,12 +80,13 @@ function DisplayShit() {
 DisplayShit();
 
 var Game = (e) => {
-    let i = ChosenWord.indexOf(e.key);
+    let letter = String(e.key).toLowerCase();
+    let i = ChosenWord.indexOf(letter);
 
     if (i >= 0) {
-        RightGuess.push(e.key);
+        RightGuess.push(letter);
     } else {
-        WrongGuess.push(e.key);
+        WrongGuess.push(letter);
     }
 
     console.log(RightGuess);
