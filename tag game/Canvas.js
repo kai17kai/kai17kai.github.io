@@ -2,6 +2,10 @@ const canvas = document.querySelector("#canvas");
 canvas.height = 600; // pick whatever dimensions fit on your screen
 canvas.width = 800;
 const context = canvas.getContext("2d");
+
+context.fillStyle = "white";
+context.fillRect(0, 0, canvas.width, canvas.height);
+
 //Set Color
 context.fillStyle = "rgb(33,66,99)";
 
@@ -19,15 +23,6 @@ function ComputerCircle() {
 	context.fill();
 	context.fillStyle = temp;
 }
-
-//clears canvas
-function clear(){
-	let temp = context.fillStyle; 						
-	context.fillStyle = "rgb(255,255,255)"; 
-	context.fillRect(0,0, canvas.width, canvas.height);
-	context.fillStyle = temp;						
-}
-clear();
 
 //Movement
 var HumanY = 125, HumanX = 125; // coordinates for the moving circle
@@ -58,65 +53,7 @@ function Level(e){ // basic key-press function to move the circle around
 		}
 	}
 
-	clear();				// clear canvas and draw the new circle
-	
-	//Computer's Circle
-	var temp = context.fillStyle;
-	context.fillStyle = "red";
-	context.beginPath();
-	context.arc(ComputerX,ComputerY,30,0,2*Math.PI,false);
-	context.closePath();
-	context.fill();
-	context.fillStyle = temp;
-	
-	//Human's Circle
-	context.beginPath();
-	context.arc(HumanX,HumanY,30,0,2*Math.PI,false);
-	context.closePath();
-	context.fill();
-
-	console.log(String(HumanX - ComputerX));
-	console.log(String(HumanY - ComputerY));
-}
-
-context.arc(125,125,30,0,2*Math.PI,false); // center at (125,125), radius = 30
-context.fill();
-
-ComputerCircle();
-
-document.addEventListener("keydown", Level); // function f defined below:
-
-//for animations, you can use:
-//setInterval(function, how often to call it)
-//let id = setInterval(g, 100) will call function g 10 times per second
-// (every 100 milliseconds)
-//you save the id so it can be stopped later with clearInterval(id);
-
-/*-----------------------------------------------------------------------------*/
-var SecTime = 0, MinTime = 0, Distance;
-
-var Time = document.createElement("p");
-var TimeText = document.createTextNode("0:00");
-Time.appendChild(TimeText);
-
-document.body.appendChild(Time);
-
-var OriginalSecTime = null, OriginalMinTime = null
-
-function Timer() {
-	SecTime += 1;
-	if (SecTime > 59) {
-		SecTime = 0;
-		MinTime += 1;
-	}
-	if (SecTime < 10) {
-		TimeText.nodeValue = String(MinTime) + ":0" + String(SecTime);
-	} else {
-		TimeText.nodeValue = String(MinTime) + ":" + String(SecTime);
-	}
-
-	let a = HumanX - ComputerX, b = HumanY - ComputerY
-	Distance = Math.hypot(a, b);
+	Distance = Math.sqrt(Math.pow(HumanX - ComputerX, 2) + Math.pow(HumanY - ComputerY, 2))
 	
 	var TimeTaken = document.getElementById("HighScore")
 
@@ -144,6 +81,65 @@ function Timer() {
 		
 		SecTime = 0; MinTime = 0;
 		ComputerCircle();
+	}
+
+	var temp = context.fillStyle;
+
+	context.fillStyle = "white";
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	
+	
+	//Computer's Circle
+	context.fillStyle = "red";
+	context.beginPath();
+	context.arc(ComputerX,ComputerY,30,0,2*Math.PI,false);
+	context.closePath();
+	context.fill();
+	context.fillStyle = temp;
+	
+	//Human's Circle
+	context.beginPath();
+	context.arc(HumanX,HumanY,30,0,2*Math.PI,false);
+	context.closePath();
+	context.fill();
+
+	console.log(String(Distance));
+}
+
+context.arc(125,125,30,0,2*Math.PI,false); // center at (125,125), radius = 30
+context.fill();
+
+ComputerCircle();
+
+document.addEventListener("keydown", Level); // function f defined below:
+
+//for animations, you can use:
+//setInterval(function, how often to call it)
+//let id = setInterval(g, 100) will call function g 10 times per second
+// (every 100 milliseconds)
+//you save the id so it can be stopped later with clearInterval(id);
+
+/*-----------------------------------------------------------------------------*/
+var SecTime = 0, MinTime = 0, Distance;
+
+var Time = document.createElement("h3");
+var TimeText = document.createTextNode("0:00");
+Time.appendChild(TimeText);
+
+document.body.appendChild(Time);
+
+var OriginalSecTime = null, OriginalMinTime = null
+
+function Timer() {
+	SecTime += 1;
+	if (SecTime > 59) {
+		SecTime = 0;
+		MinTime += 1;
+	}
+	if (SecTime < 10) {
+		TimeText.nodeValue = String(MinTime) + ":0" + String(SecTime);
+	} else {
+		TimeText.nodeValue = String(MinTime) + ":" + String(SecTime);
 	}
 }
 

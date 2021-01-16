@@ -12,6 +12,7 @@ context.font = " 20px Arial";
 var WordList = ["because", "world", "school", "schools", "military", "python", "text", "programming", "program", "electric", "computers", "computer", "ball", "soccer", "smash", "board", "white", "black", "blackboard", "whiteboard", "aim", "alive", "all", "alcohol", "airport", "ahead", "afternoon", "afraid", "air", "agency", "agricultural", "mochi", "museum", "sad", "king", "echo", "little", "kiwi", "toast", "weather", "toaster", "the", "map", "gummy", "bear", "fox", "army", "beer", "shoe", "shoes", "shoot", "shooting"];
 var RightGuess = new Array();
 var WrongGuess = new Array();
+var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 var ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
 
@@ -83,10 +84,12 @@ var Game = (e) => {
     let letter = String(e.key).toLowerCase();
     let i = ChosenWord.indexOf(letter);
 
-    if (i >= 0) {
-        RightGuess.push(letter);
-    } else {
-        WrongGuess.push(letter);
+    if (alphabet.indexOf(letter) > -1) {
+        if (i >= 0) {
+            RightGuess.push(letter);
+        } else {
+            WrongGuess.push(letter);
+        }
     }
 
     console.log(RightGuess);
