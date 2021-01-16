@@ -93,7 +93,7 @@ document.addEventListener("keydown", Level); // function f defined below:
 //you save the id so it can be stopped later with clearInterval(id);
 
 /*-----------------------------------------------------------------------------*/
-var SecTime = 0, MinTime = 0, DifferenceBetweenX, DifferenceBetweenY;
+var SecTime = 0, MinTime = 0, Distance;
 
 var Time = document.createElement("p");
 var TimeText = document.createTextNode("0:00");
@@ -115,12 +115,12 @@ function Timer() {
 		TimeText.nodeValue = String(MinTime) + ":" + String(SecTime);
 	}
 
-	DifferenceBetweenX = HumanX - ComputerX;
-	DifferenceBetweenY = HumanY - ComputerY;
+	let a = HumanX - ComputerX, b = HumanY - ComputerY
+	Distance = Math.hypot(a, b);
 	
 	var TimeTaken = document.getElementById("HighScore")
 
-	if (DifferenceBetweenX >= -5 && DifferenceBetweenX <= 5 && DifferenceBetweenY >= -5 && DifferenceBetweenY <= 5) {
+	if (Distance <= 60) {
 		if (OriginalMinTime === null && OriginalSecTime === null) {
 			OriginalSecTime = SecTime;
 			OriginalMinTime = MinTime;
