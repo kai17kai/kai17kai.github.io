@@ -17,6 +17,7 @@ img {
     display: flex;
     width: 150px;
     height: auto;
+    justify-content: center;
 }
 
 body {
@@ -25,9 +26,17 @@ body {
 
 .Items {
     display: flex;
+    justify-content: space-evenly;
 }
 
 p {
     color: rgb(255, 255, 255);
+}
+
+a {
     text-decoration-line: none;
+}
+
+p:hover {
+    color:rgb(23, 223, 234)
 }
