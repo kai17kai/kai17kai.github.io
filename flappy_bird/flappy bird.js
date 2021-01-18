@@ -57,14 +57,22 @@ const Game = () => {
             context.fillRect(ObstaclesPositions[x], 0, 50, ObstaclesPositions[x + 1]);
             context.fillRect(ObstaclesPositions[x], ObstaclesPositions[x + 1] + 125, 50, canvas.height - ObstaclesPositions[x + 1] + 125);
         }
+
+        if ((Player >= 0 && Player <= ObstaclesPositions[x + 1]) || (Player >= ObstaclesPositions[x + 1] + 125 && Player <= canvas.height)) {
+            let distance = Math.sqrt(Math.pow(100 - ObstaclesPositions[x], 2))
+            if (distance <= 20 || (ObstaclesPositions[x] < 100 && distance <= 70)) {
+                Player = 700;
+            }
+        }
     }
 
-    context.fillStyle = temp;
-
+    context.fillStyle = "rgb(240, 240, 0)";
     context.beginPath();
     context.arc(100, Player, 20, 0, 2 * Math.PI, false);
     context.closePath();
     context.fill();
+
+    context.fillStyle = temp;
 
     if (sectime < 10) {
         context.fillText(`${mintime}:0${sectime}`, 0, 50);
@@ -72,15 +80,19 @@ const Game = () => {
         context.fillText(`${mintime}:${sectime}`, 0, 50);
     }
 
-
     if (Player >= canvas.height || Player <= 0) {
+        dead();
+        Player = 700;
+    }
+
+    temp = null;
+
+    function dead() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = temp;
         context.font = "40px Arial";
         context.fillText("You Died", 380, 280);
     }
-
-    temp = null;
 
     function AtEdge(x) {
         if (ObstaclesPositions[x] < 0) {
