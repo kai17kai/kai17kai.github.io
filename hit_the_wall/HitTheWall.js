@@ -6,15 +6,6 @@ const context = canvas.getContext("2d");
 //set color
 context.fillStyle = "rgb(255, 255, 255)";
 
-function clear() {
-    let temp = context.fillStyle;
-    context.fillStyle = "rgb(0, 0, 0)";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = temp;
-}
-
-clear();
-
 //Position of the Player
 var HumanX = 250, HumanY = 150;
 
@@ -33,6 +24,11 @@ function Reaction() {
 }
 
 function Movement(e) {
+    let temp = context.fillStyle;
+    context.fillStyle = "black";
+    context.fillRect(HumanX, HumanY, 20, 20);
+    context.fillStyle = temp;
+
     if (e.key === "w" || e.key === "ArrowUp") {
         HumanY -= 10;
         if (HumanY <= 0) {
@@ -55,17 +51,14 @@ function Movement(e) {
         }
     }
 
-    clear();
-
-    if (HumanX <= 40) {
-        Reaction();
-    }
-
     //Draws Human
     context.fillRect(HumanX, HumanY, 20, 20);
 
-    //Draws THE WALL
-    context.fillRect(0, 0, 40, canvas.height);
+    let distance = Math.sqrt(Math.pow(HumanX - 0, 2) + Math.pow(HumanY - HumanY, 2));
+
+    if (distance <= 20) {
+        Reaction();
+    }
 }
 
 document.addEventListener("keydown", Movement);
