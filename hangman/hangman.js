@@ -13,6 +13,7 @@ var WordList = ["because", "world", "school", "schools", "military", "python", "
 var RightGuess = new Array();
 var WrongGuess = new Array();
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var NotOver = true;
 
 var ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
 
@@ -81,40 +82,37 @@ function DisplayShit() {
 DisplayShit();
 
 var Game = (e) => {
-    let letter = String(e.key).toLowerCase();
-    let i = ChosenWord.indexOf(letter);
+    if (NotOver) {
+        let letter = String(e.key).toLowerCase();
+        let i = ChosenWord.indexOf(letter);
 
-    if (alphabet.indexOf(letter) > -1) {
-        if (i >= 0) {
-            RightGuess.push(letter);
-        } else {
-            WrongGuess.push(letter);
+        if (alphabet.indexOf(letter) > -1) {
+            if (i >= 0) {
+                RightGuess.push(letter);
+            } else {
+                WrongGuess.push(letter);
+            }
         }
-    }
 
-    console.log(RightGuess);
-    console.log(WrongGuess);
-    DisplayShit();
-    let l = WrongGuess.join(", ");
-    document.getElementById("list").innerHTML = l;
+        console.log(RightGuess);
+        console.log(WrongGuess);
+        DisplayShit();
+        let l = WrongGuess.join(", ");
+        document.getElementById("list").innerHTML = l;
 
-    if (LinePositions.length == UsePositions.length) {
-        setTimeout(() => {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.fillText("You Have Won The Game. Press y to restart the game", 300, 300);
-            Restart();
-        }, 1000);
+        if (LinePositions.length == UsePositions.length) {
+            setTimeout(() => {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.fillText("You Have Won The Game. Press y to restart the game", 300, 300);
+                NotOver = false;
+                document.addEventListener("keydown", (e) => {
+                    if (e.key == "y" || e.key == "Y") {
+                        window.location.reload();
+                    }
+                });
+            }, 1000);
+        }
     }
 }
 
 document.addEventListener("keypress", Game);
-
-function Restart() {
-    document.removeEventListener("keydown", Game);
-    document.addEventListener("keydown", (e) => {
-        if (e.key == "y" || e.key == "Y") {
-            window.location.reload();
-        }
-    });
-}
-
