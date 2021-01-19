@@ -9,6 +9,7 @@
 img {
     height: 150;
     width: 15vw;
+    max-width: 150px;
     object-fit: cover;
 }
 

@@ -1,6 +1,6 @@
 const canvas = document.querySelector("#canvas");
-canvas.height = 600; // pick whatever dimensions fit on your screen
-canvas.width = 800;
+canvas.height = 500; // pick whatever dimensions fit on your screen
+canvas.width = 700;
 const context = canvas.getContext("2d");
 
 context.fillStyle = "white";
@@ -13,8 +13,8 @@ context.fillStyle = "rgb(33,66,99)";
 var ComputerX, ComputerY;
 
 function ComputerCircle() {
-	ComputerX = Math.floor(Math.random() * 800) + 1;
-	ComputerY = Math.floor(Math.random() * 600) + 1;
+	ComputerX = Math.floor(Math.random() * 700) + 1;
+	ComputerY = Math.floor(Math.random() * 500) + 1;
 	var temp = context.fillStyle;
 	context.fillStyle = "red";
 	context.beginPath();
@@ -82,9 +82,6 @@ function Level(e){ // basic key-press function to move the circle around
 		SecTime = 0; MinTime = 0;
 		ComputerCircle();
 	}
-
-	var temp = context.fillStyle;
-
 	context.fillStyle = "white";
 	context.fillRect(0, 0, canvas.width, canvas.height);
 	
@@ -95,9 +92,9 @@ function Level(e){ // basic key-press function to move the circle around
 	context.arc(ComputerX,ComputerY,30,0,2*Math.PI,false);
 	context.closePath();
 	context.fill();
-	context.fillStyle = temp;
 	
 	//Human's Circle
+	context.fillStyle = "rgb(33, 66, 99)";
 	context.beginPath();
 	context.arc(HumanX,HumanY,30,0,2*Math.PI,false);
 	context.closePath();
