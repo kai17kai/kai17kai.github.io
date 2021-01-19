@@ -56,7 +56,7 @@ function Movement(e) {
 
     let distance = Math.sqrt(Math.pow(HumanX - 0, 2) + Math.pow(HumanY - HumanY, 2));
 
-    if (distance <= 20) {
+    if (distance <= 40) {
         Reaction();
     }
 }
