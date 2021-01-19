@@ -51,14 +51,14 @@ function Movement(e) {
         }
     }
 
-    //Draws Human
-    context.fillRect(HumanX, HumanY, 20, 20);
-
     let distance = Math.sqrt(Math.pow(HumanX - 0, 2) + Math.pow(HumanY - HumanY, 2));
 
     if (distance <= 40) {
         Reaction();
     }
+
+    //Draws Human
+    context.fillRect(HumanX, HumanY, 20, 20);
 }
 
 document.addEventListener("keydown", Movement);
