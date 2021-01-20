@@ -108,7 +108,7 @@ var Game = (e) => {
         let l = WrongGuess.join(", ");
         document.getElementById("list").innerHTML = l;
 
-        if (LinePositions.length == UsePositions.length || WrongGuess.length) {
+        if (LinePositions.length == UsePositions.length || WrongGuess.length == ChosenWord.length) {
             setTimeout(() => {
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.fillText("You Have Won The Game. Press y to restart the game", 300, 300);
