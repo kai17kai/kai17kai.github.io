@@ -1,5 +1,3 @@
-"use strict";
-
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
 canvas.width = 800;
@@ -25,6 +23,8 @@ for (let i = 0; i < ChosenWord.length; ++i) {
 }
 
 var NotDrawn = true;
+
+var amount = 1;
 
 function DisplayShit() {
     if (NotDrawn) {
@@ -70,18 +70,15 @@ function DisplayShit() {
         context.moveTo(440, 260);
         context.lineTo(430, 270);
         context.stroke();
-        setTimeout(function() {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.fillText("You Have Lost To The Easiest Game Ever.", 300, 300);
-            context.fillText("The Word Was: " + ChosenWord, 300, 350);
-            context.fillText("Press y to restart", 300, 400);
-            NotOver = false;
-            document.addEventListener("keydown", (e) => {
-                if (e.key == "y" || e.key == "Y") {
-                    window.location.reload();
-                }
-            });
-        }, 2000)
+        context.fillText("You Have Lost To The Easiest Game Ever.", 300, 400);
+        context.fillText("The Word Was: " + ChosenWord, 300, 450);
+        context.fillText("Press y to restart", 300, 500);
+        NotOver = false;
+        window.addEventListener("keydown", (e) => {
+            if (e.key == "y" || e.key == "Y") {
+                window.location.reload();
+            }
+        });
     }
 }
 
@@ -108,10 +105,10 @@ var Game = (e) => {
         let l = WrongGuess.join(", ");
         document.getElementById("list").innerHTML = l;
 
-        if (LinePositions.length == UsePositions.length || WrongGuess.length == ChosenWord.length) {
+        if (LinePositions.length == UsePositions.length) {
             context.fillText("You Have Won The Game. Press y to restart the game", 300, 400);
             NotOver = false;
-            document.addEventListener("keydown", (e) => {
+            window.addEventListener("keydown", (e) => {
                 if (e.key == "y" || e.key == "Y") {
                     window.location.reload();
                 }
@@ -120,4 +117,4 @@ var Game = (e) => {
     }
 }
 
-document.addEventListener("keypress", Game);
+window.addEventListener("keypress", Game);
