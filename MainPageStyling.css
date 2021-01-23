@@ -16,7 +16,7 @@ img {
 .game {
     background-image: white;
     display: flex;
-    width: 150px;
+    width: auto;
     height: auto;
     justify-content: center;
 }
