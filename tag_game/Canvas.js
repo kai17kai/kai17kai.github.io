@@ -65,17 +65,17 @@ function Level(e){ // basic key-press function to move the circle around
 
 		if (OriginalMinTime >= MinTime && OriginalSecTime >= SecTime) {
 			if (SecTime < 10) {
-				TimeTaken.innerHTML = String(MinTime) + ":0" + String(SecTime);
+				TimeTaken.innerHTML = String(MinTime) + ":0" + String(SecTime) + ":" + String(MillTime);
 			} else {
-				TimeTaken.innerHTML = String(MinTime) + ":" + String(SecTime);
+				TimeTaken.innerHTML = String(MinTime) + ":" + String(SecTime) + ":" + String(MillTime);
 			}
 			OriginalSecTime = SecTime;
 			OriginalMinTime = MinTime
 		} else {
 			if (OriginalSecTime < 10) {
-				TimeTaken.innerHTML = String(OriginalMinTime) + ":0" + String(OriginalSecTime);
+				TimeTaken.innerHTML = String(OriginalMinTime) + ":0" + String(OriginalSecTime) + ":" + String(MillTime);
 			} else {
-				TimeTaken.innerHTML = String(OriginalMinTime) + ":" + String(OriginalSecTime);
+				TimeTaken.innerHTML = String(OriginalMinTime) + ":" + String(OriginalSecTime) + ":" + String(MillTime);
 			}
 		}
 		
@@ -117,7 +117,7 @@ document.addEventListener("keydown", Level); // function f defined below:
 //you save the id so it can be stopped later with clearInterval(id);
 
 /*-----------------------------------------------------------------------------*/
-var SecTime = 0, MinTime = 0, Distance;
+var SecTime = 0, MinTime = 0, MillTime = 0, Distance;
 
 var Time = document.createElement("h3");
 var TimeText = document.createTextNode("0:00");
@@ -128,16 +128,20 @@ document.body.appendChild(Time);
 var OriginalSecTime = null, OriginalMinTime = null
 
 function Timer() {
-	SecTime += 1;
+	MillTime += 1;
+	if (MillTime > 99) {
+		MillTime = 0;
+		SecTime += 1;
+	}
 	if (SecTime > 59) {
 		SecTime = 0;
 		MinTime += 1;
 	}
 	if (SecTime < 10) {
-		TimeText.nodeValue = String(MinTime) + ":0" + String(SecTime);
+		TimeText.nodeValue = String(MinTime) + ":0" + String(SecTime) + ":" +  String(MillTime);
 	} else {
-		TimeText.nodeValue = String(MinTime) + ":" + String(SecTime);
+		TimeText.nodeValue = String(MinTime) + ":" + String(SecTime) + ":" + String(MillTime);
 	}
 }
 
-var TimerInterval = setInterval(Timer, 1000);
+var TimerInterval = setInterval(Timer, 10);
