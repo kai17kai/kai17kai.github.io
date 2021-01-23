@@ -147,12 +147,23 @@ function BallMovement() {
     }
 }
 
-document.addEventListener("mousemove", (e) => {
-    Human = e.clientY - 30;
-});
-V = setInterval(Visibility, 1);
-Ball = setInterval(BallMovement, 45);
 
+context.font = "40px Arial";
+context.fillText("Press Space To Start", 210, 300);
+let done = false;
+
+document.onkeydown = (e) => {
+    if (done == false) {
+        if (e.key == " ") {
+            V = setInterval(Visibility, 1);
+            Ball = setInterval(BallMovement, 45);
+            document.addEventListener("mousemove", (e) => {
+                Human = e.clientY - 30;
+            });
+            done = true;
+        }
+    }
+}
 function IsDead() {
     clearInterval(V);
     clearInterval(Ball);
