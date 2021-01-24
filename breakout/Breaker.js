@@ -57,6 +57,106 @@ context.fillStyle = "rgb(255, 255, 255)";
 //Current ball position
 var BallPosition = {x:400, y:400};
 
+var Replace = [
+    //First
+    60,
+    20,
+    140,
+    20,
+    220,
+    20,
+    300,
+    20,
+    380,
+    20,
+    460,
+    20,
+    540,
+    20,
+    620,
+    20,
+    700,
+    20,
+    //Second
+    60,
+    60,
+    140,
+    60,
+    220,
+    60,
+    300,
+    60,
+    380,
+    60,
+    460,
+    60,
+    540,
+    60,
+    620,
+    60,
+    700,
+    60,
+    //Third
+    60,
+    100,
+    60,
+    100,
+    140,
+    100,
+    220,
+    100,
+    300,
+    100,
+    380,
+    100,
+    460,
+    100,
+    540,
+    100,
+    620,
+    100,
+    700,
+    100,
+    //Fourth
+    60,
+    140,
+    140,
+    140,
+    220,
+    140,
+    300,
+    140,
+    380,
+    140,
+    460,
+    140,
+    540,
+    140,
+    620,
+    140,
+    700,
+    140,
+    //Fifth
+    60,
+    180,
+    140,
+    180,
+    220,
+    180,
+    300,
+    180,
+    380,
+    180,
+    460,
+    180,
+    540,
+    180,
+    620,
+    180,
+    700,
+    180,
+]
+
 //Obstacle Locations
 var ObstacleLocations = [
     //First
@@ -287,12 +387,7 @@ function BallMovement() {
     }
 
     if (BallPosition.y >= 600) {
-        clearInterval(BallAndBoardVisibility);
-        clearInterval(Ball);
-        clear();
-        context.fillStyle = "white"
-        context.font = "40px Arial";
-        context.fillText("You Died", 400, 300);
+        Dead();
     }
 
     for (let i = 0; i <= ObstacleLocations.length; i += 2) {
@@ -303,8 +398,38 @@ function BallMovement() {
     }
 }
 
+var Ball, Speed = 45, BallAndBoardVisibility;
+
 //Sets up shit
-document.addEventListener("keydown", Movement);
-var BallAndBoardVisibility = setInterval(Visibility, 1);
-var Ball, Speed = 45;
-Ball = setInterval(BallMovement, Speed);
+function Start() {
+    BallPosition.x = 400;
+    BallPosition.y = 400;
+    Speed = 45;
+    Down = false;
+    clearInterval(Ball);
+    clearInterval(BallAndBoardVisibility);
+    for (let x = 0; x < ObstacleLocations.length; ++x) {
+        ObstacleLocations[x] = Replace[x];
+    }
+    document.addEventListener("keydown", Movement);
+    BallAndBoardVisibility = setInterval(Visibility, 1);
+    Ball = setInterval(BallMovement, Speed);
+}
+
+function Dead() {
+    context.fillText("You died", 400, 300);
+    document.addEventListener("keydown", Movement);
+    clearInterval(Ball);
+    clearInterval(BallAndBoardVisibility);
+}
+
+context.fillStyle = "white";
+context.font = "40px Arial";
+context.fillText("Press Space To Start", 200, 300);
+let done = false;
+document.onkeydown = function (e) {
+    if (e.key == " " && done === false) {
+        Start();
+        done = true;
+    }
+}

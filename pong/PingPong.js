@@ -155,15 +155,19 @@ let done = false;
 document.onkeydown = (e) => {
     if (done == false) {
         if (e.key == " ") {
-            V = setInterval(Visibility, 1);
-            Ball = setInterval(BallMovement, 45);
-            document.addEventListener("mousemove", (e) => {
-                Human = e.clientY - 30;
-            });
+            Start();
             done = true;
         }
     }
 }
+function Start() {
+    V = setInterval(Visibility, 1);
+    Ball = setInterval(BallMovement, 45);
+    document.addEventListener("mousemove", (e) => {
+        Human = e.clientY - 30;
+    });
+}
+
 function IsDead() {
     clearInterval(V);
     clearInterval(Ball);

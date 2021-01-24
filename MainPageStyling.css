@@ -35,10 +35,10 @@ p {
     color: rgb(255, 255, 255);
 }
 
-a {
-    text-decoration-line: none;
-}
-
 p:hover {
     color:rgb(23, 223, 234)
+}
+
+a {
+    text-decoration-line: none;
 }

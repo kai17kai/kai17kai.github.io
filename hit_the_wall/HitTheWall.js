@@ -31,7 +31,7 @@ function Movement(e) {
 
     if (e.key === "w" || e.key === "ArrowUp") {
         HumanY -= 10;
-        if (HumanY <= 0) {
+        if (HumanY <= -10) {
             HumanY += 10;
         }
     } else if (e.key === "s" || e.key === "ArrowDown") {
@@ -53,7 +53,7 @@ function Movement(e) {
 
     let distance = Math.sqrt(Math.pow(HumanX - 0, 2) + Math.pow(HumanY - HumanY, 2));
 
-    if (distance <= 40) {
+    if (distance <= 30) {
         Reaction();
     }
 

@@ -36,7 +36,7 @@ function Level(e){ // basic key-press function to move the circle around
 	}
 	if (e.key === "s" || e.key === "ArrowDown") {
 		HumanY += 6;
-		if (HumanY >= 600) {
+		if (HumanY >= 500) {
 			HumanY -= 6;
 		}
 	}
@@ -48,7 +48,7 @@ function Level(e){ // basic key-press function to move the circle around
 	}
 	if (e.key === "d" || e.key === "ArrowRight") {
 		HumanX += 6;
-		if (HumanX >= 800) {
+		if (HumanX >= 700) {
 			HumanX -= 6;
 		}
 	}
@@ -61,30 +61,26 @@ function Level(e){ // basic key-press function to move the circle around
 		if (OriginalMinTime === null && OriginalSecTime === null) {
 			OriginalSecTime = SecTime;
 			OriginalMinTime = MinTime;
+			OriginalMillTime = MillTime
 		}
 
-		if (OriginalMinTime >= MinTime && OriginalSecTime >= SecTime) {
-			if (SecTime < 10) {
-				TimeTaken.innerHTML = String(MinTime) + ":0" + String(SecTime) + ":" + String(MillTime);
-			} else {
-				TimeTaken.innerHTML = String(MinTime) + ":" + String(SecTime) + ":" + String(MillTime);
-			}
-			OriginalSecTime = SecTime;
-			OriginalMinTime = MinTime
-		} else {
-			if (OriginalSecTime < 10) {
-				TimeTaken.innerHTML = String(OriginalMinTime) + ":0" + String(OriginalSecTime) + ":" + String(MillTime);
-			} else {
-				TimeTaken.innerHTML = String(OriginalMinTime) + ":" + String(OriginalSecTime) + ":" + String(MillTime);
-			}
+		if (OriginalMillTime >= MillTime) {
+			OriginalMillTime = MillTime;
 		}
+		if (OriginalSecTime >= SecTime) {
+			OriginalSecTime = SecTime;
+		}
+		if (OriginalMinTime >= MinTime) {
+			OriginalMinTime = MinTime;
+		}
+
+		TimeTaken.innerHTML = String(OriginalMinTime) + ":" + String(OriginalSecTime) + ":" + String(OriginalMillTime);
 		
-		SecTime = 0; MinTime = 0;
+		SecTime = 0; MinTime = 0; MillTime = 0;
 		ComputerCircle();
 	}
 	context.fillStyle = "white";
 	context.fillRect(0, 0, canvas.width, canvas.height);
-	
 	
 	//Computer's Circle
 	context.fillStyle = "red";
@@ -125,7 +121,7 @@ Time.appendChild(TimeText);
 
 document.body.appendChild(Time);
 
-var OriginalSecTime = null, OriginalMinTime = null
+var OriginalSecTime = null, OriginalMinTime = null, OriginalMillTime
 
 function Timer() {
 	MillTime += 1;
@@ -137,11 +133,7 @@ function Timer() {
 		SecTime = 0;
 		MinTime += 1;
 	}
-	if (SecTime < 10) {
-		TimeText.nodeValue = String(MinTime) + ":0" + String(SecTime) + ":" +  String(MillTime);
-	} else {
-		TimeText.nodeValue = String(MinTime) + ":" + String(SecTime) + ":" + String(MillTime);
-	}
+	TimeText.nodeValue = String(MinTime) + ":" + String(SecTime) + ":" + String(MillTime);
 }
 
 var TimerInterval = setInterval(Timer, 10);
