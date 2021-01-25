@@ -3,36 +3,33 @@ canvas.height = 600; // pick whatever dimensions fit on your screen
 canvas.width = 800;
 const context = canvas.getContext("2d");
 
+let score = 0;
+
 //Used when block is hit
 function Reaction(i) {
     //Bottom
     if (BallPosition.x >= ObstacleLocations[i] - 5 && BallPosition.x <= ObstacleLocations[i] + 55 && BallPosition.y >= ObstacleLocations[i + 1] + 5) {
-        ObstacleLocations[i] = 0;
-        ObstacleLocations[i + 1] = 0;
         Down = true;
     }
     //Left
     if (BallPosition.x <= ObstacleLocations[i] + 25 && BallPosition.y >= ObstacleLocations[i + 1] - 5 && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
-        ObstacleLocations[i] = 0;
-        ObstacleLocations[i + 1] = 0;
         Slope.x = Reverse(Slope.x);
     }
     //Top
     if (BallPosition.x >= ObstacleLocations[i] && BallPosition.x <= ObstacleLocations[i] && BallPosition <= ObstacleLocations[i + 1] - 5) {
-        ObstacleLocations[i] = 0;
-        ObstacleLocations[i + 1] = 0;
         Slope.x = Reverse(Slope.x);
         Down = false;
     }
     //Right
     if (BallPosition.x >= ObstacleLocations[i] + 25 && BallPosition.y >= ObstacleLocations[i + 1] && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
-        ObstacleLocations[0] = 0;
-        ObstacleLocations[1] = 0;
         Slope.x = Reverse(Slope.x);
     }
 
+    ObstacleLocations[i] = 0;
+    ObstacleLocations[i + 1] = 0;
+
     clearInterval(Ball);
-    if (Speed > 35) {
+    if (Speed > 30) {
         Speed -= 1;
     }
     Ball = setInterval(BallMovement, Speed);
@@ -298,22 +295,34 @@ function BallMovement() {
             break;
         }
     }
+    
+    score = 0;
+    for (let i = 0; i <= ObstacleLocations.length; i += 2) {
+        if (ObstacleLocations[i] == 0) {
+            ++score;
+        }
+    }
+
+    document.getElementById("score").innerHTML = `Score: ${score}`;
 }
 
-var Ball, Speed = 45, BallAndBoardVisibility;
+var Ball, Speed, BallAndBoardVisibility;
 
 //Sets up shit
 function Start() {
+    ObstacleLocations = new Array();
+    for (let i = 0; i < Replace.length; ++i) {
+        ObstacleLocations.push(Replace[i]);
+    }
     BallPosition.x = 400;
     BallPosition.y = 400;
     Speed = 45;
     Down = false;
+    document.getElementById("old").innerHTML = `Old Score: ${score}`;
+    score = 0;
+    document.getElementById("score").innerHTML = "Score: 0";
     clearInterval(Ball);
     clearInterval(BallAndBoardVisibility);
-    for (let x = 0; x < ObstacleLocations.length; ++x) {
-        ObstacleLocations[x] = Replace[x];
-    }
-    document.addEventListener("keydown", Movement);
     BallAndBoardVisibility = setInterval(Visibility, 1);
     Ball = setInterval(BallMovement, Speed);
 }
@@ -329,9 +338,13 @@ context.fillStyle = "white";
 context.font = "40px Arial";
 context.fillText("Press Space To Start", 200, 300);
 let done = false;
-document.onkeydown = function (e) {
+document.onkeydown = (e) => {
     if (e.key == " " && done === false) {
         Start();
         done = true;
     }
+}
+
+document.onmousemove = (e) => {
+    HumanX = e.clientX - 350;
 }
