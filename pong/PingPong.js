@@ -119,7 +119,7 @@ function BallMovement() {
         if ((BallY >= Human || BallY + 20 >= Human) && BallY <= Human + 60 && BallX <= 20) {
             Slope.x = Reverse(Slope.x);
             ++Score;
-            document.getElementById("Score").innerHTML = "Your Score is " + String(Score);
+            document.getElementById("Score").innerHTML = `Your Score is ${Score}`;
             IncreaseSpeed();
             ChangeSlope()
         }
