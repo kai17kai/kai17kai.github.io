@@ -29,7 +29,7 @@ function Reverse(number) {
 }
 
 //Position of the boards and ball
-var Human = 270, Computer = 270, BallX = 390, BallY = 290;
+var Human = 270, Computer = 270, BallX, BallY;
 
 function HumanMovement(e) {
     if (e.key === "w") {
@@ -151,6 +151,14 @@ function BallMovement() {
 context.font = "40px Arial";
 context.fillText("Press Space To Start", 210, 300);
 let done = false;
+document.addEventListener("mousemove", (e) => {
+    Human = e.clientY - 30;
+    if (Human >= canvas.height - 60) {
+        Human = canvas.height - 60
+    } else if (Human <= -10) {
+        Human = 0;
+    }
+});
 
 document.onkeydown = (e) => {
     if (done == false) {
@@ -163,15 +171,13 @@ document.onkeydown = (e) => {
 function Start() {
     V = setInterval(Visibility, 1);
     Ball = setInterval(BallMovement, 45);
-    document.addEventListener("mousemove", (e) => {
-        Human = e.clientY - 30;
-    });
+    BallX = 390, BallY = 290;
+    document.getElementById("Score").innerHTML = "Your Score is 0";
 }
 
 function IsDead() {
     clearInterval(V);
     clearInterval(Ball);
-    clear();
     context.font = "40px Arial";
     context.fillText("You Died", 380, 280);
 }
