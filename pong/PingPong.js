@@ -136,7 +136,7 @@ function BallMovement() {
                 y2 = true;
                 if (BallY >= Human + 40 || BallY >= Computer + 40) {
                     Down = true;
-                } else {
+                } else if (BallY + 20 <= Human + 20 || BallY <= Computer + 20) {
                     Down = false;
                 }
             } else {
@@ -171,7 +171,7 @@ document.onkeydown = (e) => {
 function Start() {
     V = setInterval(Visibility, 1);
     Ball = setInterval(BallMovement, 45);
-    BallX = 390, BallY = 290;
+    BallX = 390, BallY = 290, Speed = 35;
     document.getElementById("Score").innerHTML = "Your Score is 0";
 }
 
