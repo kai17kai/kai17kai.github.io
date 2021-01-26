@@ -10,11 +10,16 @@ context.fillRect(0, 0, canvas.width, canvas.height);
 context.fillStyle = "rgb(33,66,99)";
 
 //Creates computer circle
-var ComputerX, ComputerY;
+var ComputerX = 0, ComputerY = 0;
 
 function ComputerCircle() {
-	ComputerX = Math.floor(Math.random() * 700) + 1;
-	ComputerY = Math.floor(Math.random() * 500) + 1;
+	let distance;
+	do {
+		ComputerX = Math.floor(Math.random() * 700);
+		ComputerY = Math.floor(Math.random() * 500);
+		distance = Math.sqrt(Math.pow(HumanX - ComputerX, 2) + Math.pow(HumanY - ComputerY, 2))
+		console.log(distance);
+	} while (distance <= 100)
 	var temp = context.fillStyle;
 	context.fillStyle = "red";
 	context.beginPath();
@@ -55,7 +60,7 @@ function Level(e){ // basic key-press function to move the circle around
 
 	Distance = Math.sqrt(Math.pow(HumanX - ComputerX, 2) + Math.pow(HumanY - ComputerY, 2))
 	
-	var TimeTaken = document.getElementById("HighScore")
+	var HighScore = document.getElementById("HighScore")
 
 	if (Distance <= 60) {
 		if (OriginalMinTime === null && OriginalSecTime === null) {
@@ -74,7 +79,7 @@ function Level(e){ // basic key-press function to move the circle around
 			OriginalMinTime = MinTime;
 		}
 
-		TimeTaken.innerHTML = String(OriginalMinTime) + ":" + String(OriginalSecTime) + ":" + String(OriginalMillTime);
+		HighScore.innerHTML = String(OriginalMinTime) + ":" + String(OriginalSecTime) + ":" + String(OriginalMillTime);
 		
 		SecTime = 0; MinTime = 0; MillTime = 0;
 		ComputerCircle();
