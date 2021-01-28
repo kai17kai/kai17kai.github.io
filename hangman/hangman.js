@@ -1,3 +1,5 @@
+"use strict";
+
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
 canvas.width = 800;
@@ -18,8 +20,10 @@ var ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
 var LinePositions = new Array();
 var UsePositions = new Array();
 
+const length = ChosenWord.length * 30;
+
 for (let i = 0; i < ChosenWord.length; ++i) {
-    LinePositions.push(400 + (i * 30));
+    LinePositions.push((400 - (length / 2)) + (i * 30))
 }
 
 var NotDrawn = true;
@@ -41,7 +45,7 @@ function DisplayShit() {
     for (let i = 0; i < ChosenWord.length; i++) {
         context.moveTo(LinePositions[i], 350);
         if (RightGuess.indexOf(ChosenWord[i]) > -1) {
-            if (UsePositions.length <= 0 || UsePositions.indexOf(LinePositions[i]) === -1) {
+            if (UsePositions.indexOf(LinePositions[i]) === -1) {
                 context.fillText(ChosenWord[i], LinePositions[i] + 5, 350);
                 UsePositions.push(LinePositions[i]);
             }
@@ -70,9 +74,10 @@ function DisplayShit() {
         context.moveTo(440, 260);
         context.lineTo(430, 270);
         context.stroke();
-        context.fillText("You Have Lost To The Easiest Game Ever.", 300, 400);
-        context.fillText("The Word Was: " + ChosenWord, 300, 450);
-        context.fillText("Press y to restart", 300, 500);
+        context.fillText("You Have Lost To The Easiest Game Ever.", 220, 400);
+        let phrase = "The Word was: " + ChosenWord;
+        context.fillText(phrase, 400 - (phrase.length * 5), 450);
+        context.fillText("Press y to restart", 310, 500);
         NotOver = false;
         window.addEventListener("keydown", (e) => {
             if (e.key == "y" || e.key == "Y") {
@@ -102,11 +107,10 @@ var Game = (e) => {
         console.log(RightGuess);
         console.log(WrongGuess);
         DisplayShit();
-        let l = WrongGuess.join(", ");
-        document.getElementById("list").innerHTML = l;
+        document.getElementById("list").innerHTML = WrongGuess.join(", ");
 
         if (LinePositions.length == UsePositions.length) {
-            context.fillText("You Have Won The Game. Press y to restart the game", 300, 400);
+            context.fillText("You Have Won The Game. Press y to restart the game", 180, 400);
             NotOver = false;
             window.addEventListener("keydown", (e) => {
                 if (e.key == "y" || e.key == "Y") {
