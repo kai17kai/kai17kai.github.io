@@ -13,11 +13,17 @@ context.font = "20px Arial";
 /*----------------------------------------------------------------*/
 //Set up time
 var sectime = 0, mintime = 0;
-setInterval(() => {
+var time = setInterval(() => {
     sectime += 1;
     if (sectime > 59) {
         sectime = 0;
         mintime += 1;
+    }
+
+    if (sectime % 10 == 0) {
+        clearInterval(Visibility);
+        Speed -= 1;
+        Visibility = setInterval(Game, Speed);
     }
 }, 1000);
 /*----------------------------------------------------------------*/
@@ -82,13 +88,13 @@ const Game = () => {
 
     if (Player >= canvas.height || Player <= 0) {
         dead();
-        Player = 700;
+        clearInterval(Visibility);
+        clearInterval(time);
     }
 
     temp = null;
 
     function dead() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = temp;
         context.font = "40px Arial";
         context.fillText("You Died", 380, 280);
@@ -128,8 +134,8 @@ const Game = () => {
     }
 };
 //allows player to see themselves and the obstacles
-var Visibility;
-Visibility = setInterval(Game, 30);
+var Visibility, Speed = 31;
+Visibility = setInterval(Game, Speed);
 
 var Velocity = 4;
 var Gravity = setInterval(() => {
