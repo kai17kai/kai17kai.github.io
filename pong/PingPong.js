@@ -131,7 +131,7 @@ function BallMovement() {
         }
 
         function ChangeSlope() {
-            if (/*Top for Computer*/(BallY + 20 <= Computer + 20 || BallY + 20 <= Computer + 20) || /*Top for Human*/(BallY <= Human + 20 || BallY + 20 <= Human + 20) || /*Bottom for Human*/BallY >= Human + 40 || /*Bottom for Computer*/BallY >= Computer + 40) {
+            if (/*Top for Computer*/(BallY <= Computer + 20 || BallY + 20 <= Computer + 20) || /*Top for Human*/(BallY <= Human + 20 || BallY + 20 <= Human + 20) || /*Bottom for Human*/BallY >= Human + 40 || /*Bottom for Computer*/BallY >= Computer + 40) {
                 y1 = false;
                 y2 = true;
                 if (BallY >= Human + 40 || BallY >= Computer + 40) {
