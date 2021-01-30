@@ -13,7 +13,7 @@ context.font = "20px Arial";
 /*----------------------------------------------------------------*/
 //Set up time
 var sectime = 0, mintime = 0;
-setInterval(() => {
+var time = setInterval(() => {
     sectime += 1;
     if (sectime > 59) {
         sectime = 0;
@@ -88,8 +88,9 @@ const Game = () => {
     temp = null;
 
     function dead() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = temp;
+        clearInterval(Visibility);
+        clearInterval(time);
         context.font = "40px Arial";
         context.fillText("You Died", 380, 280);
     }
