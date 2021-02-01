@@ -1,3 +1,5 @@
+"use strict";
+
 const canvas = document.querySelector("#canvas");
 canvas.height = 600; // pick whatever dimensions fit on your screen
 canvas.width = 800;
@@ -7,21 +9,22 @@ let score = 0;
 
 //Used when block is hit
 function Reaction(i) {
-    //Bottom
-    if (BallPosition.x >= ObstacleLocations[i] - 5 && BallPosition.x <= ObstacleLocations[i] + 55 && BallPosition.y >= ObstacleLocations[i + 1] + 5) {
-        Down = true;
-    }
-    //Left
-    if (BallPosition.x <= ObstacleLocations[i] + 25 && BallPosition.y >= ObstacleLocations[i + 1] - 5 && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
-        Slope.x = Reverse(Slope.x);
-    }
     //Top
-    if (BallPosition.x >= ObstacleLocations[i] && BallPosition.x <= ObstacleLocations[i] && BallPosition <= ObstacleLocations[i + 1] - 5) {
+    if (BallPosition.y + 10 <= ObstacleLocations[i + 1] && BallPosition.x >= ObstacleLocations[i] && BallPosition.x <= ObstacleLocations[i] + 60) {
         Slope.x = Reverse(Slope.x);
         Down = false;
     }
     //Right
-    if (BallPosition.x >= ObstacleLocations[i] + 25 && BallPosition.y >= ObstacleLocations[i + 1] && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
+    else if (BallPosition.x >= ObstacleLocations[i] + 60 && BallPosition.y >= ObstacleLocations[i + 1] && (BallPosition.y <= ObstacleLocations[i + 1] || (BallPosition.y >= ObstacleLocations[i + 1] && BallPosition + 10 >= ObstacleLocations[i + 1]))) {
+        Slope.x = Reverse(Slope.x);
+    }
+    //Bottom
+    else if (BallPosition.y >= ObstacleLocations[i + 1] && BallPosition.x >= ObstacleLocations[i] && BallPosition.x <= ObstacleLocations[i] + 60) {
+        Slope.x = Reverse(Slope.x);
+        Down = true;
+    }
+    //Left
+    else if (BallPosition.x + 10 <= ObstacleLocations[i] && BallPosition.y >= ObstacleLocations[i + 1] && (BallPosition.y <= ObstacleLocations[i + 1] || (BallPosition.y >= ObstacleLocations[i + 1] && BallPosition + 10 >= ObstacleLocations[i + 1]))) {
         Slope.x = Reverse(Slope.x);
     }
 
@@ -245,36 +248,11 @@ function BallMovement() {
         Down = false;
         if (BallPosition.x < HumanX + 10 || BallPosition.x > HumanX + 40) {
             if (BallPosition.x < HumanX + 10) {
-                if (Slope.x < 0) {
-                    y1 = true;
-                } else if (Slope.x > 0) {
-                    y1 = true;
-                    Slope.x = Reverse(Slope.x);
-                }
-            } else {
-                if (Slope.x < 0) {
-                    y1 = true;
-                    Slope.x = Reverse(Slope.x);
-                } else if (Slope.x > 0) {
-                    y1 = true;
-                    
-                }
+                y1 = true;
             }
         } else if ((BallPosition.x > HumanX + 10 && BallPosition.x < HumanX + 20) || (BallPosition.x > HumanX + 30 && BallPosition.x < HumanX + 40)) {
             if (BallPosition.x > HumanX + 10 && BallPosition.x < HumanX + 20) {
-                if (Slope.x > 0) {
-                    Slope.x = Reverse(Slope.x);
-                    y2 = true;
-                } else if (Slope.x < 0) {
-                    y2 = true;
-                }
-            } else {
-                if (Slope.x > 0) {
-                    y2 = true;
-                } else if (Slope.x < 0) {
-                    y2 = true;
-                    Slope.x = Reverse(Slope.x);
-                }
+                y2 = true;
             }
         } else {
             y3 = true

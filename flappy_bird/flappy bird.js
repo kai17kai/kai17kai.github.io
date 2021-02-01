@@ -96,6 +96,8 @@ const Game = () => {
 
     function dead() {
         context.fillStyle = temp;
+        clearInterval(Visibility);
+        clearInterval(time);
         context.font = "40px Arial";
         context.fillText("You Died", 380, 280);
     }

@@ -99,15 +99,15 @@ function BallMovement() {
         Down = false;
     }
 
-    //Checks if the ball is at the edge of the map on both sides
-    if (BallX <= 0 || BallX >= 800) {
-        IsDead();
-    }
-
     //Checks if the ball is hitting the Human or Computer board and chooses what the reaction will be
     Reaction();
 
     Computer = BallY - 25;
+
+    //Checks if the ball is at the edge of the map on both sides
+    if (BallX <= 0 || BallX >= 800) {
+        IsDead();
+    }
 
     function Reaction() {
         if (BallY >= Computer && BallY + 20 >= Computer && BallY <= Computer + 60 && BallX + 20 >= 770) {
@@ -134,11 +134,6 @@ function BallMovement() {
             if (/*Top for Computer*/(BallY <= Computer + 20 || BallY + 20 <= Computer + 20) || /*Top for Human*/(BallY <= Human + 20 || BallY + 20 <= Human + 20) || /*Bottom for Human*/BallY >= Human + 40 || /*Bottom for Computer*/BallY >= Computer + 40) {
                 y1 = false;
                 y2 = true;
-                if (BallY >= Human + 40 || BallY >= Computer + 40) {
-                    Down = true;
-                } else if (BallY + 20 <= Human + 20 || BallY <= Computer + 20) {
-                    Down = false;
-                }
             } else {
                 y1 = true;
                 y2 = false;
@@ -169,6 +164,8 @@ document.onkeydown = (e) => {
     }
 }
 function Start() {
+    clearInterval(V);
+    clearInterval(Ball);
     V = setInterval(Visibility, 1);
     Ball = setInterval(BallMovement, 45);
     BallX = 390, BallY = 290, Speed = 35;
