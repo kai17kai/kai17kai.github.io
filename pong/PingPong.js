@@ -134,14 +134,6 @@ function BallMovement() {
             if (/*Top for Computer*/((BallY <= Computer + 20 && BallY + 20 <= Computer + 20) || (BallY + 20 <= Computer + 20)) || /*Top for Human*/((BallY <= Human + 20 && BallY + 20 <= Human + 20) || (BallY + 20 <= Human + 20)) || /*Bottom for Human*/BallY >= Human + 40 || /*Bottom for Computer*/BallY >= Computer + 40) {
                 y1 = false;
                 y2 = true;
-<<<<<<< Updated upstream
-=======
-                if (BallY >= Human + 40 || BallY >= Computer + 40) {
-                    Down = true;
-                } else if ((BallY <= Human + 20 && BallY + 20 <= Human + 20) || (BallY + 20 <= Human + 20) || (BallY <= Computer + 20 && BallY + 20 <= Computer + 20) || (BallY + 20 <= Computer + 20)) {
-                    Down = false;
-                }
->>>>>>> Stashed changes
             } else {
                 y1 = true;
                 y2 = false;
