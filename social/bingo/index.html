@@ -141,8 +141,9 @@
                 for (let x = 0; x < 5; ++x) {
                     for (let y = 0; y < 5; ++y) {
                         let randomNumber = Math.floor(Math.random() * ((3 * (x * 5 + y + 1) - (2 * x * 5 + y + 1))) + (2 * x * 5 + y + 1)) + 1
-                        if (used.indexOf(randomNumber) > 0) {
+                        if (used.length == 0 || used.indexOf(randomNumber) < 0) {
                             document.getElementById(String(x * 5 + y + 1)).innerHTML = randomNumber;
+                            used.push(randomNumber);
                         }
                         document.getElementById(String(x * 5 + y + 1)).onclick = () => {
                             if (document.getElementById(String(x * 5 + y + 1)).className != "red") {
