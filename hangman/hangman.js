@@ -28,8 +28,6 @@ for (let i = 0; i < ChosenWord.length; ++i) {
 
 var NotDrawn = true;
 
-var amount = 1;
-
 function DisplayShit() {
     if (NotDrawn) {
         context.moveTo(360, 300);
