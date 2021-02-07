@@ -45,8 +45,10 @@
             }
 
             .letter {
-                height: 20px;
-                width: 20px;
+                height: 25px;
+                width: 25px;
+                display: flex;
+                justify-content: center;
             }
 
             .red {
@@ -57,9 +59,14 @@
                 color: red;
                 cursor: crosshair;
             }
+
+            a {
+                text-decoration: none;
+            }
         </style>
     </head>
     <body>
+        <a href="../">Go Back To Menu</a>
         <div id="game" style="display: none;">
             <div id="Top">
                 <div class="letter" id="Letter1">B</div>
@@ -122,6 +129,9 @@
             <input id="input" type="text" placeholder="Type Here. Press enter when done" style="width: 16em;">
             <button onclick="check()">Submit</button>
             <p id="true"> </p>
+            <hr>
+            <h3>Guide</h3>
+            <p>The button <em>"Get Random"</em> produces a random position. <em>Result</em> shows the random position. <em>Already Done</em> is the positions already used. <em>Checked If Used</em> searches through the <em>Already Used</em> to see if the given posiitons were used. A valid search would be "B12,I12,N12,G12,O12". Press Submit to search</p>
         </div>
         <script>
             const choices = ["b", "i", "n", "g", "o"];
@@ -137,23 +147,37 @@
                 let board = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
                 document.getElementById("game").style.display = "block";
 
+                let min = 1, max = 15, used = [];
                 for (let x = 0; x < 5; ++x) {
                     for (let y = 0; y < 5; ++y) {
-                        document.getElementById(String(x * 5 + y + 1)).innerHTML = Math.floor(Math.random() * ((3 * (x * 5 + y + 1) - (2 * x * 5 + y + 1))) + (2 * x * 5 + y + 1)) + 1;
-                        document.getElementById(String(x * 5 + y + 1)).onclick = () => {
-                            if (document.getElementById(String(x * 5 + y + 1)).className != "red") {
-                                document.getElementById(String(x * 5 + y + 1)).className = "red";
+                        let number = Math.floor(Math.random() * (max - min)) + min + 1;
+                        if (used.length == 0 || used.indexOf(number) < 0) {
+                            document.getElementById(String(y * 5 + x + 1)).innerHTML = number;
+                            used.push(number);
+                        } else {
+                            --y;
+                            continue;
+                        }
+
+                        document.getElementById(String(y * 5 + x + 1)).onclick = () => {
+                            if (document.getElementById(String(y * 5 + x + 1)).className != "red") {
+                                document.getElementById(String(y * 5 + x + 1)).className = "red";
                                 let idk = check(y, x, true);
                                 if (idk == true) {
                                     document.getElementById("win").style.display = "block";
                                 }
                             } else {
-                                document.getElementById(String(x * 5 + y + 1)).className = "item";
+                                document.getElementById(String(y * 5 + x + 1)).className = "item";
                                 let idk = check(y, x, false);
                                 if (idk == true) {
                                     document.getElementById("win").style.display = "block";
                                 }
                             }
+                        }
+
+                        if ((y * 5 + x + 1) >= 21) {
+                            min += 15;
+                            max += 15;
                         }
                     }
                 }
@@ -264,8 +288,20 @@
             }
 
             function check() {
-                let input = document.getElementById("input").value;
-                if (random.join(", ").includes(input)) {
+                let input = String(document.getElementById("input").value);
+                let values = input.split(",");
+
+                console.log(values);
+
+                let count = 0;
+                for (let i = 0; i < values.length; ++i) {
+                    values[i].replace(" ", "");
+                    if (random.indexOf(values[i]) >= 0) {
+                        ++count;
+                    }
+                }
+
+                if (count > 0) {
                     document.getElementById("true").innerHTML = "true";
                 } else {
                     document.getElementById("true").innerHTML = "false";
