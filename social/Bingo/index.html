@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Bingo</title>
+        <style>
+            .Row {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+            }
+
+            #Top {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: auto;
+                margin-right: auto;
+                width: 20vw;
+            }
+
+            .board {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                background-color: white;
+                height: 30vh;
+                width: 20vw;
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .item {
+                height: 20px;
+                width: 20px;
+                border: 5px solid red;
+                display: flex;
+                justify-content: center;
+                cursor: crosshair;
+            }
+
+            .letter {
+                height: 20px;
+                width: 20px;
+            }
+
+            .red {
+                height: 20px;
+                width: 20px;
+                border: 5px solid red;
+                background-color: red;
+                color: red;
+                cursor: crosshair;
+            }
+        </style>
+    </head>
+    <body style="background-color: aquamarine;">
+        <div id="game" style="display: none;">
+            <div id="Top">
+                <div class="letter" id="Letter1">B</div>
+                <div class="letter" id="Letter2">I</div>
+                <div class="letter" id="Letter3">N</div>
+                <div class="letter" id="Letter4">G</div>
+                <div class="letter" id="Letter5">O</div>
+            </div>
+            <div class="board">
+                <div class="Row">
+                    <div id="1" class="item"></div>
+                    <div id="2" class="item"></div>
+                    <div id="3" class="item"></div>
+                    <div id="4" class="item"></div>
+                    <div id="5" class="item"></div>
+                </div>
+                <div class="Row">
+                    <div id="6" class="item"></div>
+                    <div id="7" class="item"></div>
+                    <div id="8" class="item"></div>
+                    <div id="9" class="item"></div>
+                    <div id="10" class="item"></div>
+                </div>
+                <div class="Row">
+                    <div id="11" class="item"></div>
+                    <div id="12" class="item"></div>
+                    <div id="13" class="item"></div>
+                    <div id="14" class="item"></div>
+                    <div id="15" class="item"></div>
+                </div>
+                <div class="Row">
+                    <div id="16" class="item"></div>
+                    <div id="17" class="item"></div>
+                    <div id="18" class="item"></div>
+                    <div id="19" class="item"></div>
+                    <div id="20" class="item"></div>
+                </div>
+                <div class="Row">
+                    <div id="21" class="item"></div>
+                    <div id="22" class="item"></div>
+                    <div id="23" class="item"></div>
+                    <div id="24" class="item"></div>
+                    <div id="25" class="item"></div>
+                </div>
+            </div>
+            <div style="display: block; justify-content: space-around;">
+                <h2 id="win" style="display: none;">You Have Won</h2>
+            </div>
+        </div>
+        <div id="admin" style="display: none;">
+            <button onclick="x()">Get Random</button>
+            <hr>
+            <h3>Result</h3>
+            <p id="result"> </p>
+            <hr>
+            <h3>Already Done</h3>
+            <p id="done"> </p>
+            <hr>
+            <h3>Check if Used</h3>
+            <input id="input" type="text" placeholder="Type Here. Press enter when done" style="width: 16em;">
+            <button onclick="check()">Submit</button>
+            <p id="true"> </p>
+        </div>
+        <script>
+            const choices = ["b", "i", "n", "g", "o"];
+            const urlParams = new URLSearchParams(window.location.search);
+            let answer = parseInt(urlParams.get('admin'));
+            if (isNaN(answer)) {
+                game();
+            } else if (answer == 1) {
+                document.getElementById("admin").style.display = "block";
+            }
+
+            function game() {
+                let board = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
+                document.getElementById("game").style.display = "block";
+
+                for (let x = 0; x < 5; ++x) {
+                    for (let y = 0; y < 5; ++y) {
+                        document.getElementById(String(x * 5 + y + 1)).innerHTML = Math.floor(Math.random() * ((3 * (x * 5 + y + 1) - (2 * x * 5 + y + 1))) + (2 * x * 5 + y + 1)) + 1;
+                        document.getElementById(String(x * 5 + y + 1)).onclick = () => {
+                            if (document.getElementById(String(x * 5 + y + 1)).className != "red") {
+                                document.getElementById(String(x * 5 + y + 1)).className = "red";
+                                let idk = check(y, x, true);
+                                if (idk == true) {
+                                    document.getElementById("win").style.display = "block";
+                                }
+                            } else {
+                                document.getElementById(String(x * 5 + y + 1)).className = "item";
+                                let idk = check(y, x, false);
+                                if (idk == true) {
+                                    document.getElementById("win").style.display = "block";
+                                }
+                            }
+                        }
+                    }
+                }
+
+                function check(y, x, TrueOrFalse) {
+                    if (TrueOrFalse) {
+                        board[y][x] = 1;
+                    } else {
+                        board[y][x] = 0;
+                    }
+                    console.log(board);
+                    let amount = 0;
+                    
+                    for (let i = 0; i < 5; ++i) {
+                        for (let j = 0; j < 5; ++j) {
+                            if (board[i][j] == 1) {
+                                ++amount;
+                            }
+                        }
+                    }
+
+                    if (amount >= 5) {
+                        let result = Vertical();
+                        if (result == true) {
+                            document.getElementById("win").style.display = "block";
+                        }
+                        result = Horizontal();
+                        if (result == true) {
+                            document.getElementById("win").style.display = "block";
+                        }
+                        result = Diagonal();
+                        if (result == true) {
+                            document.getElementById("win").style.display = "block";
+                        }
+                    }
+
+                    //vertical
+                    function Vertical() {
+                        let amount = 0;
+                        for (let i = 0; i < 5; ++i) {
+                            for (let j = 0; j < 5; ++j) {
+                                if (board[i][j] == 1) {
+                                    ++amount;
+                                    if (amount >= 5) {
+                                        return true;
+                                    }
+                                }
+                            }
+                            amount = 0;
+                        }
+                    }
+
+                    //horizontal
+                    function Horizontal() {
+                        let amount = 0;
+                        for (let i = 0; i < 5; ++i) {
+                            for (let j = 0; j < 5; ++j) {
+                                if (board[j][i] == 1) {
+                                    ++amount;
+                                    if (amount >= 5) {
+                                        return true;
+                                    }
+                                }
+                            }
+                            amount = 0;
+                        }
+                    }
+
+                    //diagonal
+                    function Diagonal() {
+                        let amount = 0;
+                        let right = true;
+                        let left = true;
+                        for (let runs = 0; runs < 5; ++runs) {
+                            if (right == true) {
+                                for (let x = 0, y = 0; x < 5 && y < 5; ++x, ++y) {
+                                    if (board[y][x] == 1) {
+                                        ++amount;
+                                    }
+                                    if (amount == 5) {
+                                        return true;
+                                    }
+                                    if (x == 4 && y == 4) {
+                                        amount = 0;
+                                        right = false;
+                                        left = true;
+                                    }
+                                }
+                            }
+                            if (left == true) {
+                                for (let x = 4, y = 0; x > -1 && y < 5; --x, ++y) {
+                                    if (board[y][x] == 1) {
+                                        ++amount;
+                                    }
+                                    if (amount == 5) {
+                                        return true;
+                                    }
+                                    if (x == 0 && y == 4) {
+                                        amount = 0;
+                                        right = false;
+                                        left = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            function check() {
+                let input = document.getElementById("input").value;
+                if (random.join(", ").includes(input)) {
+                    document.getElementById("true").innerHTML = "true";
+                } else {
+                    document.getElementById("true").innerHTML = "false";
+                }
+            }
+
+            let random = [];
+            function x() {
+                let number = Math.floor(Math.random() * 75) + 1;
+                let done = false;
+                let letter = choices[Math.floor(Math.random() * choices.length)].toUpperCase();
+                if (random.length == 0 || random.indexOf(letter + String(number)) < 0) {
+                    document.getElementById("result").innerHTML = letter + String(number);
+                    random.push(letter + String(number));
+                    done = true;
+                }
+                document.getElementById("done").innerHTML = random.join(", ");
+            }
+        </script>
+    </body>
+</html>
