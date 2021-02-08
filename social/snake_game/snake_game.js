@@ -100,6 +100,7 @@ let game = setInterval(() => {
             console.log(distance);
             console.log(i)
             context.font = "40px Arial";
+            context.fillStyle = "white";
             context.fillText("You Have Died", 400, 300);
             clearInterval(game);
         }
