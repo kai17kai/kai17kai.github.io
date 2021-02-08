@@ -36,19 +36,21 @@ window.onkeydown = (e) => {
 let game = setInterval(() => {
     let distance = Math.sqrt(Math.pow(snake_x[0] - food.x, 2) + Math.pow(snake_y[0] - food.y, 2));
     if (distance <= 20) {
+        for (let i = 0; i < 2; ++i) {
         if (up) {
             snake_x.push(food.x);
-            snake_y.push(food.y - 20);
+            snake_y.push(food.y - 20 * i);
         } else if (down) {
             snake_x.push(food.x);
-            snake_y.push(food.y + 20);
+            snake_y.push(food.y + 20 * i);
         } else if (right) {
-            snake_x.push(food.x + 20);
+            snake_x.push(food.x + 20 * i);
             snake_y.push(food.y);
         } else if (left) {
-            snake_x.push(food.x - 20);
+            snake_x.push(food.x - 20 * i);
             snake_y.push(food.y);
         }
+    }
         food.x = Math.floor(Math.random() * 40) * 20;
         food.y = Math.floor(Math.random() * 30) * 20;
     }
@@ -99,7 +101,8 @@ let game = setInterval(() => {
     document.getElementById("length").innerHTML = `Score: ${snake_x.length - 1}`;
 
     for (let i = 1; i < snake_x.length; ++i) {
-        if (snake_x[0] + snake_y[0] === snake_x[i] + snake_y[i] && snake_x[0] === snake_x[i] && snake_y[0] === snake_y[i]) {
+        let distance = Math.sqrt(Math.pow(snake_x[0] - snake_x[i], 2) + Math.pow(snake_y[0] - snake_y[i], 2)) + 10;
+        if (distance < 20) {
             console.log(snake_x[0] + snake_y[0]);
             console.log(i);
             context.font = "40px Arial";
@@ -108,7 +111,7 @@ let game = setInterval(() => {
             clearInterval(game);
         }
     }
-}, 30);
+}, 45);
 
 function clear() {
     let temp = context.fillStyle;
