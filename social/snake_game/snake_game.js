@@ -33,30 +33,19 @@ window.onkeydown = (e) => {
 }
 
 let game = setInterval(() => {
-    for (let i = 0; i < snake_x.length; ++i) {
-        if (snake_x[i] === -20) {
-            snake_x[i] = 800;
-        } else if (snake_x[i] === 800) {
-            snake_x[i] = 0;
-        } else if (snake_y[i] === -20) {
-            snake_y[i] = 580;
-        } else if (snake_y[i] === 600) {
-            snake_y[i] = 0;
-        }
-    }
     if (snake_x[0] === food.x && snake_y[0] === food.y) {
         if (up) {
-            snake_x.unshift(food.x);
-            snake_y.unshift(food.y - 20);
+            snake_x.push(food.x);
+            snake_y.push(food.y - 20);
         } else if (down) {
-            snake_x.unshift(food.x);
-            snake_y.unshift(food.y + 20);
+            snake_x.push(food.x);
+            snake_y.push(food.y + 20);
         } else if (right) {
-            snake_x.unshift(food.x + 20);
-            snake_y.unshift(food.y);
+            snake_x.push(food.x + 20);
+            snake_y.push(food.y);
         } else if (left) {
-            snake_x.unshift(food.x - 20);
-            snake_y.unshift(food.y);
+            snake_x.push(food.x - 20);
+            snake_y.push(food.y);
         }
         food.x = Math.floor(Math.random() * 40) * 20;
         food.y = Math.floor(Math.random() * 30) * 20;
@@ -81,6 +70,17 @@ let game = setInterval(() => {
         snake_y.unshift(snake_y[0]);
         snake_x.pop();
         snake_y.pop();
+    }
+    for (let i = 0; i < snake_x.length; ++i) {
+        if (snake_x[i] <= -20) {
+            snake_x[i] = 800;
+        } else if (snake_x[i] >= 800) {
+            snake_x[i] = 0;
+        } else if (snake_y[i] <= -20) {
+            snake_y[i] = 580;
+        } else if (snake_y[i] >= 600) {
+            snake_y[i] = 0;
+        }
     }
     console.log(snake_x);
     console.log(snake_y);
