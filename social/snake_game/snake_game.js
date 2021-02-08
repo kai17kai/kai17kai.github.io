@@ -34,12 +34,34 @@ window.onkeydown = (e) => {
 
 let game = setInterval(() => {
     if (snake_x[0] === food.x && snake_y[0] === food.y) {
-        snake_x.unshift(food.x);
-        snake_y.unshift(food.y);
+        if (up) {
+            snake_x.unshift(food.x);
+            snake_y.unshift(food.y - 20);
+        } else if (down) {
+            snake_x.unshift(food.x);
+            snake_y.unshift(food.y + 20);
+        } else if (right) {
+            snake_x.unshift(food.x + 20);
+            snake_y.unshift(food.y);
+        } else if (left) {
+            snake_x.unshift(food.x - 20);
+            snake_y.unshift(food.y);
+        }
         food.x = Math.floor(Math.random() * 40) * 20;
         food.y = Math.floor(Math.random() * 30) * 20;
     }
 
+    for (let i = 0; i < snake_x.length; ++i) {
+        if (snake_x[i] === -20) {
+            snake_x[i] = 800;
+        } else if (snake_x[i] === 800) {
+            snake_x[i] = 0;
+        } else if (snake_y[i] === -20) {
+            snake_y[i] = 580;
+        } else if (snake_y[i] === 600) {
+            snake_y[i] = 0;
+        }
+    }
     if (up) {
         snake_y.unshift(snake_y[0] - 20);
         snake_x.unshift(snake_x[0]);
@@ -61,21 +83,10 @@ let game = setInterval(() => {
         snake_x.pop();
         snake_y.pop();
     }
-
-    for (let i = 0; i < snake_x.length; ++i) {
-        if (snake_x[i] === -20) {
-            snake_x[i] = 800;
-        } else if (snake_x[i] === 800) {
-            snake_x[i] = 0;
-        } else if (snake_y[i] === -20) {
-            snake_y[i] = 580;
-        } else if (snake_y[i] === 600) {
-            snake_y[i] = 0;
-        }
-    }
+    console.log(snake_x);
+    console.log(snake_y);
 
     clear();
-
     context.fillStyle = "rgb(0,255,0)";
     for (let i = 0; i < snake_x.length; ++i) {
         context.fillRect(snake_x[i], snake_y[i], 20, 20);
@@ -83,11 +94,16 @@ let game = setInterval(() => {
 
     context.fillStyle = "rgb(255, 0, 0)";
     context.fillRect(food.x, food.y, 20, 20);
-    if (snake_x.lastIndexOf(snake_x[0]) && snake_y.lastIndexOf(snake_y[0])) {
-        clear();
-        context.font = "40px Arial";
-        context.fillText("You Have Died", 400, 300);
-        clearInterval(game);
+
+    for (let i = 1; i < snake_x.length; ++i) {
+        let distance = Math.sqrt(Math.pow(snake_x[0] - snake_x[i], 2) + Math.pow(snake_y[0] - snake_y[i], 2));
+        if (distance === 0) {
+            console.log(distance);
+            console.log(i)
+            context.font = "40px Arial";
+            context.fillText("You Have Died", 400, 300);
+            clearInterval(game);
+        }
     }
 }, 100);
 
