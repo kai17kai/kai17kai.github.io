@@ -41,45 +41,21 @@ let game = setInterval(() => {
     }
 
     if (up) {
-        /*
-        for (let i = snake_y.length - 1; i > 0; --i) {
-            snake_y[i] = snake_y[i - 1];
-        }
-        snake_y[0] -= 20;
-        */
         snake_y.unshift(snake_y[0] - 20);
         snake_x.unshift(snake_x[0]);
         snake_y.pop();
         snake_x.pop();
     } else if (down) {
-        /*
-        for (let i = snake_y.length - 1; i > 0; --i) {
-            snake_y[i] = snake_y[i - 1];
-        }
-        snake_y[0] += 20;
-        */
         snake_y.unshift(snake_y[0] + 20);
         snake_x.unshift(snake_x[0]);
         snake_x.pop();
         snake_y.pop();
     } else if (right) {
-        /*
-        for (let i = snake_x.length - 1; i > 0; --i) {
-            snake_x[i] = snake_x[i - 1];
-        }
-        snake_x[0] += 20;
-        */
         snake_x.unshift(snake_x[0] + 20);
         snake_y.unshift(snake_y[0]);
         snake_x.pop();
         snake_y.pop();
     } else if (left) {
-        /*
-        for (let i = snake_x.length - 1; i > 0; --i) {
-            snake_x[i] = snake_x[i - 1];
-        }
-        snake_x[0] -= 20;
-        */
         snake_x.unshift(snake_x[0] - 20);
         snake_y.unshift(snake_y[0]);
         snake_x.pop();
