@@ -34,7 +34,8 @@ window.onkeydown = (e) => {
 }
 
 let game = setInterval(() => {
-    if (snake_x[0] === food.x && snake_y[0] === food.y) {
+    let distance = Math.sqrt(Math.pow(snake_x[0] - food.x, 2) + Math.pow(snake_y[0] - food.y, 2));
+    if (distance <= 20) {
         if (up) {
             snake_x.push(food.x);
             snake_y.push(food.y - 20);
@@ -52,22 +53,22 @@ let game = setInterval(() => {
         food.y = Math.floor(Math.random() * 30) * 20;
     }
     if (up) {
-        snake_y.unshift(snake_y[0] - 20);
+        snake_y.unshift(snake_y[0] - 10);
         snake_x.unshift(snake_x[0]);
         snake_y.pop();
         snake_x.pop();
     } else if (down) {
-        snake_y.unshift(snake_y[0] + 20);
+        snake_y.unshift(snake_y[0] + 10);
         snake_x.unshift(snake_x[0]);
         snake_x.pop();
         snake_y.pop();
     } else if (right) {
-        snake_x.unshift(snake_x[0] + 20);
+        snake_x.unshift(snake_x[0] + 10);
         snake_y.unshift(snake_y[0]);
         snake_x.pop();
         snake_y.pop();
     } else if (left) {
-        snake_x.unshift(snake_x[0] - 20);
+        snake_x.unshift(snake_x[0] - 10);
         snake_y.unshift(snake_y[0]);
         snake_x.pop();
         snake_y.pop();
@@ -98,9 +99,8 @@ let game = setInterval(() => {
     document.getElementById("length").innerHTML = `Score: ${snake_x.length - 1}`;
 
     for (let i = 1; i < snake_x.length; ++i) {
-        let distance = Math.sqrt(Math.pow(snake_x[0] - snake_x[i], 2) + Math.pow(snake_y[0] - snake_y[i], 2));
-        if (distance === 0) {
-            console.log(distance);
+        if (snake_x[0] + snake_y[0] === snake_x[i] + snake_y[i] && snake_x[0] === snake_x[i] && snake_y[0] === snake_y[i]) {
+            console.log(snake_x[0] + snake_y[0]);
             console.log(i);
             context.font = "40px Arial";
             context.fillStyle = "white";
@@ -108,7 +108,7 @@ let game = setInterval(() => {
             clearInterval(game);
         }
     }
-}, 100);
+}, 30);
 
 function clear() {
     let temp = context.fillStyle;
