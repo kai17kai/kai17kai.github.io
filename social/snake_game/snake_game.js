@@ -94,11 +94,13 @@ let game = setInterval(() => {
     context.fillStyle = "rgb(255, 0, 0)";
     context.fillRect(food.x, food.y, 20, 20);
 
+    document.getElementById("length").innerHTML = `Score: ${snake_x.length - 1}`;
+
     for (let i = 1; i < snake_x.length; ++i) {
         let distance = Math.sqrt(Math.pow(snake_x[0] - snake_x[i], 2) + Math.pow(snake_y[0] - snake_y[i], 2));
         if (distance === 0) {
             console.log(distance);
-            console.log(i)
+            console.log(i);
             context.font = "40px Arial";
             context.fillStyle = "white";
             context.fillText("You Have Died", 400, 300);
