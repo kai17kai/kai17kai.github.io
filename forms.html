@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Forms</title>
+        <link rel="stylesheet" type="text/css" href="MainPageStyling.css">
+        <style>
+            label {
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="Header">
+            <h2>Contact Us</h2>
+        </div>
+        <form action="https://formspree.io/f/xqkgjoyl" method="POST">
+            <input type="text" name="name" placeholder="Name (Optional)"><br>
+            <input type="email" name="_replyto" required placeholder="Email (Required)"><br>
+            <textarea name="message" placeholder="Type your message"></textarea><br>
+            <input type="submit" value="Send">
+        </form>
+    </body>
+</html>
