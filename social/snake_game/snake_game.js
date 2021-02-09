@@ -1,3 +1,5 @@
+"use strict";
+
 function MoveUp() {
     up = false, down = false, right = false, left = false;
     up = true;
@@ -18,7 +20,19 @@ function MoveLeft() {
     left=true;
 }
 
-"use strict";
+let sectime = 0;
+let time = setInterval(()=>{
+    ++sectime;
+    if (sectime === 300) {
+        clear();
+        context.fillStyle = "white";
+        context.font = "40px Arial";
+        context.fillText("Time is up", 400, 300);
+        window.onkeydown = null;
+        clearInterval(time);
+        clearInterval(game);
+    }
+}, 1000);
 
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
@@ -117,7 +131,9 @@ let game = setInterval(() => {
             context.font = "40px Arial";
             context.fillStyle = "white";
             context.fillText("You Have Died", 400, 300);
+            window.onkeydown = null;
             clearInterval(game);
+            clearInterval(time);
         }
     }
 }, 45);
