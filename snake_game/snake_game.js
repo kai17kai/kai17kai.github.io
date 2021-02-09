@@ -1,21 +1,29 @@
 function MoveUp() {
-    up = false, down = false, right = false, left = false;
-    up = true;
+    if (down === false) {
+        up = false, down = false, right = false, left = false;
+        up = true;
+    }
 }
 
 function MoveDown() {
-    up = false, down = false, right = false, left = false;
-    down = true;
+    if (up === false) {
+        up = false, down = false, right = false, left = false;
+        down = true;
+    }
 }
 
 function MoveRight() {
-    up = false, down = false, right = false, left = false;
-    right=true;
+    if (left === false) {
+        up = false, down = false, right = false, left = false;
+        right=true;
+    }
 }
 
 function MoveLeft() {
-    up = false, down = false, right = false, left = false;
-    left=true;
+    if (right === false) {
+        up = false, down = false, right = false, left = false;
+        left=true;
+    }
 }
 
 "use strict";
