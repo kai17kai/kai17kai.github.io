@@ -9,7 +9,7 @@
                 color: white;
             }
 
-            form {
+            .input {
                 display: flex;
                 justify-content: center;
             }
@@ -20,10 +20,21 @@
             <h2>Contact Us</h2>
         </div>
         <form action="https://formspree.io/f/xqkgjoyl" method="POST">
-            <input type="text" name="name" placeholder="Name (Optional)">
-            <input type="email" name="_replyto" required placeholder="Email (Required)">
-            <textarea name="message" placeholder="Type your message (Required)" required></textarea>
-            <input type="submit" value="Send">
+            <div class="input">
+                <input type="text" name="name" placeholder="Name (Optional)">
+            </div>
+            <br>
+            <div class="input">
+                <input type="email" name="_replyto" required placeholder="Email (Required)">
+            </div>
+            <br>
+            <div class="input">
+                <textarea name="message" rows="10" cols="30" placeholder="Type your message (Required)" required></textarea>
+            </div>
+            <br>
+            <div class="input">
+                <input type="submit" value="Send">
+            </div>
         </form>
     </body>
 </html>
