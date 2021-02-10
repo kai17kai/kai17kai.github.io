@@ -20,10 +20,14 @@ function MoveLeft() {
     left=true;
 }
 
-let sectime = 0;
 let time = setInterval(()=>{
-    ++sectime;
-    if (sectime === 300) {
+    if (localStorage.timer) {
+        localStorage.timer = Number(localStorage.timer)+1;
+    } else {
+        localStorage.timer = 0;
+    }
+    console.log(Number(localStorage.timer));
+    if (Number(localStorage.timer) >= 300) {
         clear();
         context.fillStyle = "white";
         context.font = "40px Arial";
@@ -132,6 +136,7 @@ let game = setInterval(() => {
             context.fillStyle = "white";
             context.fillText("You Have Died", 400, 300);
             window.onkeydown = null;
+            localStorage.timer = 300;
             clearInterval(game);
             clearInterval(time);
         }
