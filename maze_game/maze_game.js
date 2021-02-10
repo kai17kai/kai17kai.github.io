@@ -3,7 +3,7 @@ canvas.height = 600;
 canvas.width = 800;
 const context = canvas.getContext("2d");
 
-let x = 1;
+var x = 1;
 
 function Level() {
     let board = CreateMap();
@@ -16,16 +16,14 @@ function CreateMap() {
     let board = new Array();
     for (let i = 0; i < squareroot; ++i) {
         board.push(new Array());
-    }
-    for (let i = 0; i < squareroot; ++i) {
-        for (let y = 0; y < squareroot; ++y) {
+        for (let j = 0; j < squareroot; ++j) {
             board[i].push(0);
         }
     }
 
     board[0][0] = 1;
     board[squareroot - 1][squareroot - 1] = 3;
-    let x = 0, y = 0, trys = 0;
+    let Comx = 0, Comy = 0, trys = 0;
     while (board[squareroot - 1][squareroot - 1] === 3) {
         if (trys == squareroot * 2) {
             for (let y = 0; y < squareroot; ++y) {
@@ -42,15 +40,26 @@ function CreateMap() {
         ++trys;
         let move = Math.floor(Math.random() * 4);
         if (move == 0) {
-            if (y > 0) {
-                if (board[x][y - 1] != 2) {
+            if (Comy > 0) {
+                if (board[Comy - 1][Comx] != 2) {
                     console.log("Up");
-                    --y;
-                    board[y][x] = 2;
+                    --Comy;
+                    board[Comy][Comx] = 2;
+                    --trys;
+                }
+            }
+        } else if (move == 1) {
+            if (Comx < squareroot - 1) {
+                if (board[Comy][Comx - 1] != 2) {
+                    console.log("Right");
+                    ++Comx;
+                    board[Comy][Comx] = 2;
                     --trys;
                 }
             }
         }
-    } else if (move == )
+    }
     return board;
 }
+
+Level();
