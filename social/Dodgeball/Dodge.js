@@ -35,7 +35,7 @@ let CreateObstacles = setInterval(() => {
     enemies.r.push(Math.floor(Math.random() * 5 + 10));
 }, 100);
 
-setInterval(() => {
+let interval = setInterval(() => {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(dodger, player.x, player.y);
     
