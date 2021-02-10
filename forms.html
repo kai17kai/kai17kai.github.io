@@ -14,6 +14,20 @@
                 justify-content: center;
             }
         </style>
+        <script>
+            function Done() {
+                let a = document.createElement("a");
+                a.href = "index.html";
+            }
+
+            function test(event) {
+                let value = document.getElementById("input").value;
+                if (value === "kyle@ciurczak.com" || value === "kyle.ciurczak@gmail.com") {
+                    document.getElementById("input").value = " ";
+                    alert("Screw You");
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="Header">
@@ -25,7 +39,7 @@
             </div>
             <br>
             <div class="input">
-                <input type="email" name="_replyto" required placeholder="Email (Required)">
+                <input type="email" onkeyup="test(event)" id="input" name="_replyto" required placeholder="Email (Required)">
             </div>
             <br>
             <div class="input">
@@ -33,7 +47,7 @@
             </div>
             <br>
             <div class="input">
-                <input type="submit" value="Send">
+                <input type="submit" onclick="" value="Send">
             </div>
         </form>
     </body>
