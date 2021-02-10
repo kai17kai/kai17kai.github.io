@@ -28,7 +28,7 @@ window.onmousemove=(e) => {
 
 function dead (){
     for (a=0;a<enemies.x.length;a++){
-        console.log('it isnt ready yet')
+        alert('it isnt ready yet')
     };
 };
 
