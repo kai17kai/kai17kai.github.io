@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Hangman</title>
+        <link rel="stylesheet" type="text/css" href="../../GameStyling.css">
+        <link rel="icon" type="image/png" href="hangman.png">
+        <style>
+            #game {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="../"><button>Main Menu</button></a>
+        <div id="rules">
+            <h4>Rules</h4>
+            <p>The rules are the same as normal game of Hangman. To submit a letter, press a key. There is also a 5 minute timer.</p>
+            <button onclick="x()">Start</button>
+            </div>
+        <div id="game">
+        <canvas id="canvas">
+			Your browser does not support canvas.
+		</canvas>
+        <h4>Wrong Letters</h4>
+        <p id="list"></p>
+        <h4 id="timer">0:00</h4>
+        <h4 id="score">Score: 0</h4>
+        </div>
+        <script src="hangman.js"></script>
+    </body>
+</html>
