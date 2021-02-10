@@ -14,12 +14,28 @@ let enemies={
 };
 let player={
     x:300,
-    y:500
+    y:500,
+    
 };
+
+
 window.onmousemove=(e) => {
     let rect = canvas.getBoundingClientRect();
     player.x = e.clientX - rect.left;
     player.y = e.clientY - rect.top;
+    let MiddleX = player.x + (dodger.width / 2);
+    let MiddleY = player.y + (dodger.height / 2);
+    for (let i = 0; i < enemies.x.length; ++i) {
+        let distance = Math.sqrt(Math.pow(MiddleX - enemies.x[i], 2) + Math.pow(MiddleY - enemies.y[i], 2));
+        if (distance < 20) {
+            clearInterval(interval);
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.font = "40px Arial";
+            context.fillText("You Have Died", 150, 300);
+        }
+    }
+    console.log(MiddleX);
+    console.log(MiddleY);
 };
 
 
