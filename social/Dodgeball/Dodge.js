@@ -17,12 +17,9 @@ let player={
     y:500
 };
 window.onmousemove=(e) => {
-    if (!( e.clientX > canvas.width || e.clientX < 0 )){
-        player.x=e.clientX-16;
-    };
-    if (!( e.clientY < 0 || e.clientY > canvas.height )){
-        player.y=e.clientY-12;
-    };
+    let rect = canvas.getBoundingClientRect();
+    player.x = e.clientX - rect.left;
+    player.y = e.clientY - rect.top;
 };
 
 
