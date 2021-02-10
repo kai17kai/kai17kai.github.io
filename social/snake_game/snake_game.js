@@ -1,42 +1,32 @@
-"use strict";
-
 function MoveUp() {
-    up = false, down = false, right = false, left = false;
-    up = true;
+    if (down === false) {
+        up = false, down = false, right = false, left = false;
+        up = true;
+    }
 }
 
 function MoveDown() {
-    up = false, down = false, right = false, left = false;
-    down = true;
+    if (up === false) {
+        up = false, down = false, right = false, left = false;
+        down = true;
+    }
 }
 
 function MoveRight() {
-    up = false, down = false, right = false, left = false;
-    right=true;
+    if (left === false) {
+        up = false, down = false, right = false, left = false;
+        right=true;
+    }
 }
 
 function MoveLeft() {
-    up = false, down = false, right = false, left = false;
-    left=true;
+    if (right === false) {
+        up = false, down = false, right = false, left = false;
+        left=true;
+    }
 }
 
-let time = setInterval(()=>{
-    if (localStorage.timer) {
-        localStorage.timer = Number(localStorage.timer)+1;
-    } else {
-        localStorage.timer = 0;
-    }
-    console.log(Number(localStorage.timer));
-    if (Number(localStorage.timer) >= 300) {
-        clear();
-        context.fillStyle = "white";
-        context.font = "40px Arial";
-        context.fillText("Time is up", 400, 300);
-        window.onkeydown = null;
-        clearInterval(time);
-        clearInterval(game);
-    }
-}, 1000);
+"use strict";
 
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
@@ -78,8 +68,8 @@ let game = setInterval(() => {
     let distance = Math.sqrt(Math.pow(snake_x[0] - food.x, 2) + Math.pow(snake_y[0] - food.y, 2));
     if (distance <= 20) {
         for (let i = 0; i < 2; ++i) {
-            snake_x.push(food.x);
-            snake_y.push(food.y);
+            snake_x.unshift(food.x);
+            snake_y.unshift(food.y);
         }
         food.x = Math.floor(Math.random() * 40) * 20;
         food.y = Math.floor(Math.random() * 30) * 20;
@@ -135,10 +125,7 @@ let game = setInterval(() => {
             context.font = "40px Arial";
             context.fillStyle = "white";
             context.fillText("You Have Died", 400, 300);
-            window.onkeydown = null;
-            localStorage.timer = 300;
             clearInterval(game);
-            clearInterval(time);
         }
     }
 }, 45);
