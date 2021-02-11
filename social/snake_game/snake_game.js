@@ -1,32 +1,42 @@
+"use strict";
+
 function MoveUp() {
-    if (down === false) {
-        up = false, down = false, right = false, left = false;
-        up = true;
-    }
+    up = false, down = false, right = false, left = false;
+    up = true;
 }
 
 function MoveDown() {
-    if (up === false) {
-        up = false, down = false, right = false, left = false;
-        down = true;
-    }
+    up = false, down = false, right = false, left = false;
+    down = true;
 }
 
 function MoveRight() {
-    if (left === false) {
-        up = false, down = false, right = false, left = false;
-        right=true;
-    }
+    up = false, down = false, right = false, left = false;
+    right=true;
 }
 
 function MoveLeft() {
-    if (right === false) {
-        up = false, down = false, right = false, left = false;
-        left=true;
-    }
+    up = false, down = false, right = false, left = false;
+    left=true;
 }
 
-"use strict";
+let time = setInterval(()=>{
+    if (localStorage.timer) {
+        localStorage.timer = Number(localStorage.timer)+1;
+    } else {
+        localStorage.timer = 0;
+    }
+    console.log(Number(localStorage.timer));
+    if (Number(localStorage.timer) >= 300) {
+        clear();
+        context.fillStyle = "white";
+        context.font = "40px Arial";
+        context.fillText("Time is up", 400, 300);
+        window.onkeydown = null;
+        clearInterval(time);
+        clearInterval(game);
+    }
+}, 1000);
 
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
@@ -63,7 +73,10 @@ window.onkeydown = (e) => {
     }
 }
 
-let game = setInterval(() => {
+let amount = 5, speed = 45;
+let game = setInterval(d, speed);
+
+function d() {
     document.getElementById("length").innerHTML = `Score: ${score}`;
     let distance = Math.sqrt(Math.pow(snake_x[0] - food.x, 2) + Math.pow(snake_y[0] - food.y, 2));
     if (distance <= 20) {
@@ -74,6 +87,13 @@ let game = setInterval(() => {
         food.x = Math.floor(Math.random() * 40) * 20;
         food.y = Math.floor(Math.random() * 30) * 20;
         ++score;
+        --amount;
+        if (amount == 0) {
+            amount = 5;
+            --speed;
+            clearInterval(game);
+            game = setInterval(d, speed);
+        }
     }
     if (up) {
         snake_y.unshift(snake_y[0] - 10);
@@ -125,10 +145,13 @@ let game = setInterval(() => {
             context.font = "40px Arial";
             context.fillStyle = "white";
             context.fillText("You Have Died", 400, 300);
+            window.onkeydown = null;
+            localStorage.timer = 300;
             clearInterval(game);
+            clearInterval(time);
         }
     }
-}, 45);
+}
 
 function clear() {
     let temp = context.fillStyle;
