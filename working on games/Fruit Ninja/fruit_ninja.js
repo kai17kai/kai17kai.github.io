@@ -47,8 +47,7 @@ let moveFruits = setInterval(() => {
                 fruits.y.splice(a,1)
                 fruits.jumpcount.splice(a,1)
                 fruits.type.splice(a,1)
-            };
-            if (fruits.type[a]==='white'){
+            } else if (fruits.type[a]==='white'){
                 score+=3;
                 fruits.x.splice(a,1)
                 fruits.y.splice(a,1)
