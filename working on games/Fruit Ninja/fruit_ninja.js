@@ -17,12 +17,12 @@ let player={
 let trail = {
     x: [],
     y: []
-}
+};
 
 for (let i = 0; i < 20; ++i) {
     trail.x.push(player.x);
     trail.y.push(player.y);
-}
+};
 window.onmousemove=(e) => {
     let rect = canvas.getBoundingClientRect();
     player.x = e.clientX - rect.left;
