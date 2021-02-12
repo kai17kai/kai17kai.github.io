@@ -9,8 +9,9 @@ function x() {
     document.getElementById("rules").style.display = "none";
     document.getElementById("game").style.display = "block";
     if (!(localStorage.mintimer) || !(localStorage.sectimer)) {
-        localStorage.mintimer = 4;
+        localStorage.mintimer = 5;
         localStorage.sectimer = 0;
+        Start();
     } else {
         if (Number(localStorage.mintimer) <= 0 && Number(localStorage.sectimer) <= 0) {
             clear();
@@ -28,6 +29,7 @@ function x() {
             Start();
         }
     }
+    
 }
 
 function MoveUp() {

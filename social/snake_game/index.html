@@ -13,6 +13,8 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-evenly;
+                position: sticky;
+                position: -webkit-sticky;
             }
 
             #game {
@@ -33,8 +35,8 @@
             <button onclick="window.location.reload()">Restart Game</button>
             <div id="buttons">
                 <button onclick="MoveUp()">Up</button>
-                <button onclick="MoveDown()">Down</button>
                 <button onclick="MoveRight()">Right</button>
+                <button onclick="MoveDown()">Down</button>
                 <button onclick="MoveLeft()">Left</button>
             </div>
         </div>
