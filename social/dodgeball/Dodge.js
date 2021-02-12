@@ -52,8 +52,8 @@ window.onmousemove=(e) => {
 let CreateObstacles = setInterval(() => {
     enemies.x.push(Math.floor(Math.random() * 600));
     enemies.y.push(-10);
-    enemies.r.push(Math.floor(Math.random() * 5 + 10));
-}, 100);
+    enemies.r.push(Math.floor(Math.random() * 5 + 15));
+}, 120);
 
 let interval = setInterval(() => {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -64,11 +64,11 @@ let interval = setInterval(() => {
         context.arc(enemies.x[a], enemies.y[a], enemies.r[a], 0, 2 * Math.PI);
         context.fillStyle = 'red';
         context.fill();
-        enemies.y[a]=enemies.y[a]+2;
-        if (enemies.y[a]>canvas.height+20){
+        enemies.y[a]=enemies.y[a]+1;
+        if (enemies.y[a]>canvas.height+30){
             enemies.y.splice(a,1)
             enemies.x.splice(a,1)
             enemies.r.splice(a,1)
         };
     };
-}, 16);
+}, 1);
