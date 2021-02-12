@@ -116,7 +116,7 @@ window.onkeydown = (e) => {
     }
 }
 
-let amount = 5, speed = 45;
+let amount = 3, speed = 45;
 let game = setInterval(d, speed);
 
 function d() {
@@ -132,7 +132,7 @@ function d() {
         ++score;
         --amount;
         if (amount == 0) {
-            amount = 5;
+            amount = 3;
             --speed;
             clearInterval(game);
             game = setInterval(d, speed);

@@ -1,3 +1,5 @@
+"use strict";
+
 function MoveUp() {
     if (down === false) {
         up = false, down = false, right = false, left = false;
@@ -25,8 +27,6 @@ function MoveLeft() {
         left=true;
     }
 }
-
-"use strict";
 
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
