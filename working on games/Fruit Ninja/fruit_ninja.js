@@ -3,7 +3,7 @@ canvas.width=600;
 canvas.height=600;
 const context=canvas.getContext('2d');
 let score=0;
-let types=['red','green','green','white']
+let types=['red','red','green','green','green','green','green','white']
 let fruits={
     x:[],
     y:[],
@@ -43,6 +43,13 @@ let moveFruits = setInterval(() => {
         if (distance <= 25 ) {
             if (fruits.type[a]==='green'){
                 score+=1;
+                fruits.x.splice(a,1)
+                fruits.y.splice(a,1)
+                fruits.jumpcount.splice(a,1)
+                fruits.type.splice(a,1)
+            };
+            if (fruits.type[a]==='white'){
+                score+=3;
                 fruits.x.splice(a,1)
                 fruits.y.splice(a,1)
                 fruits.jumpcount.splice(a,1)
