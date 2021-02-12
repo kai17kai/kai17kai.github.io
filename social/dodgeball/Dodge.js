@@ -18,21 +18,23 @@ let player={
     
 };
 
-
 window.onmousemove=(e) => {
     let rect = canvas.getBoundingClientRect();
-    player.x = e.clientX - rect.left;
-    player.y = e.clientY - rect.top;
+    player.x = e.clientX - rect.left - 16;
+    player.y = e.clientY - rect.top - 12;
 
     if (player.x + 20 > canvas.width) {
         player.x = canvas.width - 20;
-    } else if (player.x < -10) {
+    };
+    if (player.x < -10) {
         player.x = 0;
-    } else if (player.y < -10) {
+    };
+    if (player.y < -10) {
         player.y = 0;
-    } else if (player.y + 20 > canvas.height) {
+    };
+    if (player.y + 20 > canvas.height) {
         player.y = canvas.height - 20;
-    }
+    };
 
     let MiddleX = player.x + (dodger.width / 2);
     let MiddleY = player.y + (dodger.height / 2);
@@ -43,16 +45,7 @@ window.onmousemove=(e) => {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.font = "40px Arial";
             context.fillText("You Have Died", 150, 300);
-        }
-    }
-    console.log(MiddleX);
-    console.log(MiddleY);
-};
-
-
-function dead (){
-    for (a=0;a<enemies.x.length;a++){
-        alert('it isnt ready yet')
+        };
     };
 };
 
