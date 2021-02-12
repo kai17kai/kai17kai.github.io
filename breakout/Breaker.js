@@ -324,5 +324,5 @@ document.onkeydown = (e) => {
 }
 
 document.onmousemove = (e) => {
-    HumanX = e.clientX - 350;
+    HumanX = e.clientX - 390;
 }
