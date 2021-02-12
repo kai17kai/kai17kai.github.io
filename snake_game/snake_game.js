@@ -68,8 +68,8 @@ let game = setInterval(() => {
     let distance = Math.sqrt(Math.pow(snake_x[0] - food.x, 2) + Math.pow(snake_y[0] - food.y, 2));
     if (distance <= 20) {
         for (let i = 0; i < 2; ++i) {
-            snake_x.push(food.x);
-            snake_y.push(food.y);
+            snake_x.push(snake_x[0]);
+            snake_y.push(snake_y[0]);
         }
         food.x = Math.floor(Math.random() * 40) * 20;
         food.y = Math.floor(Math.random() * 30) * 20;

@@ -14,23 +14,35 @@
                 flex-direction: row;
                 justify-content: space-evenly;
             }
+
+            #game {
+                display: none;
+            }
         </style>
     </head>
     <body>
-        <a href="../">
-            <button>Main Menu</button>
-        </a>
-        <canvas id="canvas">
-            Your browser does not support canvas
-        </canvas>
-        <h3 id="length">Score: 0</h3>
-        <button onclick="window.location.reload()">Restart Game</button>
-        <script src="snake_game.js"></script>
-        <div id="buttons">
-            <button onclick="MoveUp()">Up</button>
-            <button onclick="MoveDown()">Down</button>
-            <button onclick="MoveRight()">Right</button>
-            <button onclick="MoveLeft()">Left</button>
+        <div id="game">
+            <a href="../">
+                <button>Main Menu</button>
+            </a>
+            <canvas id="canvas">
+                Your browser does not support canvas
+            </canvas>
+            <h3 id="length">Score: 0</h3>
+            <h3 id="timer">Timer: 5:00</h3>
+            <button onclick="window.location.reload()">Restart Game</button>
+            <div id="buttons">
+                <button onclick="MoveUp()">Up</button>
+                <button onclick="MoveDown()">Down</button>
+                <button onclick="MoveRight()">Right</button>
+                <button onclick="MoveLeft()">Left</button>
+            </div>
         </div>
+        <div id="rules">
+            <h3>Rules</h3>
+            <p>This is the same as the original snake game. Get to the red square using the wasd keys, arrow keys, or the buttons for those who don't have a keyboard (sorry for the horrible controls). The snake grows longer as you eat the red square. Try to not hit yourself. One thing that is different in this version of the game is that you can go through the walls and the game gets faster as you eat the red square. When you go through the wall, you go to the opposite side. There is also 5 minute timer that starts when you start the game. Don't try reloading the tab when the game is over becasue that has no use. Good Luck</p>
+            <button onclick="Start()">Press To Start</button>
+        </div>
+        <script src="snake_game.js"></script>
     </body>
 </html>
