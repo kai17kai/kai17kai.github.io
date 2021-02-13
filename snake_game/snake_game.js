@@ -1,27 +1,27 @@
 "use strict";
 
-function MoveUp() {
+document.getElementById("1").onclick = () => {
     if (down === false) {
         up = false, down = false, right = false, left = false;
         up = true;
     }
 }
 
-function MoveDown() {
+document.getElementById("4").onclick = () => {
     if (up === false) {
         up = false, down = false, right = false, left = false;
         down = true;
     }
 }
 
-function MoveRight() {
+document.getElementById("3").onclick = () => {
     if (left === false) {
         up = false, down = false, right = false, left = false;
         right=true;
     }
 }
 
-function MoveLeft() {
+document.getElementById("2").onclick = () => {
     if (right === false) {
         up = false, down = false, right = false, left = false;
         left=true;

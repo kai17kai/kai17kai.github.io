@@ -1,23 +1,31 @@
 "use strict";
 
-function MoveUp() {
-    up = false, down = false, right = false, left = false;
-    up = true;
+document.getElementById("1").onclick = () => {
+    if (down === false) {
+        up = false, down = false, right = false, left = false;
+        up = true;
+    }
 }
 
-function MoveDown() {
-    up = false, down = false, right = false, left = false;
-    down = true;
+document.getElementById("4").onclick = () => {
+    if (up === false) {
+        up = false, down = false, right = false, left = false;
+        down = true;
+    }
 }
 
-function MoveRight() {
-    up = false, down = false, right = false, left = false;
-    right=true;
+document.getElementById("3").onclick = () => {
+    if (left === false) {
+        up = false, down = false, right = false, left = false;
+        right=true;
+    }
 }
 
-function MoveLeft() {
-    up = false, down = false, right = false, left = false;
-    left=true;
+document.getElementById("2").onclick = () => {
+    if (right === false) {
+        up = false, down = false, right = false, left = false;
+        left=true;
+    }
 }
 
 const canvas = document.getElementById("canvas");
