@@ -164,7 +164,7 @@ document.addEventListener("keydown", Jump);
 
 document.addEventListener("keyup", Down);
 
-canvas.onclick = (e) => {
+canvas.onmousedown = (e) => {
     if (Up) {
         Up = false;
     } else {
