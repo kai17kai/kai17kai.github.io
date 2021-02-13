@@ -7,46 +7,47 @@
         <style>
             canvas {
                 background-color: black;
+                margin: 0px;
+                display: inline;
             }
 
             div {
-            display: flex;
+                display: flex;
             }
 
-                .gameboy {
-                    display: block;
-                    margin:auto;
-                    flex-direction: column;
-                    padding: 30px;
-                    max-width: 80vw;
-                }
+            .gameboy {
+                display: flex;
+                flex-direction: row;
+                padding: 30px;
+                max-width: 80vw;
+            }
 
+            .controls {
+                justify-content: center;
+            }
 
-                .controls {
-                    justify-content: center;
-                }
+            #buttons {
+                display: flex;
+                flex-direction: column;
+                margin: auto;
+            }
 
-                #buttons {
-                    display: flex;
-                    flex-direction: column;
-                    width: 10vw;
-                }
+            .button {
+                padding: 30px;
+                border: outset;
+                border-radius: 30px;
+                justify-content: center;
+            }
 
-                .button {
-                    padding: 30px;
-                    border: outset;
-                    border-radius: 30px;
-                }
+            .empty {
+                padding: 20px;
+            }
 
-                .empty {
-                    padding: 20px;
-                }
-    
-                .rightleft {
-                    flex-direction: row;
-                    justify-content: center;
-                    max-height: 25px;
-                }
+            .rightleft {
+                flex-direction: row;
+                justify-content: center;
+                max-height: 25px;
+            }
         </style>
     </head>
     <body>
@@ -77,17 +78,17 @@
                 </div>
             </div>
         </div>
-        <h3 id="length">Score: 12</h3>
+            <h3 id="length">Score: 12</h3>
             <button onclick="window.location.reload()">Restart Game</button>
+            <h3>Rules</h3>
+            <p>This is the same as the original snake game. Get to the red 
+            square using the wasd keys, arrow keys, or the buttons for those who 
+            don't have a keyboard (sorry for the horrible controls). The snake grows
+            longer as you eat the red square. Try to not hit yourself. One thing 
+            that is different in this version of the game is that you can go through
+            the walls. When you go through the wall, you go to the opposite side. 
+            Good Luck</p>
+            </div>
         <script src="snake_game.js"></script>
-        <h3>Rules</h3>
-        <p>This is the same as the original snake game. Get to the red 
-        square using the wasd keys, arrow keys, or the buttons for those who 
-        don't have a keyboard (sorry for the horrible controls). The snake grows
-        longer as you eat the red square. Try to not hit yourself. One thing 
-        that is different in this version of the game is that you can go through
-        the walls. When you go through the wall, you go to the opposite side. 
-        Good Luck</p>
-
     </body>
 </html>
