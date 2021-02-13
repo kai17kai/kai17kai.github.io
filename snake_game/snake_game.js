@@ -45,9 +45,11 @@ let food = {
     y: Math.floor(Math.random() * 30) * 20
 }
 
-let movement = null;
 let up = false, down = false, right = false, left = false;
 window.onkeydown = (e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+        e.preventDefault();
+    }
     if ((e.key === "w" || e.key  === "ArrowUp") && down === false) {
         up = false, down = false, right = false, left = false;
         up = true;

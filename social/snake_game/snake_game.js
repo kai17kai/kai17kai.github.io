@@ -102,6 +102,9 @@ let food = {
 }
 
 window.onkeydown = (e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+        e.preventDefault();
+    }
     if ((e.key === "w" || e.key  === "ArrowUp") && down === false) {
         up = false, down = false, right = false, left = false;
         up = true;
