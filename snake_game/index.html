@@ -9,32 +9,85 @@
                 background-color: black;
             }
 
-            #buttons {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-evenly;
-                position: sticky;
-                position: -webkit-sticky;
+            div {
+            display: flex;
             }
+
+                .gameboy {
+                    display: block;
+                    margin:auto;
+                    flex-direction: column;
+                    padding: 30px;
+                    max-width: 80vw;
+                }
+
+
+                .controls {
+                    justify-content: center;
+                }
+
+                #buttons {
+                    display: flex;
+                    flex-direction: column;
+                    width: 10vw;
+                }
+
+                .button {
+                    padding: 30px;
+                    border: outset;
+                    border-radius: 30px;
+                }
+
+                .empty {
+                    padding: 20px;
+                }
+    
+                .rightleft {
+                    flex-direction: row;
+                    justify-content: center;
+                    max-height: 20px;
+                }
         </style>
     </head>
     <body>
         <a href="../">
             <button>Main Menu</button>
         </a>
-        <canvas id="canvas">
-            Your browser does not support canvas
-        </canvas>
-        <h3 id="length">Score: 0</h3>
-        <button onclick="window.location.reload()">Restart Game</button>
-        <script src="snake_game.js"></script>
-        <div id="buttons">
-            <button onclick="MoveUp()">Up</button>
-            <button onclick="MoveRight()">Right</button>
-            <button onclick="MoveDown()">Down</button>
-            <button onclick="MoveLeft()">Left</button>
+        <div class="gameboy">
+            <canvas id="canvas" height="600" width="800">
+                Your browser does not support canvas
+            </canvas>
+            <div class="controls">
+                <div id="buttons">
+                    <div class="rightleft" class="button">
+                        <div class="empty"></div>
+                        <button onclick="MoveUp()"></button>
+                        <div class="empty"></div>
+                    </div>
+                    <div class="rightleft" class="button">
+                        <button onclick="MoveLeft()"></button>
+                        <div class="empty"></div>
+                        <button onclick="MoveRight()"></button>
+                    </div>
+                    <div class="rightleft" class="button">
+                        <div class="empty"></div>
+                        <button onclick="MoveDown()"></button>
+                        <div class="empty"></div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <h3 id="length">Score: 12</h3>
+            <button onclick="window.location.reload()">Restart Game</button>
+        <script src="snake_game.js"></script>
         <h3>Rules</h3>
-        <p>This is the same as the original snake game. Get to the red square using the wasd keys, arrow keys, or the buttons for those who don't have a keyboard (sorry for the horrible controls). The snake grows longer as you eat the red square. Try to not hit yourself. One thing that is different in this version of the game is that you can go through the walls. When you go through the wall, you go to the opposite side. Good Luck</p>
+        <p>This is the same as the original snake game. Get to the red 
+        square using the wasd keys, arrow keys, or the buttons for those who 
+        don't have a keyboard (sorry for the horrible controls). The snake grows
+        longer as you eat the red square. Try to not hit yourself. One thing 
+        that is different in this version of the game is that you can go through
+        the walls. When you go through the wall, you go to the opposite side. 
+        Good Luck</p>
+
     </body>
 </html>
