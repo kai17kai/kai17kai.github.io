@@ -49,6 +49,7 @@
         <a href="../">
             <button>Main Menu</button>
         </a>
+        <button onclick="window.location.reload()">Restart Game</button>
         <div class="gameboy">
             <canvas id="canvas" height="600" width="800">
                 Your browser does not support canvas
@@ -67,17 +68,15 @@
                 </div>
             </div>
         </div>
-            <h3 id="length">Score: 0</h3>
-            <button onclick="window.location.reload()">Restart Game</button>
-            <h3>Rules</h3>
-            <p>This is the same as the original snake game. Get to the red 
-            square using the wasd keys, arrow keys, or the buttons for those who 
-            don't have a keyboard (sorry for the horrible controls). The snake grows
-            longer as you eat the red square. Try to not hit yourself. One thing 
-            that is different in this version of the game is that you can go through
-            the walls. When you go through the wall, you go to the opposite side. 
-            Good Luck</p>
-            </div>
+        <h3 id="length">Score: 0</h3>
+        <h3>Rules</h3>
+        <p>This is the same as the original snake game. Get to the red 
+        square using the wasd keys, arrow keys, or the buttons for those who 
+        don't have a keyboard (sorry for the horrible controls). The snake grows
+        longer as you eat the red square. Try to not hit yourself. There are two differences though between this
+        game and the original snake game.This version of the game allows you to go through
+        the walls and the snake speeds up as you eat the red square. When you go through the wall, you go to the opposite side. 
+        Good Luck</p>
         <script src="snake_game.js"></script>
     </body>
 </html>

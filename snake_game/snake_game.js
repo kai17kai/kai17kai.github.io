@@ -63,7 +63,10 @@ window.onkeydown = (e) => {
     }
 }
 
-let game = setInterval(() => {
+let amount = 3, speed = 45;
+let game = setInterval(d, speed);
+
+function d() {
     document.getElementById("length").innerHTML = `Score: ${score}`;
     let distance = Math.sqrt(Math.pow(snake_x[0] - food.x, 2) + Math.pow(snake_y[0] - food.y, 2));
     if (distance <= 20) {
@@ -74,6 +77,14 @@ let game = setInterval(() => {
         food.x = Math.floor(Math.random() * 40) * 20;
         food.y = Math.floor(Math.random() * 30) * 20;
         ++score;
+        --amount;
+        if (amount === 0) {
+            amount = 3;
+            speed -= 1;
+            clearInterval(game);
+            game = setInterval(d, speed);
+            console.log(speed)
+        }
     }
     if (up) {
         snake_y.unshift(snake_y[0] - 10);
@@ -128,7 +139,7 @@ let game = setInterval(() => {
             clearInterval(game);
         }
     }
-}, 45);
+}
 
 function clear() {
     let temp = context.fillStyle;

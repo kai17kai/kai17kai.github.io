@@ -1,5 +1,25 @@
 "use strict";
 
+function MoveUp() {
+    up = false, down = false, right = false, left = false;
+    up = true;
+}
+
+function MoveDown() {
+    up = false, down = false, right = false, left = false;
+    down = true;
+}
+
+function MoveRight() {
+    up = false, down = false, right = false, left = false;
+    right=true;
+}
+
+function MoveLeft() {
+    up = false, down = false, right = false, left = false;
+    left=true;
+}
+
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
 canvas.width = 800;
@@ -32,25 +52,7 @@ function x() {
     
 }
 
-function MoveUp() {
-    up = false, down = false, right = false, left = false;
-    up = true;
-}
-
-function MoveDown() {
-    up = false, down = false, right = false, left = false;
-    down = true;
-}
-
-function MoveRight() {
-    up = false, down = false, right = false, left = false;
-    right=true;
-}
-
-function MoveLeft() {
-    up = false, down = false, right = false, left = false;
-    left=true;
-}
+let up = false, down = false, right = false, left = false;
 
 function Start() {
 
@@ -99,7 +101,6 @@ let food = {
     y: Math.floor(Math.random() * 30) * 20
 }
 
-let up = false, down = false, right = false, left = false;
 window.onkeydown = (e) => {
     if ((e.key === "w" || e.key  === "ArrowUp") && down === false) {
         up = false, down = false, right = false, left = false;
