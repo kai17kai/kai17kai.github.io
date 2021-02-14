@@ -131,7 +131,7 @@
             <p id="true"> </p>
             <hr>
             <h3>Guide</h3>
-            <p>The button <em>"Get Random"</em> produces a random position. <em>Result</em> shows the random position. <em>Already Done</em> is the positions already used. <em>Checked If Used</em> searches through the <em>Already Used</em> to see if the given posiitons were used. A valid search would be "B12,I12,N12,G12,O12". Press Submit to search</p>
+            <p>The button <em>"Get Random"</em> produces a random position. <em>Result</em> shows the random position. <em>Already Done</em> is the positions already used. <em>Checked If Used</em> searches through the <em>Already Used</em> to see if the given posiitons were used. A valid search would be "B12,I12,N12,G12,O12" (doesn't have to be in order). Press Submit to search</p>
         </div>
         <script>
             const choices = ["b", "i", "n", "g", "o"];
@@ -311,12 +311,10 @@
             let random = [];
             function x() {
                 let number = Math.floor(Math.random() * 75) + 1;
-                let done = false;
                 let letter = choices[Math.floor(Math.random() * choices.length)].toUpperCase();
                 if (random.length == 0 || random.indexOf(letter + String(number)) < 0) {
                     document.getElementById("result").innerHTML = letter + String(number);
                     random.push(letter + String(number));
-                    done = true;
                 }
                 document.getElementById("done").innerHTML = random.join(", ");
             }

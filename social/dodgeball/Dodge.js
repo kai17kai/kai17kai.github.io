@@ -4,7 +4,7 @@ canvas.height=600;
 const context=canvas.getContext('2d');
 let end=true;
 let count=0;
-let test=-10
+let test=-10;
 const dodger = document.createElement("img");
 dodger.src = "dodger guy.png";
 let enemies={
@@ -41,10 +41,14 @@ window.onmousemove=(e) => {
     for (let i = 0; i < enemies.x.length; ++i) {
         let distance = Math.sqrt(Math.pow(MiddleX - enemies.x[i], 2) + Math.pow(MiddleY - enemies.y[i], 2));
         if (distance < 20) {
-            clearInterval(interval);
             context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = "black";
             context.font = "40px Arial";
             context.fillText("You Have Died", 150, 300);
+            localStorage.dead = true;
+            clearInterval(CreateObstacles);
+            clearInterval(interval);
+            clearInterval(timer);
         };
     };
 };
@@ -72,3 +76,31 @@ let interval = setInterval(() => {
         };
     };
 }, 1);
+
+let sec = 0, min= 0;
+let timer = setInterval(() => {
+    ++sec;
+    if (sec > 59) {
+        sec = 0;
+        min++;
+    }
+
+    if (sec > 9) {
+        document.getElementById("time").innerHTML = "Time:" + String(min) + ":" + String(sec);
+    } else {
+        document.getElementById("time").innerHTML = "Time:" + String(min) + ":0" + String(sec);
+    }
+}, 1000);
+
+if (!(localStorage.dead)) {
+    localStorage.dead = false;
+} else {
+    if (Boolean(localStorage.dead)) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.font = "40px Arial";
+        context.fillText("You Have Died", 150, 300);
+        clearInterval(CreateObstacles);
+        clearInterval(interval);
+        clearInterval(timer);
+    }
+}

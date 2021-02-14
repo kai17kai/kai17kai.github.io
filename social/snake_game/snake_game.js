@@ -35,8 +35,6 @@ let controls = setInterval(() => {
                 up = false, down = false, right = false, left = false;
                 up = true;
             }
-        } else if (gp.buttons[9].pressed) {
-            window.location.reload();
         }
     }
 }, 1);
@@ -81,24 +79,18 @@ const context = canvas.getContext("2d");
 function x() {
     document.getElementById("rules").style.display = "none";
     document.getElementById("game").style.display = "block";
-    if (!(localStorage.mintimer) || !(localStorage.sectimer)) {
-        localStorage.mintimer = 5;
-        localStorage.sectimer = 0;
+    if (!(localStorage.dead)) {
+        localStorage.dead = false;
         Start();
     } else {
-        if (Number(localStorage.mintimer) <= 0 && Number(localStorage.sectimer) <= 0) {
+        if (Boolean(localStorage.dead)) {
             clear();
             context.fillStyle = "white";
             context.font = "40px Arial";
-            context.fillText("Time is up", 400, 300);
+            context.fillText("You Died", 400, 300);
             document.getElementById("timer").innerHTML = "Timer: 0:00";
             window.onkeydown = null;
         } else {
-            if (Number(localStorage.sectimer) >= 10) {
-                document.getElementById("timer").innerHTML = "Timer: " + localStorage.mintimer + ":" + localStorage.sectimer;
-            } else {
-                document.getElementById("timer").innerHTML = "Timer: " + localStorage.mintimer + ":0" + localStorage.sectimer;
-            }
             Start();
         }
     }
@@ -111,36 +103,6 @@ function Start() {
 
     document.getElementById("rules").style.display = "none";
     document.getElementById("game").style.display = "block";
-
-let time = setInterval(()=>{
-        if (Number(localStorage.mintimer) <= 0 && Number(localStorage.sectimer) <= 0) {
-            clear();
-            context.fillStyle = "white";
-            context.font = "40px Arial";
-            context.fillText("Time is up", 400, 300);
-            window.onkeydown = null;
-            clearInterval(time);
-            clearInterval(game);
-        } else {
-        if (localStorage.sectimer) {
-            if (localStorage.sectimer > 0) {
-                localStorage.sectimer = Number(localStorage.sectimer)-1;
-            } else {
-                localStorage.sectimer = Number(59);
-                localStorage.mintimer = Number(localStorage.mintimer)-1;
-            }
-        }
-
-        if (Number(localStorage.sectimer) >= 10) {
-            document.getElementById("timer").innerHTML = "Timer: " + localStorage.mintimer + ":" + localStorage.sectimer;
-        } else {
-            document.getElementById("timer").innerHTML = "Timer: " + localStorage.mintimer + ":0" + localStorage.sectimer;
-        }
-
-        console.log(localStorage.sectimer);
-        console.log(localStorage.mintimer);
-    }
-}, 1000);
 
 let snake_x = [];
 snake_x.push(Math.floor(Math.random() * 30) * 20);
@@ -249,8 +211,7 @@ function d() {
             context.fillStyle = "white";
             context.fillText("You Have Died", 400, 300);
             window.onkeydown = null;
-            localStorage.mintimer = 0;
-            localStorage.sectimer = 0;
+            localStorage.dead = true;
             clearInterval(game);
             clearInterval(time);
         }

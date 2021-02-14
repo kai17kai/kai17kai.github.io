@@ -20,13 +20,6 @@ function ComputerCircle() {
 		distance = Math.sqrt(Math.pow(HumanX - ComputerX, 2) + Math.pow(HumanY - ComputerY, 2))
 		console.log(distance);
 	} while (distance <= 100)
-	var temp = context.fillStyle;
-	context.fillStyle = "red";
-	context.beginPath();
-	context.arc(ComputerX,ComputerY,30,0,2*Math.PI,false);
-	context.closePath();
-	context.fill();
-	context.fillStyle = temp;
 }
 
 //Movement
@@ -108,6 +101,13 @@ context.arc(125,125,30,0,2*Math.PI,false); // center at (125,125), radius = 30
 context.fill();
 
 ComputerCircle();
+var temp = context.fillStyle;
+context.fillStyle = "red";
+context.beginPath();
+context.arc(ComputerX,ComputerY,30,0,2*Math.PI,false);
+context.closePath();
+context.fill();
+context.fillStyle = temp;
 
 document.addEventListener("keydown", Level); // function f defined below:
 
