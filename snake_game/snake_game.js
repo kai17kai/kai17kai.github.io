@@ -9,35 +9,32 @@ window.addEventListener("gamepadconnected", function(e) {
     console.log(gamepad);
     let gp = navigator.getGamepads()[0];
     console.log(gp);
-    gamepad = true;
 });
 
 let controls = setInterval(() => {
-    if (gamepad) {
-        let gp = navigator.getGamepads()[0];
-        if (gp.buttons[0].pressed || gp.buttons[13].pressed || gp.axes[1] >= 0.75 || gp.axes[3] >= 0.75) {
-            if (up === false) {
-                up = false, down = false, right = false, left = false;
-                down = true;
-            }
-        } else if (gp.buttons[1].pressed || gp.buttons[15].pressed || gp.axes[0] >= 0.75 || gp.axes[2] >= 0.75) {
-            if (left === false) {
-                up = false, down = false, right = false, left = false;
-                right=true;
-            }
-        } else if (gp.buttons[2].pressed || gp.buttons[14].pressed || gp.axes[0] <= -0.75 || gp.axes[2] <= -0.75) {
-            if (right === false) {
-                up = false, down = false, right = false, left = false;
-                left=true;
-            }
-        } else if (gp.buttons[3].pressed || gp.buttons[12].pressed || gp.axes[1] <= -0.75 || gp.axes[3] <= -0.75) {
-            if (down === false) {
-                up = false, down = false, right = false, left = false;
-                up = true;
-            }
-        } else if (gp.buttons[9].pressed) {
-            window.location.reload();
+    let gp = navigator.getGamepads()[0];
+    if (gp.buttons[0].pressed || gp.buttons[13].pressed || gp.axes[1] >= 0.75 || gp.axes[3] >= 0.75) {
+        if (up === false) {
+            up = false, down = false, right = false, left = false;
+            down = true;
         }
+    } else if (gp.buttons[1].pressed || gp.buttons[15].pressed || gp.axes[0] >= 0.75 || gp.axes[2] >= 0.75) {
+        if (left === false) {
+            up = false, down = false, right = false, left = false;
+            right=true;
+        }
+    } else if (gp.buttons[2].pressed || gp.buttons[14].pressed || gp.axes[0] <= -0.75 || gp.axes[2] <= -0.75) {
+        if (right === false) {
+            up = false, down = false, right = false, left = false;
+            left=true;
+        }
+    } else if (gp.buttons[3].pressed || gp.buttons[12].pressed || gp.axes[1] <= -0.75 || gp.axes[3] <= -0.75) {
+        if (down === false) {
+            up = false, down = false, right = false, left = false;
+            up = true;
+        }
+    } else if (gp.buttons[9].pressed) {
+        window.location.reload();
     }
 }, 1);
 
