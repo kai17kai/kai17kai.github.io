@@ -12,6 +12,25 @@ window.addEventListener("gamepadconnected", function(e) {
     gamepad = true;
 });
 
+function highScore(score) {
+    var saved = 0;
+    try { saved = parseFloat(localStorage.snakehighScore); } catch (e) { saved = 0; }
+    if (!(typeof score === 'undefined')) {
+       try { score = parseFloat(score); } catch (e) { score = 0; }
+       if (score>saved) {
+         saved = score;
+         localStorage.snakehighScore = '' + score;
+       }
+    }
+    if (isNaN(saved)) {
+       saved = 0;
+       localStorage.snakehighScore = '0';
+    }
+    return saved;
+ }
+
+ document.getElementById("high").innerHTML = "HighScore: " + highScore(0);
+
 let controls = setInterval(() => {
     if (gamepad) {
         let gp = navigator.getGamepads()[0];
@@ -123,9 +142,17 @@ function d() {
             snake_x.push(snake_x[0]);
             snake_y.push(snake_y[0]);
         }
-        food.x = Math.floor(Math.random() * (canvas.width + 1 - 20));
-        food.y = Math.floor(Math.random() * (canvas.height + 1 - 20));
+        let x = Math.floor(Math.random() * (canvas.width + 1 - 20));
+        let y = Math.floor(Math.random() * (canvas.height + 1 - 20));
+
+        while (snake_x.includes(x) || snake_y.includes(y)) {
+            x = Math.floor(Math.random() * (canvas.width + 1 - 20));
+            y = Math.floor(Math.random() * (canvas.height + 1 - 20));
+        }
+        food.x = x;
+        food.y = y;
         ++score;
+        document.getElementById("high").innerHTML = "HighScore: " + highScore(score);
         if (speed > 5) {
             --amount;
             if (amount === 0) {
