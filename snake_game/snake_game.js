@@ -74,11 +74,10 @@ document.getElementById("2").onclick = () => {
 }
 
 const canvas = document.getElementById("canvas");
-let square_side = Math.min(window.innerWidth, window.innerHeight) - 30;
-square_side -= square_side%8; 
+let square_side = Math.min(window.innerWidth, window.innerHeight) - 150;
+square_side -= square_side%8;
 canvas.setAttribute('width', square_side.toString()); 
 canvas.setAttribute('height',square_side.toString());
-canvas.width = canvas.width; canvas.height = canvas.height;
 const context = canvas.getContext("2d");
 
 let snake_x = [];
@@ -187,7 +186,7 @@ function d() {
             console.log(i);
             context.font = "40px Arial";
             context.fillStyle = "white";
-            context.fillText("You Have Died", 400, 300);
+            context.fillText("You Have Died", canvas.width / 2, canvas.height / 2);
             clearInterval(game);
         }
     }
@@ -201,10 +200,10 @@ function clear() {
 }
 
 window.onresize = () => {
-    let square_side = Math.min(window.innerWidth, window.innerHeight) - 30;
+    let square_side = Math.min(window.innerWidth, window.innerHeight) - 150;
 	square_side -= square_side%8;
-	canvas.setAttribute('width', square_side.toString()); 
-	canvas.setAttribute('height',square_side.toString());
+    canvas.setAttribute('width', square_side.toString()); 
+    canvas.setAttribute('height',square_side.toString());
     canvas.width = canvas.width; canvas.height = canvas.height;
     if (food.x + 20 > canvas.x && food.y + 20 > canvas.y) {
         food.x -= square_side;
