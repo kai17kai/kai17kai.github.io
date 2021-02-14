@@ -124,8 +124,8 @@ function d() {
             snake_x.push(snake_x[0]);
             snake_y.push(snake_y[0]);
         }
-        food.x = Math.floor(Math.random() * canvas.width) + 1;
-        food.y = Math.floor(Math.random() * canvas.height) + 1;
+        food.x = Math.floor(Math.random() * (canvas.width + 1 - 20));
+        food.y = Math.floor(Math.random() * (canvas.height + 1 - 20));
         ++score;
         if (speed > 5) {
             --amount;
@@ -202,8 +202,12 @@ function clear() {
 
 window.onresize = () => {
     let square_side = Math.min(window.innerWidth, window.innerHeight) - 30;
-	square_side -= square_side%8; 
+	square_side -= square_side%8;
 	canvas.setAttribute('width', square_side.toString()); 
 	canvas.setAttribute('height',square_side.toString());
     canvas.width = canvas.width; canvas.height = canvas.height;
+    if (food.x + 20 > canvas.x && food.y + 20 > canvas.y) {
+        food.x -= square_side;
+        food.y -= square_side;
+    }
 }
