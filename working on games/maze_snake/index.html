@@ -2,11 +2,86 @@
 
 <html>
     <head>
-        <title>Snake Maze</title>
+        <title>Snake</title>
         <link rel="stylesheet" type="text/css" href="../GameStyling.css">
+        <style>
+            canvas {
+                background-color: black;
+                display: inline;
+                margin: 0px;
+                margin-left: 20px;
+            }
+
+            div {
+                display: flex;
+            }
+
+            .gameboy {
+                flex-direction: row;
+            }
+
+            .controls {
+                width: fit-content;
+            }
+
+            #buttons {
+                flex-direction: column;
+                margin-right: auto;
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-left: 5px;
+            }
+
+            .empty {
+                width: 45px;
+                height: 45px;
+            }
+
+            .rightleft {
+                flex-direction: row;
+                border-radius: 30px;
+                justify-content: center;
+            }
+
+            .button2 {
+                height: 45px;
+                width: 45px;
+                background-color: rgb(0, 0, 0);
+            }
+        </style>
     </head>
     <body>
-        <!--Krish this is a file for a game idea that my friend gave me. The game is basically the same as the snake game 
-        but now there are going to be obstacles that grow in amount as you eat the food.-->
+        <a href="../">
+            <button>Main Menu</button>
+        </a>
+        <button onclick="window.location.reload()">Restart Game</button>
+        <div class="gameboy">
+            <canvas id="canvas" height="600" width="800">
+                Your browser does not support canvas
+            </canvas>
+            <div id="buttons">
+                <div class="rightleft" class="button">
+                    <button class="button2" id="1"></button>
+                </div>
+                <div class="rightleft" class="button">
+                    <button class="button2" id="2"></button>
+                    <div class="empty"></div>
+                    <button class="button2" id="3"></button>
+                </div>
+                <div class="rightleft" class="button">
+                    <button class="button2" id="4"></button>
+                </div>
+                <h3 id="length">Score: 0</h3>
+            </div>
+        </div>
+        <h3>Rules</h3>
+        <p>This is the same as the original snake game. Get to the red 
+        square using the wasd keys, arrow keys, the buttons for those who 
+        don't have a keyboard (sorry for the horrible controls), or a xbox controller. The snake grows
+        longer as you eat the red square. Try to not hit yourself. There are two differences though between this
+        game and the original snake game.This version of the game allows you to go through
+        the walls and the snake speeds up as you eat the red square. When you go through the wall, you go to the opposite side. 
+        Good Luck</p>
+        <script src="snake_game.js"></script>
     </body>
 </html>
