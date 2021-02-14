@@ -121,13 +121,15 @@ function d() {
         food.x = Math.floor(Math.random() * 40) * 20;
         food.y = Math.floor(Math.random() * 30) * 20;
         ++score;
-        --amount;
-        if (amount === 0) {
-            amount = 3;
-            speed -= 1;
-            clearInterval(game);
-            game = setInterval(d, speed);
-            console.log(speed)
+        if (speed > 5) {
+            --amount;
+            if (amount === 0) {
+                amount = 3;
+                speed -= 1;
+                clearInterval(game);
+                game = setInterval(d, speed);
+                console.log(speed)
+            }
         }
     }
     if (up) {
