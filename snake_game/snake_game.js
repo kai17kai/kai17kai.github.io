@@ -74,8 +74,11 @@ document.getElementById("2").onclick = () => {
 }
 
 const canvas = document.getElementById("canvas");
-canvas.height = 600;
-canvas.width = 800;
+let square_side = Math.min(window.innerWidth, window.innerHeight) - 30;
+square_side -= square_side%8; 
+canvas.setAttribute('width', square_side.toString()); 
+canvas.setAttribute('height',square_side.toString());
+canvas.width = canvas.width; canvas.height = canvas.height;
 const context = canvas.getContext("2d");
 
 let snake_x = [];
@@ -86,13 +89,13 @@ snake_y.push(Math.floor(Math.random() * 30) * 20);
 let score = 0;
 
 let food = {
-    x: Math.floor(Math.random() * 40) * 20,
-    y: Math.floor(Math.random() * 30) * 20
+    x: Math.floor(Math.random() * canvas.width) + 1,
+    y: Math.floor(Math.random() * canvas.height) + 1
 }
 
 let up = false, down = false, right = false, left = false;
 window.onkeydown = (e) => {
-    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === "ArrowLeft") {
         e.preventDefault();
     }
     if ((e.key === "w" || e.key  === "ArrowUp") && down === false) {
@@ -121,8 +124,8 @@ function d() {
             snake_x.push(snake_x[0]);
             snake_y.push(snake_y[0]);
         }
-        food.x = Math.floor(Math.random() * 40) * 20;
-        food.y = Math.floor(Math.random() * 30) * 20;
+        food.x = Math.floor(Math.random() * canvas.width) + 1;
+        food.y = Math.floor(Math.random() * canvas.height) + 1;
         ++score;
         if (speed > 5) {
             --amount;
@@ -158,12 +161,12 @@ function d() {
     }
     for (let i = 0; i < snake_x.length; ++i) {
         if (snake_x[i] <= -20) {
-            snake_x[i] = 800;
-        } else if (snake_x[i] >= 800) {
+            snake_x[i] = canvas.width;
+        } else if (snake_x[i] >= canvas.width) {
             snake_x[i] = 0;
         } else if (snake_y[i] <= -20) {
-            snake_y[i] = 580;
-        } else if (snake_y[i] >= 600) {
+            snake_y[i] = canvas.height;
+        } else if (snake_y[i] >= canvas.height) {
             snake_y[i] = 0;
         }
     }
@@ -195,4 +198,12 @@ function clear() {
     context.fillStyle = "rgb(0, 0, 0)";
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = temp;
+}
+
+window.onresize = () => {
+    let square_side = Math.min(window.innerWidth, window.innerHeight) - 30;
+	square_side -= square_side%8; 
+	canvas.setAttribute('width', square_side.toString()); 
+	canvas.setAttribute('height',square_side.toString());
+    canvas.width = canvas.width; canvas.height = canvas.height;
 }
