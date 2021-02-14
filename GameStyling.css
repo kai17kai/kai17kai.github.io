@@ -12,5 +12,9 @@ body {
 }
 
 a {
-    color: black;
+    text-decoration: none;
+}
+
+html {
+    touch-action: manipulation;
 }

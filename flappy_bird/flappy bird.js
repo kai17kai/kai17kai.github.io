@@ -163,3 +163,11 @@ function Down(e) {
 document.addEventListener("keydown", Jump);
 
 document.addEventListener("keyup", Down);
+
+canvas.onclick = () => {
+    if (Up) {
+        Up = false;
+    } else {
+        Up = true;
+    }
+}

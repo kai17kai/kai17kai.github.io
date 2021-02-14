@@ -1,5 +1,78 @@
 "use strict";
 
+var gamepad = false;
+
+window.addEventListener("gamepadconnected", function(e) {
+    console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
+    e.gamepad.index, e.gamepad.id,
+    e.gamepad.buttons.length, e.gamepad.axes.length);
+    console.log(gamepad);
+    let gp = navigator.getGamepads()[0];
+    console.log(gp);
+    gamepad = true;
+});
+
+let controls = setInterval(() => {
+    if (gamepad) {
+        let gp = navigator.getGamepads()[0];
+        if (gp.buttons[0].pressed || gp.buttons[13].pressed || gp.axes[1] >= 0.75 || gp.axes[3] >= 0.75) {
+            if (up === false) {
+                up = false, down = false, right = false, left = false;
+                down = true;
+            }
+        } else if (gp.buttons[1].pressed || gp.buttons[15].pressed || gp.axes[0] >= 0.75 || gp.axes[2] >= 0.75) {
+            if (left === false) {
+                up = false, down = false, right = false, left = false;
+                right=true;
+            }
+        } else if (gp.buttons[2].pressed || gp.buttons[14].pressed || gp.axes[0] <= -0.75 || gp.axes[2] <= -0.75) {
+            if (right === false) {
+                up = false, down = false, right = false, left = false;
+                left=true;
+            }
+        } else if (gp.buttons[3].pressed || gp.buttons[12].pressed || gp.axes[1] <= -0.75 || gp.axes[3] <= -0.75) {
+            if (down === false) {
+                up = false, down = false, right = false, left = false;
+                up = true;
+            }
+        } else if (gp.buttons[9].pressed) {
+            window.location.reload();
+        }
+    }
+}, 1);
+
+window.ongamepaddisconnected = () => {
+    console.log("Controller disconnected");
+}
+
+document.getElementById("1").onclick = () => {
+    if (down === false) {
+        up = false, down = false, right = false, left = false;
+        up = true;
+    }
+}
+
+document.getElementById("4").onclick = () => {
+    if (up === false) {
+        up = false, down = false, right = false, left = false;
+        down = true;
+    }
+}
+
+document.getElementById("3").onclick = () => {
+    if (left === false) {
+        up = false, down = false, right = false, left = false;
+        right=true;
+    }
+}
+
+document.getElementById("2").onclick = () => {
+    if (right === false) {
+        up = false, down = false, right = false, left = false;
+        left=true;
+    }
+}
+
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
 canvas.width = 800;
@@ -32,25 +105,7 @@ function x() {
     
 }
 
-function MoveUp() {
-    up = false, down = false, right = false, left = false;
-    up = true;
-}
-
-function MoveDown() {
-    up = false, down = false, right = false, left = false;
-    down = true;
-}
-
-function MoveRight() {
-    up = false, down = false, right = false, left = false;
-    right=true;
-}
-
-function MoveLeft() {
-    up = false, down = false, right = false, left = false;
-    left=true;
-}
+let up = false, down = false, right = false, left = false;
 
 function Start() {
 
@@ -99,8 +154,10 @@ let food = {
     y: Math.floor(Math.random() * 30) * 20
 }
 
-let up = false, down = false, right = false, left = false;
 window.onkeydown = (e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+        e.preventDefault();
+    }
     if ((e.key === "w" || e.key  === "ArrowUp") && down === false) {
         up = false, down = false, right = false, left = false;
         up = true;
@@ -130,12 +187,15 @@ function d() {
         food.x = Math.floor(Math.random() * 40) * 20;
         food.y = Math.floor(Math.random() * 30) * 20;
         ++score;
-        --amount;
-        if (amount == 0) {
-            amount = 3;
-            --speed;
-            clearInterval(game);
-            game = setInterval(d, speed);
+        if (speed > 5) {
+            --amount;
+            if (amount === 0) {
+                amount = 3;
+                speed -= 1;
+                clearInterval(game);
+                game = setInterval(d, speed);
+                console.log(speed)
+            }
         }
     }
     if (up) {
