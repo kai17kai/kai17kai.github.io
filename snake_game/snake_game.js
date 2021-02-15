@@ -56,6 +56,8 @@ let controls = setInterval(() => {
             }
         } else if (gp.buttons[9].pressed) {
             window.location.reload();
+        } else if (gp.buttons[16].pressed) {
+            document.getElementById("back").click();
         }
     }
 }, 1);
@@ -142,16 +144,30 @@ function d() {
             snake_x.push(snake_x[0]);
             snake_y.push(snake_y[0]);
         }
-        let x = Math.floor(Math.random() * (canvas.width + 1 - 20));
-        let y = Math.floor(Math.random() * (canvas.height + 1 - 20));
+        let x, y, end = true;
 
-        while (snake_x.includes(x) || snake_y.includes(y)) {
+        while (end) {
+            let amount = 0;
             x = Math.floor(Math.random() * (canvas.width + 1 - 20));
             y = Math.floor(Math.random() * (canvas.height + 1 - 20));
+            for (let i = 0; i < snake_x.length; ++i) {
+                let distance = Math.sqrt(Math.pow(snake_x[i] - x, 2) + Math.pow(snake_y[i] - y, 2));
+                if (distance > 100) {
+                    ++amount;
+                }
+            }
+            if (amount === snake_x.length) {
+                end = false;
+            }
         }
         food.x = x;
         food.y = y;
         ++score;
+        if (score === 120) {
+            let audio = new Audio();
+            audio.src = "audio.mp3"
+            audio.play();
+        }
         document.getElementById("high").innerHTML = "HighScore: " + highScore(score);
         if (speed > 5) {
             --amount;
@@ -213,7 +229,7 @@ function d() {
             console.log(i);
             context.font = "40px Arial";
             context.fillStyle = "white";
-            context.fillText("You Have Died", canvas.width / 2, canvas.height / 2);
+            context.fillText("You Have Died", canvas.width / 4, canvas.height / 2);
             clearInterval(game);
         }
     }

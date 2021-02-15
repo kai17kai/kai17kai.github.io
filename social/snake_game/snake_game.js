@@ -35,6 +35,8 @@ let controls = setInterval(() => {
                 up = false, down = false, right = false, left = false;
                 up = true;
             }
+        } else if (gp.buttons[16].pressed) {
+            document.getElementById("back").click();
         }
     }
 }, 1);
@@ -72,8 +74,10 @@ document.getElementById("2").onclick = () => {
 }
 
 const canvas = document.getElementById("canvas");
-canvas.height = 600;
-canvas.width = 800;
+let square_side = Math.min(window.innerWidth, window.innerHeight) - 150;
+square_side -= square_side%8;
+canvas.setAttribute('width', square_side.toString()); 
+canvas.setAttribute('height',square_side.toString());
 const context = canvas.getContext("2d");
 
 function x() {
@@ -146,9 +150,26 @@ function d() {
             snake_x.push(snake_x[0]);
             snake_y.push(snake_y[0]);
         }
-        food.x = Math.floor(Math.random() * 40) * 20;
-        food.y = Math.floor(Math.random() * 30) * 20;
+        let x, y, end = true;
+
+        while (end) {
+            let amount = 0;
+            x = Math.floor(Math.random() * (canvas.width + 1 - 20));
+            y = Math.floor(Math.random() * (canvas.height + 1 - 20));
+            for (let i = 0; i < snake_x.length; ++i) {
+                let distance = Math.sqrt(Math.pow(snake_x[i] - x, 2) + Math.pow(snake_y[i] - y, 2));
+                if (distance > 100) {
+                    ++amount;
+                }
+            }
+            if (amount === snake_x.length) {
+                end = false;
+            }
+        }
+        food.x = x;
+        food.y = y;
         ++score;
+        document.getElementById("length").innerHTML = score;
         if (speed > 5) {
             --amount;
             if (amount === 0) {
@@ -224,4 +245,16 @@ function clear() {
     context.fillStyle = "rgb(0, 0, 0)";
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = temp;
+}
+
+window.onresize = () => {
+    let square_side = Math.min(window.innerWidth, window.innerHeight) - 150;
+	square_side -= square_side%8;
+    canvas.setAttribute('width', square_side.toString()); 
+    canvas.setAttribute('height',square_side.toString());
+    canvas.width = canvas.width; canvas.height = canvas.height;
+    if (food.x + 20 > canvas.x && food.y + 20 > canvas.y) {
+        food.x -= square_side;
+        food.y -= square_side;
+    }
 }
