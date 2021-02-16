@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Mix That Cup</title>
+		<style>
+			#holder {
+				display: flex;;
+				flex-direction: row;
+			}
+
+			img {
+				transform: rotate(180deg);
+			}
+
+			#win, #lost {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="holder">
+			<img src="./download.png" id="1">
+			<img src="./download.png" id="2">
+			<img src="./download.png" id="3">
+		</div>
+		<p id="win">You Have Won</p>
+		<p id="lost">You Have Lost</p>
+		<script>
+			let ball = Math.floor(Math.random() * 3) + 1;
+			let lost = false;
+			for (let i = 1; i <= 3; ++i) {
+				document.getElementById(String(i)).onclick = () => {
+					if (ball == i) {
+						document.getElementById("win").style.display = "block";
+					} else {
+						document.getElementById("lost").style.display = "block";
+						lost = true;
+					}
+				}
+			}
+			if (lost) {
+				for (let i = 1; i <= 3; ++i) {
+					document.getElementById(String(i)).onclick = null;
+				}
+			}
+		</script>
+	</body>
+</html>
