@@ -1,6 +1,6 @@
 "use strict";
 
-if (localStorage.score) {
+if (localStorage.minTime) {
     document.getElementById("game").style.display = "block";
     document.getElementById("rules").style.display = "none";
     if (Number(localStorage.secTime) >= 10) {
@@ -45,10 +45,10 @@ for (let i = 0; i < ChosenWord.length; ++i) {
 }
 
 if (localStorage.score) {
-    document.getElementById("score").innerHTML = localStorage.score;
+    document.getElementById("score").innerHTML = "Score: " + localStorage.score;
 } else {
     localStorage.score = 0;
-    document.getElementById("score").innerHTML = 0;
+    document.getElementById("score").innerHTML = "Score: 0";
 }
 
 var NotDrawn = true;
@@ -135,7 +135,8 @@ var Game = (e) => {
         if (LinePositions.length == UsePositions.length) {
             context.fillText("You Have Won The Game. Press y to restart the game", 180, 400);
             NotOver = false;
-            document.getElementById("score").innerHTML = localStorage.score;
+            localStorage.score = Number(localStorage.score)+1;
+            document.getElementById("score").innerHTML = "Score: " + localStorage.score;
             window.addEventListener("keydown", (e) => {
                 if (e.key == "y" || e.key == "Y") {
                     window.location.reload();
