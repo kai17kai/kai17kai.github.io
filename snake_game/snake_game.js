@@ -1,5 +1,6 @@
 "use strict";
 
+function Game() {
 var gamepad = false;
 
 window.addEventListener("gamepadconnected", function(e) {
@@ -102,16 +103,27 @@ canvas.setAttribute('height',square_side.toString());
 const context = canvas.getContext("2d");
 
 let snake_x = [];
-snake_x.push(Math.floor(Math.random() * 30) * 20);
+snake_x.push(Math.floor(Math.random() * canvas.width + 1));
 let snake_y = [];
-snake_y.push(Math.floor(Math.random() * 30) * 20);
+snake_y.push(Math.floor(Math.random() * canvas.height + 1));
 
 let score = 0;
 
 let food = {
-    x: Math.floor(Math.random() * canvas.width) + 1,
-    y: Math.floor(Math.random() * canvas.height) + 1
+    x: Math.floor(Math.random() * canvas.width + 1 - 20),
+    y: Math.floor(Math.random() * canvas.height + 1 - 20)
 }
+let x = Math.floor(Math.random() * canvas.width + 1), y = Math.floor(Math.random() * canvas.height + 1);
+for (let i = 0; i < snake.y.length; ++i) {
+    let distance = Math.sqrt(Math.pow(x - snake.y[i], 2) + Math.pow(y - snake.y[i], 2));
+    if (distance < 100) {
+        x = Math.floor(Math.random() * canvas.width + 1), y = Math.floor(Math.random() * canvas.height + 1);
+        distance = Math.sqrt(Math.pow(food.x - snake.y, 2) + Math.pow(food.y - snake.y, 2));
+        i = -1;
+    }
+}
+food.x = x;
+food.y = y;
 
 let up = false, down = false, right = false, left = false;
 window.onkeydown = (e) => {
@@ -133,43 +145,31 @@ window.onkeydown = (e) => {
     }
 }
 
-let amount = 3, speed = 45;
+let amount = 5, speed = 45;
 let game = setInterval(d, speed);
 
 function d() {
-    document.getElementById("length").innerHTML = `Score: ${score}`;
     let distance = Math.sqrt(Math.pow(snake_x[0] - food.x, 2) + Math.pow(snake_y[0] - food.y, 2));
     if (distance <= 20) {
         for (let i = 0; i < 2; ++i) {
             snake_x.push(snake_x[0]);
             snake_y.push(snake_y[0]);
         }
-        let x, y, end = true;
-
-        while (end) {
-            let amount = 0;
-            x = Math.floor(Math.random() * (canvas.width + 1 - 20));
-            y = Math.floor(Math.random() * (canvas.height + 1 - 20));
-            for (let i = 0; i < snake_x.length; ++i) {
-                let distance = Math.sqrt(Math.pow(snake_x[i] - x, 2) + Math.pow(snake_y[i] - y, 2));
-                if (distance > 100) {
-                    ++amount;
-                }
-            }
-            if (amount === snake_x.length) {
-                end = false;
+        let x = Math.floor(Math.random() * canvas.width + 1), y = Math.floor(Math.random() * canvas.height + 1);
+        for (let i = 0; i < snake.y.length; ++i) {
+            let distance = Math.sqrt(Math.pow(x - snake.y[i], 2) + Math.pow(y - snake.y[i], 2));
+            if (distance < 100) {
+                x = Math.floor(Math.random() * canvas.width + 1), y = Math.floor(Math.random() * canvas.height + 1);
+                distance = Math.sqrt(Math.pow(food.x - snake.y, 2) + Math.pow(food.y - snake.y, 2));
+                i = -1;
             }
         }
         food.x = x;
         food.y = y;
         ++score;
-        if (score === 120) {
-            let audio = new Audio();
-            audio.src = "audio.mp3"
-            audio.play();
-        }
+        document.getElementById("length").innerHTML = `Score: ${score}`;
         document.getElementById("high").innerHTML = "HighScore: " + highScore(score);
-        if (speed > 5) {
+        if (speed > 10) {
             --amount;
             if (amount === 0) {
                 amount = 3;
@@ -178,6 +178,10 @@ function d() {
                 game = setInterval(d, speed);
                 console.log(speed)
             }
+        } else {
+            let audio = new Audio();
+            audio.src = "audio.mp3"
+            audio.play();
         }
     }
     if (up) {
@@ -252,4 +256,5 @@ window.onresize = () => {
         food.x -= square_side;
         food.y -= square_side;
     }
+}
 }
