@@ -103,7 +103,7 @@ canvas.setAttribute('height',square_side.toString());
 const context = canvas.getContext("2d");
 
 let snake_x = [];
-snake_x.push(Math.floor(Math.random() * canvas.width + 1));
+snake_x.push(Math.floor(Math.random() * (canvas.width + 1)));
 let snake_y = [];
 snake_y.push(Math.floor(Math.random() * canvas.height + 1));
 
@@ -117,7 +117,7 @@ let x = Math.floor(Math.random() * canvas.width + 1), y = Math.floor(Math.random
 for (let i = 0; i < snake_y.length; ++i) {
     let distance = Math.sqrt(Math.pow(x - snake_y[i], 2) + Math.pow(y - snake_y[i], 2));
     if (distance < 100) {
-        x = Math.floor(Math.random() * canvas.width + 1), y = Math.floor(Math.random() * canvas.height + 1);
+        x = Math.floor(Math.random() * canvas.width + 1 - 20), y = Math.floor(Math.random() * canvas.height + 1 - 20);
         distance = Math.sqrt(Math.pow(food.x - snake_y, 2) + Math.pow(food.y - snake_y, 2));
         i = -1;
     }
@@ -159,7 +159,7 @@ function d() {
         for (let i = 0; i < snake_y.length; ++i) {
             let distance = Math.sqrt(Math.pow(x - snake_y[i], 2) + Math.pow(y - snake_y[i], 2));
             if (distance < 100) {
-                x = Math.floor(Math.random() * canvas.width + 1), y = Math.floor(Math.random() * canvas.height + 1);
+                x = Math.floor(Math.random() * canvas.width + 1 - 20), y = Math.floor(Math.random() * canvas.height + 1 - 20);
                 distance = Math.sqrt(Math.pow(food.x - snake_y, 2) + Math.pow(food.y - snake_y, 2));
                 i = -1;
             }
@@ -172,7 +172,7 @@ function d() {
         if (speed > 10) {
             --amount;
             if (amount === 0) {
-                amount = 3;
+                amount = 5;
                 speed -= 1;
                 clearInterval(game);
                 game = setInterval(d, speed);
