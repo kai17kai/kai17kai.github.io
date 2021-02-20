@@ -1,4 +1,23 @@
 "use strict";
+/*
+let tileSize = 16;
+let i_Sprite = new Image();
+i_Sprite.src = "i_sprite.png";
+let Issac_Sprite = [];
+i_Sprite.onload = () => {
+    let names = [
+        '1', '2', '3'
+    ];
+    for (let i = 0; i < names.length; ++i) {
+        Issac_Sprite[names[i]]
+    }
+}
+*/
+
+function preventDefault(e){
+    e.preventDefault();
+}
+    document.body.addEventListener('touchmove', preventDefault, { passive: false });
 
 function Game() {
 var gamepad = false;

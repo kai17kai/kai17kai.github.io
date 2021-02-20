@@ -5,7 +5,6 @@
         <title>Snake</title>
         <link rel="stylesheet" type="text/css" href="../GameStyling.css">
         <style>
-            html, body {margin: 0; height: 100%; overflow: hidden}
             canvas {
                 background-color: black;
                 display: inline;
@@ -59,11 +58,14 @@
         </style>
     </head>
     <body>
-        <a href="../" id="back">
+        <a href="../">
             <button>Main Menu</button>
         </a>
         <button onclick="window.location.reload()">Restart Game</button>
-        <div class="gameboy">
+        <a href="#rules">
+            <button>Rules</button>
+        </a>
+        <div class="gameboy" id="game">
             <canvas id="canvas" height="600" width="800">
                 Your browser does not support canvas
             </canvas>
@@ -92,6 +94,11 @@
             game and the original snake game.This version of the game allows you to go through
             the walls and the snake speeds up slowly as you eat the red square. When you go through the wall, you go to the opposite side. 
             Good Luck. Try to get to a score of 175 because there is a special prize.</p>
+            <button onclick="window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+              })">Back To Game</button>
         </div>
         <script src="snake_game.js"></script>
         <script>
