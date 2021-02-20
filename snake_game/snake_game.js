@@ -1,4 +1,4 @@
-"use strict";
+"use strict"
 
 function preventDefault(e){
     if (!(clicked)) {
@@ -112,7 +112,7 @@ const context = canvas.getContext("2d");
 let snake_x = [];
 snake_x.push(Math.floor(Math.random() * (canvas.width + 1)));
 let snake_y = [];
-snake_y.push(Math.floor(Math.random() * canvas.height + 1));
+snake_y.push(Math.floor(Math.random() * (canvas.height + 1)));
 
 let score = 0;
 
@@ -124,7 +124,7 @@ let x = Math.floor(Math.random() * canvas.width + 1), y = Math.floor(Math.random
 for (let i = 0; i < snake_y.length; ++i) {
     let distance = Math.sqrt(Math.pow(x - snake_y[i], 2) + Math.pow(y - snake_y[i], 2));
     if (distance < 100) {
-        x = Math.floor(Math.random() * (canvas.width + 1 - 20)), y = Math.floor(Math.random() * (canvas.height + 1 - 20));
+        x = Math.floor(Math.random() * (canvas.width + 1 - 40)), y = Math.floor(Math.random() * (canvas.height + 1 - 40));
         distance = Math.sqrt(Math.pow(food.x - snake_y, 2) + Math.pow(food.y - snake_y, 2));
         i = -1;
     }
@@ -166,7 +166,7 @@ function d() {
         for (let i = 0; i < snake_y.length; ++i) {
             let distance = Math.sqrt(Math.pow(x - snake_y[i], 2) + Math.pow(y - snake_y[i], 2));
             if (distance < 100) {
-                x = Math.floor(Math.random() * (canvas.width + 1 - 20)), y = Math.floor(Math.random() * (canvas.height + 1 - 20));
+                x = Math.floor(Math.random() * (canvas.width + 1 - 40)), y = Math.floor(Math.random() * (canvas.height + 1 - 40));
                 distance = Math.sqrt(Math.pow(food.x - snake_y, 2) + Math.pow(food.y - snake_y, 2));
                 i = -1;
             }
