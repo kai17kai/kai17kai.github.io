@@ -1,5 +1,8 @@
 'use strict';
 
+let Issac_Image = new Image(32, 32);
+Issac_Image.src = "i_sprite.png";
+
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
 canvas.width = 800;
@@ -28,6 +31,9 @@ var time = setInterval(() => {
 }, 1000);
 /*----------------------------------------------------------------*/
 
+//animation counter
+let frame = 1;
+
 //Array that holds the positions of the obstacles
 var ObstaclesPositions = new Array;
 
@@ -50,9 +56,7 @@ var CreateObstacles = setInterval(() => {
 
 const Game = () => {
     MoveObstacles();
-    let temp = context.fillStyle;
-    context.fillStyle = "rgb(255, 255, 255)";
-    clear();
+    context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(image, 0, 0);
 
     context.fillStyle = "rgb(50, 205, 50)";
@@ -65,21 +69,23 @@ const Game = () => {
         }
 
         if ((Player >= 0 && Player <= ObstaclesPositions[x + 1]) || (Player >= ObstaclesPositions[x + 1] + 125 && Player <= canvas.height)) {
-            let distance = Math.sqrt(Math.pow(100 - ObstaclesPositions[x], 2))
+            let distance = Math.sqrt(Math.pow(100 - ObstaclesPositions[x], 2));
             if (distance <= 20 || (ObstaclesPositions[x] < 100 && distance <= 70)) {
                 Player = 700;
             }
         }
     }
 
-    context.fillStyle = "rgb(240, 240, 0)";
-    context.beginPath();
-    context.arc(100, Player, 20, 0, 2 * Math.PI, false);
-    context.closePath();
-    context.fill();
+    if (frame == 1) {
+        context.drawImage(Issac_Image, 0, 0, 1024, 1024, 100, Player, 60, 60);
+    } else if (frame == 2) {
+        context.drawImage(Issac_Image, 1024, 0, 1024, 1024, 100, Player, 60, 60);
+    } else if (frame == 3) {
+        context.drawImage(Issac_Image, 0, 1024, 1024, 1024, 100, Player, 60, 60);
+    }
+    
 
-    context.fillStyle = temp;
-
+    context.fillStyle = "black";
     if (sectime < 10) {
         context.fillText(`${mintime}:0${sectime}`, 0, 50);
     } else {
@@ -92,10 +98,8 @@ const Game = () => {
         clearInterval(time);
     }
 
-    temp = null;
-
     function dead() {
-        context.fillStyle = temp;
+        context.fillStyle = "black";
         clearInterval(Visibility);
         clearInterval(time);
         context.font = "40px Arial";
@@ -110,29 +114,6 @@ const Game = () => {
                 ObstaclesPositions.shift();
             }
         }  
-    }
-
-    function clear() {
-        context.clearRect(0, 30, 50, 50);
-        for (let x = 0; x < ObstaclesPositions.length; x += 2) {
-            if (ObstaclesPositions[x] >= 0) {
-                context.clearRect(ObstaclesPositions[x] + 4, 0, 50, ObstaclesPositions[x + 1]);
-                context.clearRect(ObstaclesPositions[x] + 4, ObstaclesPositions[x + 1] + 125, 50, canvas.height - ObstaclesPositions[x + 1] + 125);
-                AtEdge(x);
-            }
-        }
-    
-        if (Up == false) {
-            context.beginPath();
-            context.arc(100, Player - 4, 30, 0, 2 * Math.PI, false);
-            context.closePath();
-            context.fill(); 
-        } else {
-            context.beginPath();
-            context.arc(100, Player + 6, 30, 0, 2 * Math.PI, false);
-            context.closePath();
-            context.fill();
-        }
     }
 };
 //allows player to see themselves and the obstacles
@@ -165,10 +146,9 @@ document.addEventListener("keydown", Jump);
 
 document.addEventListener("keyup", Down);
 
-canvas.onclick = () => {
-    if (Up) {
-        Up = false;
-    } else {
-        Up = true;
+let counter = setInterval(() => {
+    ++frame
+    if (frame == 4) {
+        frame = 1;
     }
-}
+}, 83);
