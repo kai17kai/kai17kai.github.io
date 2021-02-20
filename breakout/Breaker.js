@@ -318,6 +318,7 @@ context.fillText("Press Space To Start", 200, 300);
 let done = false;
 document.onkeydown = (e) => {
     if (e.key == " " && done === false) {
+        e.preventDefault();
         Start();
         done = true;
     }

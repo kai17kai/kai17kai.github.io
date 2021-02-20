@@ -150,6 +150,7 @@ var Gravity = setInterval(() => {
 
 function Jump(e) {
     if (e.key === " ") {
+        e.preventDefault();
         Up = true;
     }
 }

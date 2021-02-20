@@ -158,6 +158,7 @@ document.addEventListener("mousemove", (e) => {
 document.onkeydown = (e) => {
     if (done == false) {
         if (e.key == " ") {
+            e.preventDefault();
             Start();
             done = true;
         }
