@@ -78,11 +78,17 @@ const Game = () => {
             context.fillRect(ObstaclesPositions[x], ObstaclesPositions[x + 1] + 125, 50, canvas.height - ObstaclesPositions[x + 1] + 125);
         }
 
-        if ((Player >= 0 && Player <= ObstaclesPositions[x + 1]) || (Player >= ObstaclesPositions[x + 1] + 125 && Player <= canvas.height)) {
-            let distance = Math.sqrt(Math.pow(100 - ObstaclesPositions[x], 2));
-            if (distance <= 20 || (ObstaclesPositions[x] < 100 && distance <= 70)) {
-                Player = 700;
-            }
+        let PlayerX = 130
+        let PlayerY = Player + 30;
+
+        let ObstacleTopX = ObstaclesPositions[x] + 25
+        let ObstacleTopY = ObstaclesPositions[x + 1] / 2;
+        let ObstacleBottomX = ObstaclesPositions[x] + 25;
+        let ObstacleBottomY = (canvas.height - ObstaclesPositions[x + 1] + 125) / 2;
+        let TopDistance = Math.sqrt(Math.pow(ObstacleTopX - PlayerX, 2) + Math.pow(ObstacleTopY - PlayerY, 2));
+        let BottomDistance = Math.sqrt(Math.pow(ObstacleBottomX - 100, 2) + Math.pow(ObstacleBottomY - Player, 2));
+        if (/*Testing Distance*/(TopDistance < (ObstaclesPositions[x] / 2) + 30 || BottomDistance < (canvas.height - ObstaclesPositions[x + 1] + 125) / 2 + 30) && /*Testing if the Player is in between the obstacles*/((Player > 0 && Player < ObstaclesPositions[x + 1]) || (Player > ObstaclesPositions[x + 1] + 125 && Player < canvas.height)) && ObstaclesPositions[x] > 100 && ObstaclesPositions[x] < 130) {
+            Player = 800;
         }
     }
 
@@ -171,7 +177,6 @@ window.onkeydown = (e) => {
     if (Number(e.key) < 4 && Number(e.key) > 0) {
         value = Number(e.key);
     }
-    console.log(e.key);
 }
 
 window.onkeyup = (e) => {
