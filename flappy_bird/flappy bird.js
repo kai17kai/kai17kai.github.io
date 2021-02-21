@@ -1,7 +1,17 @@
 'use strict';
 
-let Issac_Image = new Image(32, 32);
+let Issac_Image = new Image();
 Issac_Image.src = "i_sprite.png";
+let Ethan_Image = new Image();
+Ethan_Image.src = "ethan.png";
+let Allie_Image = new Image();
+Allie_Image.src = "a_sprite.png";
+
+let value = "ethan";
+let choice = document.getElementById("choice");
+choice.addEventListener("change", (e) => {
+    value = e.target.value;
+}, false)
 
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
@@ -14,9 +24,8 @@ image.src = "background.png";
 context.font = "20px Arial";
 
 /*----------------------------------------------------------------*/
-//Set up time
-var sectime = 0, mintime = 0;
-var time = setInterval(() => {
+
+let time = () => {
     sectime += 1;
     if (sectime > 59) {
         sectime = 0;
@@ -28,7 +37,10 @@ var time = setInterval(() => {
         Speed -= 1;
         Visibility = setInterval(Game, Speed);
     }
-}, 1000);
+}
+//Set up time
+var sectime = 0, mintime = 0;
+var timer = setInterval(time, 1000);
 /*----------------------------------------------------------------*/
 
 //animation counter
@@ -48,11 +60,13 @@ function MoveObstacles() {
     }
 }
 
-//creates obstacles at 2.5 seconds
-var CreateObstacles = setInterval(() => {    
+let x = () => {    
     ObstaclesPositions.push(800);
     ObstaclesPositions.push(Math.floor(Math.random() * 200 + 1) + 150);
-}, 2500);
+}
+
+//creates obstacles at 2.5 seconds
+var CreateObstacles = setInterval(x, 2500);
 
 const Game = () => {
     MoveObstacles();
@@ -76,12 +90,32 @@ const Game = () => {
         }
     }
 
-    if (frame == 1) {
-        context.drawImage(Issac_Image, 0, 0, 1024, 1024, 100, Player, 60, 60);
-    } else if (frame == 2) {
-        context.drawImage(Issac_Image, 1024, 0, 1024, 1024, 100, Player, 60, 60);
-    } else if (frame == 3) {
-        context.drawImage(Issac_Image, 0, 1024, 1024, 1024, 100, Player, 60, 60);
+    if (value == "issac") {
+        if (frame == 1) {
+            context.drawImage(Issac_Image, 0, 0, 1024, 1024, 100, Player, 60, 60);
+        } else if (frame == 2) {
+            context.drawImage(Issac_Image, 1024, 0, 1024, 1024, 100, Player, 60, 60);
+        } else if (frame == 3) {
+            context.drawImage(Issac_Image, 0, 1024, 1024, 1024, 100, Player, 60, 60);
+        }
+    } else if (value == "ethan") {
+        if (frame == 1) {
+            context.drawImage(Ethan_Image, 0, 0, 32, 32, 100, Player, 60, 60);
+        } else if (frame == 2) {
+            context.drawImage(Ethan_Image, 0, 32, 32, 32, 100, Player, 60, 60);
+        }
+    } else if (value == "allie") {
+        if (frame == 1) {
+            context.drawImage(Allie_Image, 0, 0, 1024, 1024, 100, Player, 100, 100);
+        } else if (frame == 2) {
+            context.drawImage(Allie_Image, 1024, 0, 1024, 1024, 100, Player, 100, 100);
+        } else if (frame == 3) {
+            context.drawImage(Allie_Image, 0, 1024, 1024, 1024, 100, Player, 100, 100);
+        } else if (frame == 4) {
+            context.drawImage(Allie_Image, 1024, 1024, 1024, 1024, 100, Player, 100, 100);
+        } else if (frame == 5) {
+            context.drawImage(Allie_Image, 2048, 0, 1024, 1024, 100, Player, 100, 100);
+        }
     }
     
 
@@ -95,13 +129,15 @@ const Game = () => {
     if (Player >= canvas.height || Player <= 0) {
         dead();
         clearInterval(Visibility);
-        clearInterval(time);
+        clearInterval(Gravity);
+        clearInterval(CreateObstacles);
+        clearInterval(timer);
+        window.onkeydown = null;
+        window.onkeyup = null;
     }
 
     function dead() {
         context.fillStyle = "black";
-        clearInterval(Visibility);
-        clearInterval(time);
         context.font = "40px Arial";
         context.fillText("You Died", 380, 280);
     }
@@ -120,35 +156,59 @@ const Game = () => {
 var Visibility, Speed = 31;
 Visibility = setInterval(Game, Speed);
 
-var Velocity = 4;
-var Gravity = setInterval(() => {
+const d = () => {
     if (Up == false) {
         Player += Velocity;
     } else {
         Player -= 6;
     }
-}, 30); 
+}
 
-function Jump(e) {
+var Velocity = 4;
+var Gravity = setInterval(d, 30); 
+
+window.onkeydown = (e) => {
     if (e.key === " ") {
         e.preventDefault();
         Up = true;
+    } else if (e.key === "q") {
+        if (Visibility != 0 && Gravity != 0 && CreateObstacles != 0 && timer != 0) {
+            clearInterval(Visibility);
+            clearInterval(Gravity);
+            clearInterval(CreateObstacles);
+            clearInterval(timer);
+            timer = 0;
+            CreateObstacles = 0;
+            Gravity = 0;
+            Visibility = 0;
+        } else {
+            timer = setInterval(time, 1000);
+            Visibility = setInterval(Game, Speed);
+            Gravity = setInterval(d, 30);
+            CreateObstacles = setInterval(x, 2500);
+        }
     }
 }
 
-function Down(e) {
+window.onkeyup = (e) => {
     if (e.key === " ") {
         Up = false;
     }
 }
 
-document.addEventListener("keydown", Jump);
-
-document.addEventListener("keyup", Down);
-
 let counter = setInterval(() => {
     ++frame
-    if (frame == 4) {
-        frame = 1;
+    if (value == "issac") {
+        if (frame == 4) {
+            frame = 1;
+        }
+    } else if (value == "ethan") {
+        if (frame == 3) {
+            frame = 1;
+        }
+    } else if (value == "allie") {
+        if (frame == 5) {
+            frame = 1;
+        }
     }
 }, 83);
