@@ -7,11 +7,7 @@ Ethan_Image.src = "ethan.png";
 let Allie_Image = new Image();
 Allie_Image.src = "a_sprite.png";
 
-let value = "ethan";
-let choice = document.getElementById("choice");
-choice.addEventListener("change", (e) => {
-    value = e.target.value;
-}, false)
+let value = 1;
 
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
@@ -90,7 +86,7 @@ const Game = () => {
         }
     }
 
-    if (value == "issac") {
+    if (value == 2) {
         if (frame == 1) {
             context.drawImage(Issac_Image, 0, 0, 1024, 1024, 100, Player, 60, 60);
         } else if (frame == 2) {
@@ -98,13 +94,13 @@ const Game = () => {
         } else if (frame == 3) {
             context.drawImage(Issac_Image, 0, 1024, 1024, 1024, 100, Player, 60, 60);
         }
-    } else if (value == "ethan") {
+    } else if (value == 1) {
         if (frame == 1) {
             context.drawImage(Ethan_Image, 0, 0, 32, 32, 100, Player, 60, 60);
         } else if (frame == 2) {
             context.drawImage(Ethan_Image, 0, 32, 32, 32, 100, Player, 60, 60);
         }
-    } else if (value == "allie") {
+    } else if (value == 3) {
         if (frame == 1) {
             context.drawImage(Allie_Image, 0, 0, 1024, 1024, 100, Player, 100, 100);
         } else if (frame == 2) {
@@ -171,23 +167,11 @@ window.onkeydown = (e) => {
     if (e.key === " ") {
         e.preventDefault();
         Up = true;
-    } else if (e.key === "q") {
-        if (Visibility != 0 && Gravity != 0 && CreateObstacles != 0 && timer != 0) {
-            clearInterval(Visibility);
-            clearInterval(Gravity);
-            clearInterval(CreateObstacles);
-            clearInterval(timer);
-            timer = 0;
-            CreateObstacles = 0;
-            Gravity = 0;
-            Visibility = 0;
-        } else {
-            timer = setInterval(time, 1000);
-            Visibility = setInterval(Game, Speed);
-            Gravity = setInterval(d, 30);
-            CreateObstacles = setInterval(x, 2500);
-        }
     }
+    if (Number(e.key) < 4 && Number(e.key) > 0) {
+        value = Number(e.key);
+    }
+    console.log(e.key);
 }
 
 window.onkeyup = (e) => {
@@ -198,16 +182,16 @@ window.onkeyup = (e) => {
 
 let counter = setInterval(() => {
     ++frame
-    if (value == "issac") {
-        if (frame == 4) {
+    if (value == 2) {
+        if (frame >= 4) {
             frame = 1;
         }
-    } else if (value == "ethan") {
-        if (frame == 3) {
+    } else if (value == 1) {
+        if (frame >= 3) {
             frame = 1;
         }
-    } else if (value == "allie") {
-        if (frame == 5) {
+    } else if (value == 3) {
+        if (frame >= 5) {
             frame = 1;
         }
     }
