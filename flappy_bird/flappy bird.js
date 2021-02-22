@@ -7,6 +7,7 @@ Ethan_Image.src = "ethan.png";
 let Allie_Image = new Image();
 Allie_Image.src = "a_sprite.png";
 
+//choice
 let value = 1;
 
 const canvas = document.getElementById("canvas");
@@ -120,7 +121,6 @@ const Game = () => {
         }
     }
     
-
     context.fillStyle = "black";
     if (sectime < 10) {
         context.fillText(`${mintime}:0${sectime}`, 0, 50);
