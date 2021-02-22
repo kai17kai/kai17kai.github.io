@@ -78,7 +78,7 @@ const Game = () => {
             context.fillRect(ObstaclesPositions[x], ObstaclesPositions[x + 1] + 125, 50, canvas.height - ObstaclesPositions[x + 1] + 125);
         }
 
-        let PlayerX = 130
+        let PlayerX = 130;
         let PlayerY = Player + 30;
 
         let ObstacleTopX = ObstaclesPositions[x] + 25
