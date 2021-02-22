@@ -58,17 +58,20 @@ setInterval(() => {
         if (HumanY <= -10) {
             HumanY += 10;
         }
-    } else if (Down) {
+    }
+    if (Down) {
         HumanY += 10;
         if (HumanY >= 190) {
             HumanY -= 10;
         }
-    } else if (Right) {
+    }
+    if (Right) {
         HumanX += 10;
         if (HumanX >= 290) {
             HumanX -= 10;
         }
-    } else if (Left) {
+    }
+    if (Left) {
         HumanX -= 10;
         if (HumanX < -10) {
             HumanX += 10;
