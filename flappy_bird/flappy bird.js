@@ -88,7 +88,7 @@ const Game = () => {
         let ObstacleBottomY = (canvas.height - ObstaclesPositions[x + 1] + 125) / 2;
         let TopDistance = Math.sqrt(Math.pow(ObstacleTopX - PlayerX, 2) + Math.pow(ObstacleTopY - PlayerY, 2));
         let BottomDistance = Math.sqrt(Math.pow(ObstacleBottomX - 100, 2) + Math.pow(ObstacleBottomY - Player, 2));
-        if (/*Testing Distance*/(TopDistance < (ObstaclesPositions[x] / 2) + 30 || BottomDistance < (canvas.height - ObstaclesPositions[x + 1] + 125) / 2 + 30) && /*Testing if the Player is in between the obstacles*/((Player > 0 && Player < ObstaclesPositions[x + 1]) || (Player > ObstaclesPositions[x + 1] + 125 && Player < canvas.height)) && ObstaclesPositions[x] > 100 && ObstaclesPositions[x] < 130) {
+        if (/*Testing Distance*/(TopDistance < (ObstaclesPositions[x] / 2) + 30 || BottomDistance < (canvas.height - ObstaclesPositions[x + 1] + 125) / 2 + 30) && /*Testing if the Player is in between the obstacles*/((PlayerY > 0 && Player < ObstaclesPositions[x + 1]) || (PlayerY > ObstaclesPositions[x + 1] + 125 && PlayerY < canvas.height)) && ObstaclesPositions[x] > 100 && ObstaclesPositions[x] < 130) {
             Player = 800;
         }
     }
