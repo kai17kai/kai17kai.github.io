@@ -14,18 +14,16 @@ for (let i = 0; i < board.length; ++i) {
 
 class Block {
     constructor(positions) {
-        this.positions = new Array(positions.length);
-        for (let i = 0; i < this.positions.length; ++i) {
-            this.positions[i] = positions[i];
-        }
-        console.log(this.positions);
+        this.positions = positions;
     }
     CanMove = true;
 
     MoveRight = () => {
         if (this.CanMove) {
             for (let i = 0; i < this.positions.length; ++i) {
-                this.positions[i][0][0] += 1;
+                for (let j = 0; j < this.positions[i].length; ++j) {
+                    this.positions[i][j][1] += 1;
+                }
             }
         }
     }
@@ -33,7 +31,9 @@ class Block {
     MoveLeft = () => {
         if (this.CanMove) {
             for (let i = 0; i < this.positions.length; ++i) {
-                this.positions[i][0][0] -= 1;
+                for (let j = 0; j < this.positions[i].length; ++j) {
+                    this.positions[i][j][1] -= 1;
+                }
             }
         }
     }
@@ -41,7 +41,9 @@ class Block {
     MoveDown = () => {
         if (this.CanMove) {
             for (let i = 0; i < this.positions.length; ++i) {
-                this.positions[i][0][1] += 1;
+                for (let j = 0; j < this.positions[i].length; ++j) {
+                    this.positions[i][j][0] += 1;
+                }
             }
         }
     }
@@ -57,27 +59,30 @@ class Blocks {
     Check = () => {
         let positions = [];
         this.blocks.forEach(element => {
-            let YPosition = [];
             for (let i = 0; i < element.positions.length; ++i) {
                 for (let j = 0; j < element.positions[i].length; ++j) {
-                    YPosition.push(element.positions[i][j][1]);
-                }
-            }
-            let max = YPosition.reduce(function(a, b) {
-                return Math.max(a, b);
-            });
-            for (let i = 0; i < element.positions.length; ++i) {
-                for (let j = 0; j < element.positions[i].length; ++j) {
-                    if (element.positions[i][j].includes(max)) {
-                        positions.push(new Array([i, j, 1]));
+                    if (board[element.positions[i][j][0]+1][element.positions[i][j][1]] === 1) {
+                        element.CanMove = false;
                     }
                 }
             }
+            console.log(element.CanMove);
         });
-        console.log(positions);
     }
 };
 
 let test = new Blocks;
-test.AddBlock(new Array([[0, 0], [0, 0]]));
+test.AddBlock(new Array([
+                        [0, 0],
+                        [0, 0]]));
+test.AddBlock(new Array([[0, 0], 
+                        [1, 0],
+                        [2, 0]]));
+board[4][1] = 1;
+test.blocks.forEach(element => element.MoveDown());
 test.Check();
+test.blocks.forEach(element => element.MoveRight());
+test.Check();
+test.blocks.forEach(element => element.MoveDown());
+test.Check();
+test.blocks.forEach(element => console.log(element));
