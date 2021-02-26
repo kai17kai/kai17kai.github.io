@@ -1,6 +1,4 @@
 const canvas = document.getElementById("canvas");
-canvas.height = 600;
-canvas.width = 400;
 const context = canvas.getContext("2d");
 
 let board = new Array(16);
