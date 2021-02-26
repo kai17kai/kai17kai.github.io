@@ -72,12 +72,8 @@ class Blocks {
 };
 
 let test = new Blocks;
-test.AddBlock(new Array([
-                        [0, 0],
-                        [0, 0]]));
-test.AddBlock(new Array([[0, 0], 
-                        [1, 0],
-                        [2, 0]]));
+test.AddBlock(new Array([[0, 0], [0, 0]]));
+test.AddBlock(new Array([[0, 0], [1, 0], [2, 0]]));
 board[4][1] = 1;
 test.blocks.forEach(element => element.MoveDown());
 test.Check();
