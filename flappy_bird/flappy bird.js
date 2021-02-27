@@ -17,6 +17,8 @@ const context = canvas.getContext("2d");
 
 const image = document.createElement("img");
 image.src = "background.png";
+image.height = 600;
+image.width = 800;
 
 context.font = "20px Arial";
 
@@ -68,7 +70,7 @@ var CreateObstacles = setInterval(x, 2500);
 const Game = () => {
     MoveObstacles();
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(image, 0, 0);
+    context.drawImage(image, 0, 0, 800, 600);
 
     context.fillStyle = "rgb(50, 205, 50)";
 

@@ -56,7 +56,8 @@
                 width: 25px;
                 border: 5px solid red;
                 background-color: red;
-                color: red;
+                display: flex;
+                justify-content: center;
                 cursor: crosshair;
             }
 
@@ -122,8 +123,11 @@
             <h3>Result</h3>
             <p id="result"> </p>
             <hr>
-            <h3>Already Done</h3>
+            <h3>Already Used</h3>
             <p id="done"> </p>
+            <hr>
+            <h3>Already Used Amount</h3>
+            <p id="length"> </p>
             <hr>
             <h3>Check if Used</h3>
             <input id="input" type="text" placeholder="Type Here. Press enter when done" style="width: 16em;">
@@ -309,14 +313,19 @@
             }
 
             let random = [];
+            let choice = [1, 2, 3, 4, 5];
             function x() {
-                let number = Math.floor(Math.random() * 75) + 1;
-                let letter = choices[Math.floor(Math.random() * choices.length)].toUpperCase();
-                if (random.length == 0 || random.indexOf(letter + String(number)) < 0) {
+                let x = Math.floor(Math.random() * 5) + 1;
+                let max = x * 15;
+                let min = max - 14;
+                let number = Math.floor(Math.random() * (max - min + 1) + min);
+                let letter = choices[x - 1].toUpperCase();
+                if (random.indexOf(letter + String(number)) < 0) {
                     document.getElementById("result").innerHTML = letter + String(number);
                     random.push(letter + String(number));
                 }
                 document.getElementById("done").innerHTML = random.join(", ");
+                document.getElementById("length").innerHTML = String(random.length) + ", " + String(random.length / 75) + " (Used Length/75)";
             }
         </script>
     </body>
