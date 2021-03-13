@@ -74,10 +74,7 @@
             }
 
             setInterval(() => {
-                let temp = context.fillStyle;
-                context.fillStyle = "black";
-                context.fillRect(HumanX, HumanY, 20, 20);
-                context.fillStyle = temp;
+                context.clearRect(40, 0, canvas.width - 40, canvas.height);
                 if (Up) {
                     HumanY -= 10;
                     if (HumanY <= -10) {
