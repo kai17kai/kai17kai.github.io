@@ -15,100 +15,75 @@ var WrongGuess = new Array();
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var NotOver = true;
 
-var ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
+var ChosenWord;
+$.getJSON("http://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&minCorpusCount=0&minLength=3&maxLength=15&limit=1&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
+    ChosenWord = Array.from(data[0].word);
+    console.log(ChosenWord);
+    start();
+});
+function start() {
+    //var ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
 
-var LinePositions = new Array();
-var UsePositions = new Array();
+    var LinePositions = [];
+    var UsePositions = [];
 
-const length = ChosenWord.length * 30;
+    var length = ChosenWord.length;
+    console.log(length);
 
-for (let i = 0; i < ChosenWord.length; ++i) {
-    LinePositions.push((400 - (length / 2)) + (i * 30))
-}
-
-var NotDrawn = true;
-
-function DisplayShit() {
-    if (NotDrawn) {
-        context.moveTo(360, 300);
-        context.lineTo(440, 300);
-        context.moveTo(400, 300);
-        context.lineTo(400, 200);
-        context.lineTo(440, 200);
-        context.lineTo(440, 210);
-        context.stroke();
-        NotDrawn = false;
+    for (let i = 0; i < ChosenWord.length; ++i) {
+        LinePositions.push((400 - (length * 30 / 2)) + (i * 30))
     }
 
-    for (let i = 0; i < ChosenWord.length; i++) {
-        context.moveTo(LinePositions[i], 350);
-        if (RightGuess.indexOf(ChosenWord[i]) > -1) {
-            if (UsePositions.indexOf(LinePositions[i]) === -1) {
-                context.fillText(ChosenWord[i], LinePositions[i] + 5, 350);
-                UsePositions.push(LinePositions[i]);
-            }
+    var NotDrawn = true;
+
+    function DisplayShit() {
+        if (NotDrawn) {
+            context.moveTo(360, 300);
+            context.lineTo(440, 300);
+            context.moveTo(400, 300);
+            context.lineTo(400, 200);
+            context.lineTo(440, 200);
+            context.lineTo(440, 210);
+            context.stroke();
+            NotDrawn = false;
         }
-        context.fillRect(LinePositions[i],350, 20, 1);
-    }
 
-    if (WrongGuess.length == 1) {
-        context.beginPath();
-        context.arc(440, 220, 10, 0,2*Math.PI,false);
-        context.closePath();
-        context.stroke();
-    }
-    if (WrongGuess.length == 2) {
-        context.fillRect(440, 230, 1, 30);
-    }
-    if (WrongGuess.length == 3) {
-        context.fillRect(420, 240, 40, 1);
-    }
-    if (WrongGuess.length == 4) {
-        context.moveTo(440, 260);
-        context.lineTo(450, 270);
-        context.stroke();
-    }
-    if (WrongGuess.length == 5) {
-        context.moveTo(440, 260);
-        context.lineTo(430, 270);
-        context.stroke();
-        context.fillText("You Have Lost To The Easiest Game Ever.", 220, 400);
-        let phrase = "The Word was: " + ChosenWord;
-        context.fillText(phrase, 400 - (phrase.length * 5), 450);
-        context.fillText("Press y to restart", 310, 500);
-        NotOver = false;
-        window.addEventListener("keydown", (e) => {
-            if (e.key == "y" || e.key == "Y") {
-                window.location.reload();
-            }
-        });
-    }
-}
-
-DisplayShit();
-
-var Game = (e) => {
-    if (NotOver) {
-        let letter = String(e.key).toLowerCase();
-        let i = ChosenWord.indexOf(letter);
-
-        if (alphabet.indexOf(letter) > -1) {
-            if (i >= 0) {
-                RightGuess.push(letter);
-            } else {
-                if (WrongGuess.indexOf(letter) == -1) {
-                    WrongGuess.push(letter);
+        for (let i = 0; i < ChosenWord.length; i++) {
+            context.moveTo(LinePositions[i], 350);
+            if (RightGuess.indexOf(ChosenWord[i]) > -1) {
+                if (UsePositions.indexOf(LinePositions[i]) === -1) {
+                    context.fillText(ChosenWord[i], LinePositions[i] + 5, 350);
+                    UsePositions.push(LinePositions[i]);
                 }
             }
+            context.fillRect(LinePositions[i],350, 20, 1);
         }
 
-        console.log(RightGuess);
-        console.log(WrongGuess);
-        DisplayShit();
-        document.getElementById("list").innerHTML = WrongGuess.join(", ");
-
-        if (LinePositions.length == UsePositions.length) {
-            context.fillText("You Have Won The Game. Press y to restart the game", 180, 400);
+        if (WrongGuess.length == 1) {
+            context.beginPath();
+            context.arc(440, 220, 10, 0,2*Math.PI,false);
+            context.closePath();
+            context.stroke();
+        }
+        if (WrongGuess.length == 2) {
+            context.fillRect(440, 230, 1, 30);
+        }
+        if (WrongGuess.length == 3) {
+            context.fillRect(420, 240, 40, 1);
+        }
+        if (WrongGuess.length == 4) {
+            context.moveTo(440, 260);
+            context.lineTo(450, 270);
+            context.stroke();
+        }
+        if (WrongGuess.length == 5) {
+            context.moveTo(440, 260);
+            context.lineTo(430, 270);
+            context.stroke();
+            context.fillText("You Have Lost To The Easiest Game Ever.", 220, 400);
+            let phrase = "The Word was: " + ChosenWord;
+            context.fillText(phrase, 400 - (phrase.length * 5), 450);
+            context.fillText("Press y to restart", 310, 500);
             NotOver = false;
             window.addEventListener("keydown", (e) => {
                 if (e.key == "y" || e.key == "Y") {
@@ -117,6 +92,40 @@ var Game = (e) => {
             });
         }
     }
-}
 
-window.addEventListener("keypress", Game);
+    DisplayShit();
+
+    var Game = (e) => {
+        if (NotOver) {
+            let letter = String(e.key).toLowerCase();
+            let i = ChosenWord.indexOf(letter);
+
+            if (alphabet.indexOf(letter) > -1) {
+                if (i >= 0) {
+                    RightGuess.push(letter);
+                } else {
+                    if (WrongGuess.indexOf(letter) == -1) {
+                        WrongGuess.push(letter);
+                    }
+                }
+            }
+
+            console.log(RightGuess);
+            console.log(WrongGuess);
+            DisplayShit();
+            document.getElementById("list").innerHTML = WrongGuess.join(", ");
+
+            if (LinePositions.length == UsePositions.length) {
+                context.fillText("You Have Won The Game. Press y to restart the game", 180, 400);
+                NotOver = false;
+                window.addEventListener("keydown", (e) => {
+                    if (e.key == "y" || e.key == "Y") {
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+    }
+
+    window.addEventListener("keypress", Game);
+}
