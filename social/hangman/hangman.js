@@ -27,14 +27,26 @@ context.fillStyle = "rgb(0, 0, 0)";
 context.font = " 20px Arial";
 
 //Creates arrays that holds the word list, right guess, and wrong guess
-var WordList = ["because", "world", "school", "schools", "military", "python", "text", "programming", "program", "electric", "computers", "computer", "ball", "soccer", "smash", "board", "white", "black", "blackboard", "whiteboard", "aim", "alive", "all", "alcohol", "airport", "ahead", "afternoon", "afraid", "air", "agency", "agricultural", "mochi", "museum", "sad", "king", "echo", "little", "kiwi", "toast", "weather", "toaster", "the", "map", "gummy", "bear", "fox", "army", "beer", "shoe", "shoes", "shoot", "shooting"];
 var RightGuess = new Array();
 var WrongGuess = new Array();
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var NotOver = true;
 
-var ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
+var ChosenWord;
+function Word() {
+    $.getJSON("https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=3&maxLength=-1&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
+        ChosenWord = Array.from(data.word);
+        ChosenWord.forEach(element => {
+            if (!(alphabet.includes(element))) {
+                Word();
+            }
+        });
+        start();
+    });
+}
+Word();
 
+function start() {
 var LinePositions = new Array();
 var UsePositions = new Array();
 
@@ -173,4 +185,5 @@ let time = setInterval(() => {
     console.log(localStorage.secTime);
     console.log(localStorage.minTime);
 }, 1000);
+}
 }
