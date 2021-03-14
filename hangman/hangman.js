@@ -22,7 +22,7 @@ function Word() {
             if (!(alphabet.includes(element))) {
                 Word();
             }
-        })
+        });
         start();
     });
 }
