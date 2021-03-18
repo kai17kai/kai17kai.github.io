@@ -13,26 +13,22 @@ var alphabet = "abcdefghijklemnopqrstuvwxyz";
 var RightGuess = new Array();
 var WrongGuess = new Array();
 var NotOver = true;
+var ChosenWord;
 
-var ChosenWord = null;
 function Word() {
     $.getJSON("https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=6&maxLength=12&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
-        if (ChosenWord == null) {
-            ChosenWord = Array.from(data.word);
-            ChosenWord.forEach(element => {
-                if (!(alphabet.includes(element))) {
-                    ChosenWord = null;
-                    Word();
-                }
-            });
-            start();
-        }
+        ChosenWord = Array.from(data.word);
+        ChosenWord.forEach(element => {
+            if (!(alphabet.includes(element))) {
+                Word();
+            }
+        });
+        console.log(ChosenWord);
+        start();
     });
 }
 Word();
 function start() {
-    //var ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
-
     var LinePositions = [];
     var UsePositions = [];
 
