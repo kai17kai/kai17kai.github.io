@@ -14,16 +14,19 @@ var RightGuess = new Array();
 var WrongGuess = new Array();
 var NotOver = true;
 
-var ChosenWord;
+var ChosenWord = null;
 function Word() {
-    $.getJSON("https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=6&maxLength=-1&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
-        ChosenWord = Array.from(data.word);
-        ChosenWord.forEach(element => {
-            if (!(alphabet.includes(element))) {
-                Word();
-            }
-        });
-        start();
+    $.getJSON("https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=6&maxLength=12&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
+        if (ChosenWord == null) {
+            ChosenWord = Array.from(data.word);
+            ChosenWord.forEach(element => {
+                if (!(alphabet.includes(element))) {
+                    ChosenWord = null;
+                    Word();
+                }
+            });
+            start();
+        }
     });
 }
 Word();
@@ -87,7 +90,7 @@ function start() {
             context.lineTo(430, 270);
             context.stroke();
             context.fillText("You Have Lost To The Easiest Game Ever.", 220, 400);
-            let phrase = "The Word was: " + ChosenWord;
+            let phrase = "The Word was: " + ChosenWord.join("");
             context.fillText(phrase, 400 - (phrase.length * 5), 450);
             context.fillText("Press y to restart", 310, 500);
             NotOver = false;
@@ -103,13 +106,14 @@ function start() {
 
     var Game = (e) => {
         if (NotOver) {
-            let letter = String(e.key);
-            let i = ChosenWord.indexOf(letter);
+            let letter = String(e.key).toLowerCase();
 
-            if (i >= 0) {
+            if (ChosenWord.includes(letter)) {
                 RightGuess.push(letter);
             } else {
-                WrongGuess.push(letter);
+                if (!(WrongGuess.includes(letter))) {
+                    WrongGuess.push(letter);
+                }
             }
 
             console.log(RightGuess);
