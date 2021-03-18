@@ -14,6 +14,21 @@
                 display: flex;
                 justify-content: center;
             }
+
+            #social {
+                height: 30px;
+                width: 200px;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                font-size: inherit;
+                font-weight: bold;
+                background-image: linear-gradient(to left, green, yellow, brown, orange);
+            }
+
+            #social_link {
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -86,5 +101,16 @@
             <button>Contact Us</button>
         </a>
         <p style="font-size: xx-small;">Made By Kyle Ciurczak</p>
+        <a href="./social/" id="social_link">
+            <button id="social">Social Games</button>
+        </a>
+        <script>
+            setInterval(() => {
+                let date = new Date();
+                if (date.getDate() > 21 && date.getDate() < 27 && date.getDate() != 23 && date.getHours() >= 17 && date.getHours <= 18 && date.getMinutes >= 15 && date.getMinutes <= 30) {
+                    document.getElementById("social_link").style.display = "block";
+                }
+            })
+        </script>
     </body>
 </html>
