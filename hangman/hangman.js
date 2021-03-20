@@ -19,7 +19,7 @@ var NotOver = true;
 var ChosenWord;
 
 function Word() {
-    $.getJSON("https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=6&maxLength=12&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
+    $.getJSON("https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&minCorpusCount=200000&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=7&maxLength=16&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
         let done = false;
         ChosenWord = Array.from(data.word);
         ChosenWord.forEach(element => {
@@ -27,6 +27,7 @@ function Word() {
                 done = true;
             }
         });
+        console.log(ChosenWord);
         if (!(done)) {
             start();
         } else {
@@ -121,7 +122,7 @@ function start() {
                     WrongGuess.push(letter);
                 }
             }
-            
+
             DisplayShit();
             document.getElementById("list").innerHTML = WrongGuess.join(", ");
 
