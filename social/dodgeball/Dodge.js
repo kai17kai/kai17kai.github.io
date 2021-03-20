@@ -53,29 +53,9 @@ window.onmousemove=(e) => {
     };
 };
 
-let CreateObstacles = setInterval(() => {
-    enemies.x.push(Math.floor(Math.random() * 600));
-    enemies.y.push(-10);
-    enemies.r.push(Math.floor(Math.random() * 5 + 15));
-}, 120);
+let CreateObstacles;
 
-let interval = setInterval(() => {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(dodger, player.x, player.y);
-    
-    for (a=0;a<enemies.x.length;a++){
-        context.beginPath();
-        context.arc(enemies.x[a], enemies.y[a], enemies.r[a], 0, 2 * Math.PI);
-        context.fillStyle = 'red';
-        context.fill();
-        enemies.y[a]=enemies.y[a]+1;
-        if (enemies.y[a]>canvas.height+30){
-            enemies.y.splice(a,1)
-            enemies.x.splice(a,1)
-            enemies.r.splice(a,1)
-        };
-    };
-}, 1);
+let interval;
 
 let sec = 0, min= 0;
 let timer = setInterval(() => {
@@ -83,6 +63,30 @@ let timer = setInterval(() => {
     if (sec > 59) {
         sec = 0;
         min++;
+    }
+    if (sec == 3) {
+        interval = setInterval(() => {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(dodger, player.x, player.y);
+            
+            for (a=0;a<enemies.x.length;a++){
+                context.beginPath();
+                context.arc(enemies.x[a], enemies.y[a], enemies.r[a], 0, 2 * Math.PI);
+                context.fillStyle = 'red';
+                context.fill();
+                enemies.y[a]=enemies.y[a]+1;
+                if (enemies.y[a]>canvas.height+30){
+                    enemies.y.splice(a,1)
+                    enemies.x.splice(a,1)
+                    enemies.r.splice(a,1)
+                };
+            };
+        }, 1);
+        CreateObstacles = setInterval(() => {
+            enemies.x.push(Math.floor(Math.random() * 600));
+            enemies.y.push(-10);
+            enemies.r.push(Math.floor(Math.random() * 5 + 15));
+        }, 120);
     }
 
     if (sec > 9) {
