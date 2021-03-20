@@ -49,7 +49,6 @@ function Word() {
                 done = true;
             }
         });
-        console.log(ChosenWord);
         if (!(done)) {
             start();
         } else {
