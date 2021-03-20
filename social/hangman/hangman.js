@@ -38,14 +38,18 @@ var ChosenWord;
 
 function Word() {
     $.getJSON("https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=6&maxLength=12&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
+        let done = false;
         ChosenWord = Array.from(data.word);
         ChosenWord.forEach(element => {
             if (!(alphabet.includes(element))) {
-                Word();
+                done = true;
             }
         });
-        console.log(ChosenWord);
-        start();
+        if (!(done)) {
+            start();
+        } else {
+            Word();
+        }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
@@ -147,8 +151,6 @@ var Game = (e) => {
             }
         }
 
-        console.log(RightGuess);
-        console.log(WrongGuess);
         DisplayShit();
         document.getElementById("list").innerHTML = WrongGuess.join(", ");
 
