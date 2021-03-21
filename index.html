@@ -107,7 +107,7 @@
         <script>
             setInterval(() => {
                 let date = new Date();
-                if (date.getDate() > 21 && date.getDate() < 27 && date.getDate() != 23 && date.getHours() >= 17 && date.getHours <= 18 && date.getMinutes >= 15 && date.getMinutes <= 30) {
+                if (date.getDate() > 19 && date.getDate() < 27 && date.getDate() != 23 && date.getHours() < 19) {
                     document.getElementById("social_link").style.display = "block";
                 }
             })
