@@ -78,19 +78,19 @@ function start() {
             context.fillRect(LinePositions[i],350, 20, 1);
         }
 
-        if (WrongGuess.length / 2 == 1) {
+        if (WrongGuess.length == 1) {
             context.beginPath();
             context.arc(440, 220, 10, 0,2*Math.PI,false);
             context.closePath();
             context.stroke();
         }
-        if (WrongGuess.length / 2 == 2) {
+        if (WrongGuess.length == 2) {
             context.fillRect(440, 230, 1, 30);
         }
-        if (WrongGuess.length / 2 == 3) {
+        if (WrongGuess.length == 3) {
             context.fillRect(420, 240, 40, 1);
         }
-        if (WrongGuess.length / 2 == 4) {
+        if (WrongGuess.length == 4) {
             context.moveTo(440, 260);
             context.lineTo(450, 270);
             context.stroke();
@@ -126,7 +126,6 @@ function start() {
                     if (ChosenWord.includes(letter)) {
                         RightGuess.push(letter);
                     } else if (!(WrongGuess.includes(letter))) {
-                        WrongGuess.push(letter.toUpperCase());
                         WrongGuess.push(letter.toLowerCase());
                     }
                 }
