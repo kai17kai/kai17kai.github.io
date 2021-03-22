@@ -92,13 +92,11 @@ function x() {
             context.fillStyle = "white";
             context.font = "40px Arial";
             context.fillText("You Died", 400, 300);
-            document.getElementById("timer").innerHTML = "Timer: 0:00";
             window.onkeydown = null;
         } else {
             Start();
         }
     }
-    
 }
 
 let up = false, down = false, right = false, left = false;
@@ -238,14 +236,6 @@ function d() {
         }
     }
 }
-}
-
-function clear() {
-    let temp = context.fillStyle;
-    context.fillStyle = "rgb(0, 0, 0)";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = temp;
-}
 
 window.onresize = () => {
     let square_side = Math.min(window.innerWidth, window.innerHeight) - 150;
@@ -257,4 +247,12 @@ window.onresize = () => {
         food.x -= square_side;
         food.y -= square_side;
     }
+}
+}
+
+function clear() {
+    let temp = context.fillStyle;
+    context.fillStyle = "rgb(0, 0, 0)";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = temp;
 }
