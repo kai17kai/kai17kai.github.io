@@ -175,12 +175,15 @@ var Game = (e) => {
     }
 }
 
-window.addEventListener("keypress", Game);
+var shit = window.addEventListener("keypress", Game);
 
 let time = setInterval(() => {
     if (Number(localStorage.minTime) >= 5) {
+        clearInterval(shit);
         NotOver = false;
-        context.fillText("Time is Up", 1800, 400);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.font = " 20px Arial";
+        context.fillText("Time is Up", 180, 400);
         clearInterval(time);
     }
     if (localStorage.secTime && localStorage.minTime) {
