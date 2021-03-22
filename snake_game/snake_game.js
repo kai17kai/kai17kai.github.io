@@ -107,6 +107,7 @@ let square_side = Math.min(window.innerWidth, window.innerHeight) - 150;
 square_side -= square_side%8;
 canvas.setAttribute('width', square_side.toString()); 
 canvas.setAttribute('height',square_side.toString());
+let playerSize = square_side / 50;
 const context = canvas.getContext("2d");
 
 let snake_x = [];
@@ -227,11 +228,11 @@ function d() {
     clear();
     context.fillStyle = "rgb(0,255,0)";
     for (let i = 0; i < snake_x.length; ++i) {
-        context.fillRect(snake_x[i], snake_y[i], 20, 20);
+        context.fillRect(snake_x[i], snake_y[i], playerSize, playerSize);
     }
 
     context.fillStyle = "rgb(255, 0, 0)";
-    context.fillRect(food.x, food.y, 20, 20);
+    context.fillRect(food.x, food.y, playerSize, playerSize);
 
     for (let i = 1; i < snake_x.length; ++i) {
         let distance = Math.sqrt(Math.pow(snake_x[0] - snake_x[i], 2) + Math.pow(snake_y[0] - snake_y[i], 2)) + 10;
@@ -263,5 +264,6 @@ window.onresize = () => {
         food.x -= square_side;
         food.y -= square_side;
     }
+    playerSize = square_side / 50;
 }
 }
