@@ -204,12 +204,12 @@ function d() {
     }
     for (let i = 0; i < snake_x.length; ++i) {
         if (snake_x[i] <= -20) {
-            snake_x[i] = 800;
-        } else if (snake_x[i] >= 800) {
+            snake_x[i] = canvas.height;
+        } else if (snake_x[i] >= canvas.height) {
             snake_x[i] = 0;
         } else if (snake_y[i] <= -20) {
-            snake_y[i] = 580;
-        } else if (snake_y[i] >= 600) {
+            snake_y[i] = canvas.height;
+        } else if (snake_y[i] >= canvas.height) {
             snake_y[i] = 0;
         }
     }
