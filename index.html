@@ -25,10 +25,6 @@
                 font-weight: bold;
                 background-image: linear-gradient(to left, green, yellow, brown, orange);
             }
-
-            #social_link {
-                display: none;
-            }
         </style>
     </head>
     <body>
@@ -66,14 +62,14 @@
                     <p>Pong</p>
                 </a>
             </div>
-        </div>
-        <div class="Items">
             <div class="game">
                 <a href="hangman/">
                     <img src="hangman/hangman.png" alt="Pic of hangman game">
                     <p>Hangman</p>
                 </a>
             </div>
+        </div>
+        <div class="Items">
             <div class="game">
                 <a href="flappy_bird/">
                     <img src="flappy_bird/flappyBirdPic.png" alt="Pic of flappy bird">
@@ -84,6 +80,18 @@
                 <a href="snake_game/">
                     <img src="snake_game/snake.png" alt="Pic of snake game">
                     <p>Snake</p>
+                </a>
+            </div>
+            <div class="game">
+                <a href="./bingo/">
+                    <img src="./bingo/bingo.png" alt="Pic of bingo game">
+                    <p>Bingo</p>
+                </a>
+            </div>
+            <div class="game">
+                <a href="./mix_that_cup/">
+                    <img src="./mix_that_cup/cup.png" alt="Pic of mix that cup">
+                    <p>Mix That Cup</p>
                 </a>
             </div>
         </div>
@@ -101,16 +109,5 @@
             <button>Contact Us</button>
         </a>
         <p style="font-size: xx-small;">Made By Kyle Ciurczak</p>
-        <a href="./social/" id="social_link">
-            <button id="social">Social Games</button>
-        </a>
-        <script>
-            setInterval(() => {
-                let date = new Date();
-                if (date.getDate() > 21 && date.getDate() < 27 && date.getDate() != 23 && date.getHours() < 19 && date.getHours()) {
-                    document.getElementById("social_link").style.display = "block";
-                }
-            })
-        </script>
     </body>
 </html>
