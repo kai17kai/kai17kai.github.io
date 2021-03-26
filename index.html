@@ -15,17 +15,11 @@
                 justify-content: center;
             }
 
-            #social {
-                height: 30px;
-                width: 200px;
-                margin-left: auto;
-                margin-right: auto;
-                display: block;
-                font-size: inherit;
-                font-weight: bold;
-                background-image: linear-gradient(to left, green, yellow, brown, orange);
+            #worm {
+                cursor: pointer;
             }
         </style>
+        <script src="mainPage.js"></script>
     </head>
     <body>
         <div class="Header">
@@ -100,10 +94,18 @@
         </div>
         <div class="Items">
             <div class="game">
-                <a href="Maze Game.zip" download>
+                <a href="coded_games/Maze Game.zip" download>
                     <p>Maze Game(.exe file in zip)</p>
                 </a>
             </div>
+            <div class="game">
+                <p id="worm" onclick="download()">
+                    Get The Worm
+                </p>
+                <a href="./coded_games/get_the_worm/Get The Worm (mac).zip" download style="display: none;" id="mac"></a>
+                <a href="./coded_games/get_the_worm/Get The Worm (windows).zip" download style="display: none;" id="windows"></a>
+            </div>
+        </div>
         </div>
         <a id="link" href="forms/">
             <button>Contact Us</button>

@@ -158,7 +158,7 @@ let game = setInterval(d, speed);
 
 function d() {
     let distance = Math.sqrt(Math.pow(snake_x[0] - food.x, 2) + Math.pow(snake_y[0] - food.y, 2));
-    if (distance <= 20) {
+    if (distance <= square_side / 50) {
         for (let i = 0; i < 2; ++i) {
             snake_x.push(snake_x[0]);
             snake_y.push(snake_y[0]);
@@ -236,7 +236,7 @@ function d() {
 
     for (let i = 1; i < snake_x.length; ++i) {
         let distance = Math.sqrt(Math.pow(snake_x[0] - snake_x[i], 2) + Math.pow(snake_y[0] - snake_y[i], 2)) + 10;
-        if (distance < 20) {
+        if (distance < square_side / 50) {
             console.log(distance);
             console.log(i);
             context.font = "40px Arial";
