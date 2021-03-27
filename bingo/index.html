@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>Bingo</title>
-        <link rel="stylesheet" type="text/css" href="../../MainPageStyling.css">
+        <link rel="stylesheet" type="text/css" href="../MainPageStyling.css">
         <style>
             .Row {
                 display: flex;
@@ -166,16 +166,10 @@
                         document.getElementById(String(y * 5 + x + 1)).onclick = () => {
                             if (document.getElementById(String(y * 5 + x + 1)).className != "red") {
                                 document.getElementById(String(y * 5 + x + 1)).className = "red";
-                                let idk = check(y, x, true);
-                                if (idk == true) {
-                                    document.getElementById("win").style.display = "block";
-                                }
+                                check(y, x, true);
                             } else {
                                 document.getElementById(String(y * 5 + x + 1)).className = "item";
-                                let idk = check(y, x, false);
-                                if (idk == true) {
-                                    document.getElementById("win").style.display = "block";
-                                }
+                                check(y, x, false);
                             }
                         }
 
