@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Get The Worm</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Get The Worm (mac).zip.json", {onProgress: UnityProgress});
+    </script>
+    <style>
+      body {
+        background-image: linear-gradient(to left, rgb(107, 202, 170), blueviolet);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="../"><button>Main Menu</button></a>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+      </div>
+      <h4>Rules</h4>
+    <p>To move around, press the wasd or arrow keys. Try to get the the chest without getting hit by the foxes. Every time you get the chest, a new fox spawns</p>
+    </div>    
+  </body>
+</html>

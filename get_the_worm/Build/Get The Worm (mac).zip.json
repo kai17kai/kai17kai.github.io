@@ -1,0 +1,16 @@
+{
+"companyName": "DefaultCompany",
+"productName": "Maze Game",
+"productVersion": "0.1",
+"dataUrl": "Get The Worm (mac).zip.data.unityweb",
+"wasmCodeUrl": "Get The Worm (mac).zip.wasm.code.unityweb",
+"wasmFrameworkUrl": "Get The Worm (mac).zip.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.4.18f1"
+}
