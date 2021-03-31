@@ -147,11 +147,10 @@ context.font = "40px Arial";
 context.fillText("Press Space To Start", 210, 300);
 let done = false;
 document.addEventListener("mousemove", (e) => {
-    Human = e.clientY - 30;
-    if (Human >= canvas.height - 60) {
-        Human = canvas.height - 60
-    } else if (Human <= -10) {
-        Human = 0;
+    let rect = canvas.getBoundingClientRect();
+    let PosY = e.clientY - rect.top;
+    if (PosY > 0 && PosY < canvas.height) {
+        Human = PosY;
     }
 });
 
