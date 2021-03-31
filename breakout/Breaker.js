@@ -13,14 +13,12 @@ function Reaction(position) {
     if (BallPosition.x + 10 >= ObstacleLocations[position] &&
         BallPosition.x <= ObstacleLocations[position] + 50 &&
         BallPosition.y >= ObstacleLocations[position + 1] + 10) {
-            Down = true;
             Slope.x = Reverse(Slope.x);
     }
     //top
     else if (BallPosition.x + 10 >= ObstacleLocations[position] &&
         BallPosition.x <= ObstacleLocations[position] + 50 &&
         BallPosition.y + 10 >= ObstacleLocations[position + 1]) {
-            Down = false;
             Slope.x = Reverse(Slope.x)
     }
     //left and right
