@@ -169,6 +169,7 @@ function Start() {
     V = setInterval(Visibility, 1);
     Ball = setInterval(BallMovement, 45);
     BallX = 390, BallY = 290, Speed = 35;
+    Score = 0;
     document.getElementById("Score").innerHTML = "Your Score is 0";
 }
 
