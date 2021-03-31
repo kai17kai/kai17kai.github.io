@@ -330,5 +330,9 @@ document.onkeydown = (e) => {
 }
 
 document.onmousemove = (e) => {
-    HumanX = e.offsetX;
+    let rect = canvas.getBoundingClientRect();
+    let PosX = e.clientX - rect.left;
+    if (PosX > 0 && PosX < canvas.width) {
+        HumanX = PosX;
+    }
 }
