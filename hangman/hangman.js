@@ -23,27 +23,33 @@ var NotOver = true;
 var ChosenWord;
 
 function Word() {
-    $.getJSON("https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&includePartOfSpeech=noun%2Cadjective%2Cverb%2Cadverb&minCorpusCount=20000&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=7&maxLength=16&limit=1&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
-        let done = false;
-        if (/[A-Z]/.test(data[0].word)) {
-            done = true;
-        }
-        ChosenWord = Array.from(data[0].word);
-        ChosenWord.forEach(element => {
-            if (!(alphabet.includes(element))) {
+    try {
+        $.getJSON("https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&includePartOfSpeech=noun%2Cadjective%2Cverb%2Cadverb&minCorpusCount=20000&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=7&maxLength=16&limit=1&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
+            let done = false;
+            if (/[A-Z]/.test(data[0].word)) {
                 done = true;
             }
-        });
-        if (!(done)) {
+            ChosenWord = Array.from(data[0].word);
+            ChosenWord.forEach(element => {
+                if (!(alphabet.includes(element))) {
+                    done = true;
+                }
+            });
+            if (!(done)) {
+                start();
+            } else {
+                Word();
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
             start();
-        } else {
-            Word();
-        }
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) {
+        });
+    }
+    catch {
         ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
         start();
-    });
+    }
 }
 Word();
 function start() {
