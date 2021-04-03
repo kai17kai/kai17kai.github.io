@@ -13,13 +13,13 @@ function Reaction(position) {
     if (BallPosition.x + 10 >= ObstacleLocations[position] &&
         BallPosition.x <= ObstacleLocations[position] + 50 &&
         BallPosition.y >= ObstacleLocations[position + 1] + 10) {
-            Slope.x = Reverse(Slope.x);
+            Down = true;
     }
     //top
     else if (BallPosition.x + 10 >= ObstacleLocations[position] &&
         BallPosition.x <= ObstacleLocations[position] + 50 &&
         BallPosition.y + 10 >= ObstacleLocations[position + 1]) {
-            Slope.x = Reverse(Slope.x)
+            Down = false;
     }
     //left and right
     else if ((BallPosition.x + 10 <= ObstacleLocations[position] || BallPosition.x >= ObstacleLocations[position] + 50) &&
@@ -327,7 +327,7 @@ document.onkeydown = (e) => {
     }
 }
 
-document.onmousemove = (e) => {
+canvas.onmousemove = (e) => {
     let rect = canvas.getBoundingClientRect();
     let PosX = e.clientX - rect.left;
     if (PosX > 0 && PosX < canvas.width) {
