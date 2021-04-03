@@ -32,7 +32,7 @@
         </script>
     </head>
     <body>
-        <a href="../../">
+        <a href="../">
             <button>Main Menu</button>
         </a>
         <button onclick="window.location.reload()">Restart</button>
@@ -49,20 +49,17 @@
         </p>
         <script>
             let answer = Math.floor(Math.random() * 3) + 1;
-            console.log(answer);
             for (let i = 1; i <= 3; ++i) {
-                document.getElementById(String(i)).onclick = () => {
-                    for (let i = 1; i <= 3; ++i) {
-                        if (Number(document.getElementById(String(i)).id) == answer) {
-                            document.getElementById("result").innerHTML = "You have won the game";
-                            for (let i = 1; i <= 3; ++i) {
-                                document.getElementById(String(i)).onclick = null;
-                            }
-                        } else {
-                            document.getElementById("result").innerHTML = "You have lost the game";
-                            for (let i = 1; i <= 3; ++i) {
-                                document.getElementById(String(i)).onclick = null;
-                            }
+            document.getElementById(String(i)).onclick = () => {
+                    if (Number(document.getElementById(String(i)).id) == answer) {
+                        document.getElementById("result").innerHTML = "You have won the game";
+                        for (let i = 1; i <= 3; ++i) {
+                            document.getElementById(String(i)).onclick = null;
+                        }
+                    } else {
+                        document.getElementById("result").innerHTML = "You have lost the game";
+                        for (let i = 1; i <= 3; ++i) {
+                            document.getElementById(String(i)).onclick = null;
                         }
                     }
                 }
