@@ -8,28 +8,28 @@ const context = canvas.getContext("2d");
 let score = 0;
 
 //Used when block is hit
-function Reaction(i) {
-    //Top
-    if (BallPosition.y + 10 <= ObstacleLocations[i + 1] && BallPosition.x >= ObstacleLocations[i] && BallPosition.x <= ObstacleLocations[i] + 60) {
-        Slope.x = Reverse(Slope.x);
-        Down = false;
+function Reaction(position) {
+    //bottom
+    if (BallPosition.x + 10 >= ObstacleLocations[position] &&
+        BallPosition.x <= ObstacleLocations[position] + 50 &&
+        BallPosition.y >= ObstacleLocations[position + 1] + 10) {
+            Slope.x = Reverse(Slope.x);
     }
-    //Right
-    else if (BallPosition.x >= ObstacleLocations[i] + 60 && BallPosition.y >= ObstacleLocations[i + 1] && (BallPosition.y <= ObstacleLocations[i + 1] || (BallPosition.y >= ObstacleLocations[i + 1] && BallPosition + 10 >= ObstacleLocations[i + 1]))) {
-        Slope.x = Reverse(Slope.x);
+    //top
+    else if (BallPosition.x + 10 >= ObstacleLocations[position] &&
+        BallPosition.x <= ObstacleLocations[position] + 50 &&
+        BallPosition.y + 10 >= ObstacleLocations[position + 1]) {
+            Slope.x = Reverse(Slope.x)
     }
-    //Bottom
-    else if (BallPosition.y >= ObstacleLocations[i + 1] && BallPosition.x >= ObstacleLocations[i] && BallPosition.x <= ObstacleLocations[i] + 60) {
-        Slope.x = Reverse(Slope.x);
-        Down = true;
-    }
-    //Left
-    else if (BallPosition.x + 10 <= ObstacleLocations[i] && BallPosition.y >= ObstacleLocations[i + 1] && (BallPosition.y <= ObstacleLocations[i + 1] || (BallPosition.y >= ObstacleLocations[i + 1] && BallPosition + 10 >= ObstacleLocations[i + 1]))) {
-        Slope.x = Reverse(Slope.x);
+    //left and right
+    else if ((BallPosition.x + 10 <= ObstacleLocations[position] || BallPosition.x >= ObstacleLocations[position] + 50) &&
+        BallPosition.y + 10 >= ObstacleLocations[position + 1] &&
+        BallPosition.y <= ObstacleLocations[position + 1] + 10) {
+            Slope.x = Reverse(Slope.x);
     }
 
-    ObstacleLocations[i] = 0;
-    ObstacleLocations[i + 1] = 0;
+    ObstacleLocations[position] = 0;
+    ObstacleLocations[position + 1] = 0;
 
     clearInterval(Ball);
     if (Speed > 30) {
@@ -201,7 +201,7 @@ function Visibility() {
 }
 
 //Ball Movement
-var Down = false, y1, y2, y3;
+var Down = true, y1, y2, y3;
 
 var Choice = Math.floor(Math.random() * 3) + 1;
 if (Choice === 1) {
@@ -268,7 +268,10 @@ function BallMovement() {
     }
 
     for (let i = 0; i <= ObstacleLocations.length; i += 2) {
-        if (ObstacleLocations[i] != 0 && ObstacleLocations[i + 1] != 0 && BallPosition.x >= ObstacleLocations[i] - 5 && BallPosition.x <= ObstacleLocations[i] + 55 && BallPosition.y >= ObstacleLocations[i + 1] - 5 && BallPosition.y <= ObstacleLocations[i + 1] + 15) {
+        if (BallPosition.x + 10 > ObstacleLocations[i] &&
+            BallPosition.x < ObstacleLocations[i] + 50 &&
+            BallPosition.y + 10 > ObstacleLocations[i + 1] &&
+            BallPosition.y < ObstacleLocations[i + 1] + 10) {
             Reaction(i);
             break;
         }
@@ -325,5 +328,9 @@ document.onkeydown = (e) => {
 }
 
 document.onmousemove = (e) => {
-    HumanX = e.clientX - 390;
+    let rect = canvas.getBoundingClientRect();
+    let PosX = e.clientX - rect.left;
+    if (PosX > 0 && PosX < canvas.width) {
+        HumanX = PosX;
+    }
 }
