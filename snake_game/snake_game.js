@@ -111,9 +111,9 @@ function Game() {
     const context = canvas.getContext("2d");
 
     let snake_x = [];
-    snake_x.push(Math.floor(Math.random() * (canvas.width - playerSize)));
+    snake_x.push(Math.floor(Math.random() * (canvas.width - playerSize)) + 1);
     let snake_y = [];
-    snake_y.push(Math.floor(Math.random() * (canvas.height - playerSize)));
+    snake_y.push(Math.floor(Math.random() * (canvas.height - playerSize)) + 1);
 
     let score = 0;
 
