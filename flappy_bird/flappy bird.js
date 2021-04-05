@@ -74,7 +74,7 @@ var timer = setInterval(time, 1000);
 /*----------------------------------------------------------------*/
 
 //animation counter
-let frame = 1;
+let frame = 0;
 
 //Array that holds the positions of the obstacles
 var ObstaclesPositions = new Array;
@@ -127,29 +127,25 @@ const Game = () => {
     }
 
     if (value == 2) {
-        if (frame == 1) {
+        if (frame == 0) {
             context.drawImage(Issac_Image, 0, 0, 1024, 1024, 100, Player, 60, 60);
-        } else if (frame == 2) {
+        } else if (frame == 1) {
             context.drawImage(Issac_Image, 1024, 0, 1024, 1024, 100, Player, 60, 60);
-        } else if (frame == 3) {
+        } else if (frame == 2) {
             context.drawImage(Issac_Image, 0, 1024, 1024, 1024, 100, Player, 60, 60);
         }
     } else if (value == 1) {
-        if (frame == 1) {
-            context.drawImage(Ethan_Image, 0, 0, 32, 32, 100, Player, 60, 60);
-        } else if (frame == 2) {
-            context.drawImage(Ethan_Image, 0, 32, 32, 32, 100, Player, 60, 60);
-        }
+        context.drawImage(Ethan_Image, 0, frame * 32, 32, 32, 100, Player, 60, 60);
     } else if (value == 3) {
-        if (frame == 1) {
+        if (frame == 0) {
             context.drawImage(Allie_Image, 0, 0, 1024, 1024, 100, Player, 100, 100);
-        } else if (frame == 2) {
+        } else if (frame == 1) {
             context.drawImage(Allie_Image, 1024, 0, 1024, 1024, 100, Player, 100, 100);
-        } else if (frame == 3) {
+        } else if (frame == 2) {
             context.drawImage(Allie_Image, 0, 1024, 1024, 1024, 100, Player, 100, 100);
-        } else if (frame == 4) {
+        } else if (frame == 3) {
             context.drawImage(Allie_Image, 1024, 1024, 1024, 1024, 100, Player, 100, 100);
-        } else if (frame == 5) {
+        } else if (frame == 4) {
             context.drawImage(Allie_Image, 2048, 0, 1024, 1024, 100, Player, 100, 100);
         }
     }
@@ -161,7 +157,7 @@ const Game = () => {
         context.fillText(`Time: ${mintime}:${sectime}`, 0, 30);
     }
     highScore(mintime, sectime);
-    context.fillText("High Score" + localStorage.time, 0, 50);
+    context.fillText("High Score: " + localStorage.time, 0, 50);
 
     if (Player >= canvas.height || Player <= 0) {
         dead();
@@ -199,6 +195,7 @@ window.onkeydown = (e) => {
         e.preventDefault();
         Up = true;
     }
+    frame = 0;
     if (Number(e.key) < 4 && Number(e.key) > 0) {
         value = Number(e.key);
     }
@@ -211,18 +208,18 @@ window.onkeyup = (e) => {
 }
 
 let counter = setInterval(() => {
-    ++frame
+    ++frame;
     if (value == 2) {
-        if (frame >= 4) {
-            frame = 1;
+        if (!(frame < 3)) {
+            frame = 0;
         }
     } else if (value == 1) {
-        if (frame >= 3) {
-            frame = 1;
+        if (!(frame < 2)) {
+            frame = 0;
         }
     } else if (value == 3) {
-        if (frame >= 5) {
-            frame = 1;
+        if (!(frame < 4)) {
+            frame = 0;
         }
     }
 }, 83);
