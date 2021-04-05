@@ -1,5 +1,36 @@
 'use strict';
 
+//function for high score
+function highScore(min, sec) {
+    var minTime = 0, secTime = 0;
+    try { 
+        minTime = parseFloat(localStorage.time.split(":")[0]);
+        secTime = parseFloat(localStorage.time.split(":")[1]);
+    } catch (e) {
+        minTime = 0;
+        secTime = 0;
+    }
+    if (!(typeof min === 'undefined') && !(typeof sec === "undefined")) {
+        try {
+            min = parseFloat(min);
+            sec = parseFloat(sec);
+        } catch (e) {
+            min = 0;
+            sec = 0;
+        }
+        if (min>=minTime && sec>=secTime) { minTime = min; secTime = sec; }
+        if (secTime > 9) {
+            localStorage.time = '' + minTime + ":" + secTime;
+        } else {
+            localStorage.time = '' + minTime + ":0" + secTime;
+        }
+    }
+    if (isNaN(minTime) || isNaN(secTime)) {
+        minTime = secTime = 0;
+        localStorage.time = '0:00';
+    }
+}
+
 let Issac_Image = new Image();
 Issac_Image.src = "i_sprite.png";
 let Ethan_Image = new Image();
@@ -125,10 +156,12 @@ const Game = () => {
     
     context.fillStyle = "black";
     if (sectime < 10) {
-        context.fillText(`${mintime}:0${sectime}`, 0, 50);
+        context.fillText(`Time: ${mintime}:0${sectime}`, 0, 30);
     } else {
-        context.fillText(`${mintime}:${sectime}`, 0, 50);
+        context.fillText(`Time: ${mintime}:${sectime}`, 0, 30);
     }
+    highScore(mintime, sectime);
+    context.fillText("High Score" + localStorage.time, 0, 50);
 
     if (Player >= canvas.height || Player <= 0) {
         dead();
@@ -144,16 +177,6 @@ const Game = () => {
         context.fillStyle = "black";
         context.font = "40px Arial";
         context.fillText("You Died", 380, 280);
-    }
-
-    function AtEdge(x) {
-        if (ObstaclesPositions[x] < 0) {
-            ObstaclesPositions[x] = null;
-            ObstaclesPositions[x + 1] = null;
-            for (let i = 0; i < 1; ++i) {
-                ObstaclesPositions.shift();
-            }
-        }  
     }
 };
 //allows player to see themselves and the obstacles

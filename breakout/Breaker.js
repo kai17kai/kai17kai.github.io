@@ -7,12 +7,30 @@ const context = canvas.getContext("2d");
 
 let score = 0;
 
+//set up high score
+function highScore(score) {
+    var saved = 0;
+    try { saved = parseFloat(localStorage.breakHighScore); } catch (e) { saved = 0; }
+    if (!(typeof score === 'undefined')) {
+        try { score = parseFloat(score); } catch (e) { score = 0; }
+        if (score>saved) {
+            saved = score;
+            localStorage.breakHighScore = '' + score;
+        }
+    }
+    if (isNaN(saved)) {
+        saved = 0;
+        localStorage.breakHighScore = '0';
+    }
+    return saved;
+}
+
 //Used when block is hit
 function Reaction(position) {
     //bottom
     if (BallPosition.x + 10 >= ObstacleLocations[position] &&
         BallPosition.x <= ObstacleLocations[position] + 50 &&
-        BallPosition.y >= ObstacleLocations[position + 1] + 10) {
+        BallPosition.y <= ObstacleLocations[position + 1] + 10) {
             Down = true;
     }
     //top
@@ -220,21 +238,21 @@ if (Choice === 1) {
 function BallMovement() {
     BallPosition.x += Slope.x;
     if (y3 === true) {
-        if (Down === true) {
+        if (Down) {
             BallPosition.y += Slope.y3;
-        } else if (Down === false) {
+        } else {
             BallPosition.y -= Slope.y3;
         }
     } else if (y2 === true) {
-        if (Down === true) {
+        if (Down) {
             BallPosition.y += Slope.y2;
-        } else if (Down === false) {
+        } else {
             BallPosition.y -= Slope.y2;
         }
     } else if (y1 === true) {
-        if (Down === true) {
+        if (Down) {
             BallPosition.y += Slope.y1;
-        } else if (Down === false) {
+        } else {
             BallPosition.y -= Slope.y1;
         }
     }
@@ -243,7 +261,7 @@ function BallMovement() {
         Slope.x = Reverse(Slope.x)
     }
 
-    if (BallPosition.y >= 490 && BallPosition.y <= 500 && BallPosition.x >= HumanX && BallPosition.x <= HumanX + 50) {
+    if (BallPosition.y >= 490 && BallPosition.y <= 500 && BallPosition.x + 10 >= HumanX && BallPosition.x <= HumanX + 50) {
         y1 = false, y2 = false, y3 = false;
         Down = false;
         if (BallPosition.x < HumanX + 10 || BallPosition.x > HumanX + 40) {
@@ -285,6 +303,7 @@ function BallMovement() {
     }
 
     document.getElementById("score").innerHTML = `Score: ${score}`;
+    document.getElementById("old").innerHTML = "High Score: " + highScore(score); 
 }
 
 var Ball, Speed, BallAndBoardVisibility;
@@ -298,9 +317,9 @@ function Start() {
     BallPosition.x = 400;
     BallPosition.y = 400;
     Speed = 45;
-    Down = false;
-    document.getElementById("old").innerHTML = `Old Score: ${score}`;
+    Down = true;
     score = 0;
+    document.getElementById("old").innerHTML = "High Score: " + highScore(score);
     document.getElementById("score").innerHTML = "Score: 0";
     clearInterval(Ball);
     clearInterval(BallAndBoardVisibility);

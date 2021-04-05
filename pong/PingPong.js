@@ -17,6 +17,23 @@ context.fillStyle = "rgb(255, 255, 255)";
 //Score
 var Score = 0;
 
+function highScore(score) {
+    var saved = 0;
+    try { saved = parseFloat(localStorage.pongHighScore); } catch (e) { saved = 0; }
+    if (!(typeof score === 'undefined')) {
+        try { score = parseFloat(score); } catch (e) { score = 0; }
+        if (score>saved) {
+            saved = score;
+            localStorage.pongHighScore = '' + score;
+        }
+    }
+    if (isNaN(saved)) {
+        saved = 0;
+        localStorage.pongHighScore = '0';
+    }
+    return saved;
+}
+
 function clear() {
     let temp = context.fillStyle;
     context.fillStyle = "rgb(0, 0, 0)";
@@ -119,7 +136,8 @@ function BallMovement() {
         if (((BallY >= Human && BallY + 20 >= Human) || (BallY + 20 >= Human)) && BallY <= Human + 60 && BallX <= 20) {
             Slope.x = Reverse(Slope.x);
             ++Score;
-            document.getElementById("Score").innerHTML = `Your Score is ${Score}`;
+            document.getElementById("Score").innerHTML = `Score: ${Score}`;
+            document.getElementById("HighScore").innerHTML = "High Score: " + highScore(Score);
             IncreaseSpeed();
             ChangeSlope()
         }
@@ -170,7 +188,7 @@ function Start() {
     Ball = setInterval(BallMovement, 45);
     BallX = 390, BallY = 290, Speed = 35;
     Score = 0;
-    document.getElementById("Score").innerHTML = "Your Score is 0";
+    document.getElementById("Score").innerHTML = "Score: 0";
 }
 
 function IsDead() {
