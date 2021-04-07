@@ -153,7 +153,7 @@ function Game() {
         }
     }
 
-    let amount = 5, speed = 60;
+    let amount = 5, speed = 45;
     let game = setInterval(d, speed);
 
     function d() {
@@ -193,22 +193,22 @@ function Game() {
             }
         }
         if (up) {
-            snake_y.unshift(snake_y[0] - playerSize);
+            snake_y.unshift(snake_y[0] - playerSize / 2);
             snake_x.unshift(snake_x[0]);
             snake_y.pop();
             snake_x.pop();
         } else if (down) {
-            snake_y.unshift(snake_y[0] + playerSize);
+            snake_y.unshift(snake_y[0] + playerSize / 2);
             snake_x.unshift(snake_x[0]);
             snake_x.pop();
             snake_y.pop();
         } else if (right) {
-            snake_x.unshift(snake_x[0] + playerSize);
+            snake_x.unshift(snake_x[0] + playerSize / 2);
             snake_y.unshift(snake_y[0]);
             snake_x.pop();
             snake_y.pop();
         } else if (left) {
-            snake_x.unshift(snake_x[0] - playerSize);
+            snake_x.unshift(snake_x[0] - playerSize / 2);
             snake_y.unshift(snake_y[0]);
             snake_x.pop();
             snake_y.pop();
@@ -235,8 +235,9 @@ function Game() {
         context.fillRect(food.x, food.y, playerSize, playerSize);
 
         for (let i = 1; i < snake_x.length; ++i) {
-            let distance = Math.sqrt(Math.pow(snake_x[0] - snake_x[i], 2) + Math.pow(snake_y[0] - snake_y[i], 2)) + 10;
-            if (distance < playerSize) {
+            let distance = Math.sqrt(Math.pow(snake_x[0] - snake_x[i], 2) + Math.pow(snake_y[0] - snake_y[i], 2));
+            console.log(distance);
+            if (distance < playerSize / 2) {
                 console.log(distance);
                 console.log(i);
                 context.font = "40px Arial";
