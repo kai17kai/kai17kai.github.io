@@ -1,9 +1,0 @@
-﻿  Maze Game.cpp
-C:\Users\kyle\OneDrive\Documents\Visual Studio 2019\Visual Studio Projects\Maze Game\Maze Game.cpp(404,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\kyle\OneDrive\Documents\Visual Studio 2019\Visual Studio Projects\Maze Game\Maze Game.cpp(428,21): warning C4018: '<': signed/unsigned mismatch
-  Generating code
-  2 of 267 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  Func++.vcxproj -> C:\Users\kyle\OneDrive\Documents\Visual Studio 2019\Visual Studio Projects\Maze Game\Release\Maze Game.exe
