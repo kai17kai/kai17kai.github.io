@@ -346,8 +346,8 @@ document.onkeydown = (e) => {
     }
 }
 
+let rect = canvas.getBoundingClientRect();
 canvas.onmousemove = (e) => {
-    let rect = canvas.getBoundingClientRect();
     let PosX = e.clientX - rect.left;
     if (PosX > 0 && PosX < canvas.width) {
         HumanX = PosX;

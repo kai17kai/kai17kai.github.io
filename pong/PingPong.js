@@ -164,10 +164,10 @@ function BallMovement() {
 context.font = "40px Arial";
 context.fillText("Press Space To Start", 210, 300);
 let done = false;
+let rect = canvas.getBoundingClientRect();
 document.addEventListener("mousemove", (e) => {
-    let rect = canvas.getBoundingClientRect();
-    let PosY = e.clientY - rect.top;
-    if (PosY > 0 && PosY < canvas.height) {
+    let PosY = e.clientY - rect.top - 30;
+    if (PosY > -1 && PosY + 60 < canvas.height) {
         Human = PosY;
     }
 });
