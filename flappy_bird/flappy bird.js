@@ -18,11 +18,14 @@ function highScore(min, sec) {
             min = 0;
             sec = 0;
         }
+        if (sec === 0 && min < minTime) {
+            secTime = 0;
+        }
+        if (sec-secTime > 0 && min === minTime) {
+            secTime = sec;
+        }
         if (min-minTime > 0) {
             minTime = min;
-        }
-        if (sec-secTime > 0) {
-            secTime = sec;
         }
         
         if (secTime > 9) {
@@ -85,7 +88,7 @@ let time = () => {
     }
 }
 //Set up time
-var sectime = 0, mintime = 0;
+var sectime = 0, mintime = 1;
 var timer = setInterval(time, 1000);
 /*----------------------------------------------------------------*/
 
