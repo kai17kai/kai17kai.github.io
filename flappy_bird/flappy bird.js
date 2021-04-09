@@ -18,7 +18,9 @@ function highScore(min, sec) {
             min = 0;
             sec = 0;
         }
-        if (min>=minTime && sec>=secTime) { minTime = min; secTime = sec; }
+        if (min>=minTime) { minTime = min; }
+        if (sec>=secTime) { secTime = sec; }
+        if (sec===0) {secTime = 0;}
         if (secTime > 9) {
             localStorage.time = '' + minTime + ":" + secTime;
         } else {
@@ -79,7 +81,7 @@ let time = () => {
     }
 }
 //Set up time
-var sectime = 0, mintime = 0;
+var sectime = 55, mintime = 0;
 var timer = setInterval(time, 1000);
 /*----------------------------------------------------------------*/
 
