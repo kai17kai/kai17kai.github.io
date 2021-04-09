@@ -88,7 +88,7 @@ let time = () => {
     }
 }
 //Set up time
-var sectime = 0, mintime = 1;
+var sectime = 0, mintime = 0;
 var timer = setInterval(time, 1000);
 /*----------------------------------------------------------------*/
 
