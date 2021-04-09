@@ -39,17 +39,19 @@ let Allie_Image = new Image();
 Allie_Image.src = "a_sprite.png";
 
 //choice
-let value = 1;
+let PlayerSpriteValue = 1;
+let BackgroundValue = 1;
 
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
 canvas.width = 800;
 const context = canvas.getContext("2d");
 
-const image = document.createElement("img");
-image.src = "background.png";
-image.height = 600;
-image.width = 800;
+//background Background
+const AllieBackground = document.createElement("img");
+AllieBackground.src = "background.png";
+const EthanBackground = document.createElement("img");
+EthanBackground.src = "ethan background.png";
 
 context.font = "20px Arial";
 
@@ -90,23 +92,28 @@ function MoveObstacles() {
     }
 }
 
-let x = () => {    
+//creates obstacles at 2.5 seconds
+var CreateObstacles = setInterval(() => {    
     ObstaclesPositions.push(800);
     ObstaclesPositions.push(Math.floor(Math.random() * 200 + 1) + 150);
+    ObstaclesPositions.push((ObstaclesPositions[ObstaclesPositions.length - 1] + ObstaclesPositions[ObstaclesPositions.length - 1] + 125) / 2);
 }
-
-//creates obstacles at 2.5 seconds
-var CreateObstacles = setInterval(x, 2500);
+, 1500);
 
 const Game = () => {
     MoveObstacles();
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(image, 0, 0, 800, 600);
+    
+    if (BackgroundValue === 1) {
+        context.drawImage(AllieBackground, 0, 0, 800, 600);
+    } else {
+        context.drawImage(EthanBackground, 0, 0, 800, 600);
+    }
 
     context.fillStyle = "rgb(50, 205, 50)";
 
     //Draws obstacles
-    for (let x = 0; x < ObstaclesPositions.length; x += 2) {
+    for (let x = 0; x < ObstaclesPositions.length; x += 3) {
         if (ObstaclesPositions[x] > 0) {
             context.fillRect(ObstaclesPositions[x], 0, 50, ObstaclesPositions[x + 1]);
             context.fillRect(ObstaclesPositions[x], ObstaclesPositions[x + 1] + 125, 50, canvas.height - ObstaclesPositions[x + 1] + 125);
@@ -126,7 +133,7 @@ const Game = () => {
         }
     }
 
-    if (value == 2) {
+    if (PlayerSpriteValue == 2) {
         if (frame == 0) {
             context.drawImage(Issac_Image, 0, 0, 1024, 1024, 100, Player, 60, 60);
         } else if (frame == 1) {
@@ -134,9 +141,9 @@ const Game = () => {
         } else if (frame == 2) {
             context.drawImage(Issac_Image, 0, 1024, 1024, 1024, 100, Player, 60, 60);
         }
-    } else if (value == 1) {
+    } else if (PlayerSpriteValue == 1) {
         context.drawImage(Ethan_Image, 0, frame * 32, 32, 32, 100, Player, 60, 60);
-    } else if (value == 3) {
+    } else if (PlayerSpriteValue == 3) {
         if (frame == 0) {
             context.drawImage(Allie_Image, 0, 0, 1024, 1024, 100, Player, 100, 100);
         } else if (frame == 1) {
@@ -195,9 +202,14 @@ window.onkeydown = (e) => {
         e.preventDefault();
         Up = true;
     }
-    frame = 0;
-    if (Number(e.key) < 4 && Number(e.key) > 0) {
-        value = Number(e.key);
+    
+    if (e.key === "!") {
+        BackgroundValue = 1;
+    } else if (e.key === "@") {
+        BackgroundValue = 2;
+    } else if (parseInt(e.key) < 4 && parseInt(e.key) > 0) {
+        frame = 0;
+        PlayerSpriteValue = parseInt(e.key);
     }
 }
 
@@ -209,15 +221,15 @@ window.onkeyup = (e) => {
 
 let counter = setInterval(() => {
     ++frame;
-    if (value == 2) {
+    if (PlayerSpriteValue == 2) {
         if (!(frame < 3)) {
             frame = 0;
         }
-    } else if (value == 1) {
+    } else if (PlayerSpriteValue == 1) {
         if (!(frame < 2)) {
             frame = 0;
         }
-    } else if (value == 3) {
+    } else if (PlayerSpriteValue == 3) {
         if (!(frame < 4)) {
             frame = 0;
         }

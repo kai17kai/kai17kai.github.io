@@ -134,6 +134,8 @@ function Game() {
     food.y = y - playerSize / 2;
 
     let up = false, down = false, right = false, left = false;
+    let PrizeAudio = new Audio();
+    PrizeAudio.src = "audio.mp3"
     window.onkeydown = (e) => {
         if (e.key === "ArrowUp" || e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === "ArrowLeft") {
             e.preventDefault();
@@ -187,9 +189,7 @@ function Game() {
                     console.log(speed)
                 }
             } else {
-                let audio = new Audio();
-                audio.src = "audio.mp3"
-                audio.play();
+                PrizeAudio.play();
             }
         }
         if (up) {
