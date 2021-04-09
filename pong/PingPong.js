@@ -127,13 +127,13 @@ function BallMovement() {
     }
 
     function Reaction() {
-        if (BallY + 20 > Computer && BallY < Computer + 60 && BallX + 20 > 770) {
+        if (BallY + 20 > Computer && BallY < Computer + 60 && BallX + 20 === 770) {
             Slope.x = Reverse(Slope.x);
             IncreaseSpeed();
             ChangeSlope();
         }
 
-        if (BallY + 20 > Human && BallY < Human + 60 && BallX < 30) {
+        if (BallY + 20 > Human && BallY < Human + 60 && BallX === 30) {
             Slope.x = Reverse(Slope.x);
             ++Score;
             document.getElementById("Score").innerHTML = `Score: ${Score}`;
@@ -164,10 +164,10 @@ function BallMovement() {
 context.font = "40px Arial";
 context.fillText("Press Space To Start", 210, 300);
 let done = false;
-let rect = canvas.getBoundingClientRect();
+let rectTop = canvas.getBoundingClientRect().top;
 document.addEventListener("mousemove", (e) => {
-    let PosY = e.clientY - rect.top - 30;
-    if (PosY > -1 && PosY + 60 < canvas.height) {
+    let PosY = e.clientY - rectTop - 30;
+    if (PosY >= -1 && PosY + 60 <= 600) {
         Human = PosY;
     }
 });
