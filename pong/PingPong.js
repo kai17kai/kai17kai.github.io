@@ -127,13 +127,13 @@ function BallMovement() {
     }
 
     function Reaction() {
-        if (((BallY >= Computer && BallY + 20 >= Computer) || (BallY + 20 >= Computer)) && BallY <= Computer + 60 && BallX + 20 >= 770) {
+        if (BallY + 20 > Computer && BallY < Computer + 60 && BallX + 20 > 770) {
             Slope.x = Reverse(Slope.x);
             IncreaseSpeed();
             ChangeSlope();
         }
 
-        if (((BallY >= Human && BallY + 20 >= Human) || (BallY + 20 >= Human)) && BallY <= Human + 60 && BallX <= 20) {
+        if (BallY + 20 > Human && BallY < Human + 60 && BallX < 30) {
             Slope.x = Reverse(Slope.x);
             ++Score;
             document.getElementById("Score").innerHTML = `Score: ${Score}`;
@@ -149,7 +149,7 @@ function BallMovement() {
         }
 
         function ChangeSlope() {
-            if (/*Top for Computer*/((BallY <= Computer + 20 && BallY + 20 <= Computer + 20) || (BallY + 20 <= Computer + 20)) || /*Top for Human*/((BallY <= Human + 20 && BallY + 20 <= Human + 20) || (BallY + 20 <= Human + 20)) || /*Bottom for Human*/BallY >= Human + 40 || /*Bottom for Computer*/BallY >= Computer + 40) {
+            if (/*Computer*/BallY + 20 < Computer + 20 || BallY > Computer + 40 || /*Human*/BallY + 20 < Human + 20 || BallY > Human + 40) {
                 y1 = false;
                 y2 = true;
             } else {
