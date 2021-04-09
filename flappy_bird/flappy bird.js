@@ -28,11 +28,7 @@ function highScore(min, sec) {
             minTime = min;
         }
         
-        if (secTime > 9) {
-            localStorage.time = '' + minTime + ":" + secTime;
-        } else {
-            localStorage.time = '' + minTime + ":0" + secTime;
-        }
+        secTime > 9 ? localStorage.time = '' + minTime + ":" + secTime : localStorage.time = '' + minTime + ":0" + secTime
     }
     if (isNaN(minTime) || isNaN(secTime)) {
         minTime = secTime = 0;
@@ -121,11 +117,7 @@ const Game = () => {
     MoveObstacles();
     context.clearRect(0, 0, canvas.width, canvas.height);
     
-    if (BackgroundValue === 1) {
-        context.drawImage(AllieBackground, 0, 0, 800, 600);
-    } else {
-        context.drawImage(EthanBackground, 0, 0, 800, 600);
-    }
+    BackgroundValue === 1 ? context.drawImage(AllieBackground, 0, 0, 800, 600) : context.drawImage(EthanBackground, 0, 0, 800, 600);
 
     context.fillStyle = "rgb(50, 205, 50)";
 
@@ -175,11 +167,7 @@ const Game = () => {
     }
     
     context.fillStyle = "black";
-    if (sectime < 10) {
-        context.fillText(`Time: ${mintime}:0${sectime}`, 0, 30);
-    } else {
-        context.fillText(`Time: ${mintime}:${sectime}`, 0, 30);
-    }
+    sectime < 10 ? context.fillText(`Time: ${mintime}:0${sectime}`, 0, 30) : context.fillText(`Time: ${mintime}:${sectime}`, 0, 30);
     highScore(mintime, sectime);
     context.fillText("High Score: " + localStorage.time, 0, 50);
 
@@ -203,16 +191,8 @@ const Game = () => {
 var Visibility, Speed = 31;
 Visibility = setInterval(Game, Speed);
 
-const d = () => {
-    if (Up == false) {
-        Player += Velocity;
-    } else {
-        Player -= 6;
-    }
-}
-
 var Velocity = 4;
-var Gravity = setInterval(d, 30); 
+var Gravity = setInterval(() => {!Up ? Player += Velocity : Player -= 6;}, 30); 
 
 window.onkeydown = (e) => {
     if (e.key === " ") {
