@@ -42,6 +42,10 @@ Allie_Image.src = "a_sprite.png";
 let PlayerSpriteValue = 1;
 let BackgroundValue = 1;
 
+//audio
+let PrizeAudio = new Audio();
+PrizeAudio.src = "audio.mp4";
+
 const canvas = document.getElementById("canvas");
 canvas.height = 600;
 canvas.width = 800;
@@ -68,6 +72,10 @@ let time = () => {
         clearInterval(Visibility);
         Speed -= 1;
         Visibility = setInterval(Game, Speed);
+    }
+
+    if (mintime >= 10) {
+        PrizeAudio.play();
     }
 }
 //Set up time
