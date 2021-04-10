@@ -79,7 +79,7 @@ let time = () => {
         Visibility = setInterval(Game, Speed);
     }
 
-    if (mintime >= 10) {
+    if (mintime >= 7) {
         PrizeAudio.play();
     }
 }
