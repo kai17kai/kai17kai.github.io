@@ -140,18 +140,32 @@ function Game() {
         if (e.key === "ArrowUp" || e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === "ArrowLeft") {
             e.preventDefault();
         }
-        if ((e.key === "w" || e.key  === "ArrowUp") && down === false) {
-            up = false, down = false, right = false, left = false;
-            up = true;
-        } else if ((e.key === "s" || e.key === "ArrowDown") && up === false) {
-            up = false, down = false, right = false, left = false;
-            down = true;
-        } else if ((e.key === "d" || e.key === "ArrowRight") && left === false) {
-            up = false, down = false, right = false, left = false;
-            right=true;
-        } else if ((e.key === "a" || e.key === "ArrowLeft") && right === false) {
-            up = false, down = false, right = false, left = false;
-            left=true;
+
+        switch (e.key) {
+            case "w":case "ArrowUp":
+                if (!down) {
+                    up = false, down = false, right = false, left = false;
+                    up = true;
+                }
+                break;
+            case "s":case "ArrowDown":
+                if (!up) {
+                    up = false, down = false, right = false, left = false;
+                    down = true;
+                }
+                break;
+            case "d":case "ArrowRight":
+                if (!left) {
+                    up = false, down = false, right = false, left = false;
+                    right=true;
+                }
+                break;
+            case "a":case "ArrowLeft":
+                if (!right) {
+                    up = false, down = false, right = false, left = false;
+                    left=true;
+                }
+                break;
         }
     }
 
@@ -193,27 +207,34 @@ function Game() {
                 PrizeAudio.play();
             }
         }
-        if (up) {
-            snake_y.unshift(snake_y[0] - playerSize / 2);
-            snake_x.unshift(snake_x[0]);
-            snake_y.pop();
-            snake_x.pop();
-        } else if (down) {
-            snake_y.unshift(snake_y[0] + playerSize / 2);
-            snake_x.unshift(snake_x[0]);
-            snake_x.pop();
-            snake_y.pop();
-        } else if (right) {
-            snake_x.unshift(snake_x[0] + playerSize / 2);
-            snake_y.unshift(snake_y[0]);
-            snake_x.pop();
-            snake_y.pop();
-        } else if (left) {
-            snake_x.unshift(snake_x[0] - playerSize / 2);
-            snake_y.unshift(snake_y[0]);
-            snake_x.pop();
-            snake_y.pop();
+
+        switch (true) {
+            case up:
+                snake_y.unshift(snake_y[0] - playerSize / 2);
+                snake_x.unshift(snake_x[0]);
+                snake_y.pop();
+                snake_x.pop();
+                break;
+            case down:
+                snake_y.unshift(snake_y[0] + playerSize / 2);
+                snake_x.unshift(snake_x[0]);
+                snake_x.pop();
+                snake_y.pop();
+                break;
+            case right:
+                snake_x.unshift(snake_x[0] + playerSize / 2);
+                snake_y.unshift(snake_y[0]);
+                snake_x.pop();
+                snake_y.pop();
+                break;
+            case left:
+                snake_x.unshift(snake_x[0] - playerSize / 2);
+                snake_y.unshift(snake_y[0]);
+                snake_x.pop();
+                snake_y.pop();
+                break;
         }
+
         for (let i = 0; i < snake_x.length; ++i) {
             if (snake_x[i] <= -20) {
                 snake_x[i] = canvas.width;
