@@ -179,16 +179,15 @@ function Game() {
             ++score;
             document.getElementById("length").innerHTML = `Score: ${score}`;
             document.getElementById("high").innerHTML = "HighScore: " + highScore(score);
-            if (speed > 20) {
-                --amount;
-                if (amount === 0) {
-                    amount = 5;
-                    speed -= 1;
-                    clearInterval(game);
-                    game = setInterval(d, speed);
-                    console.log(speed)
-                }
-            } else {
+            --amount;
+            if (amount === 0) {
+                amount = 5;
+                speed -= 1;
+                clearInterval(game);
+                game = setInterval(d, speed);
+                console.log(speed)
+            }
+            if (amount <= 20) {
                 PrizeAudio.play();
             }
         }
