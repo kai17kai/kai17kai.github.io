@@ -30,19 +30,21 @@ function Reaction(position) {
     //bottom
     if (BallPosition.x + 10 >= ObstacleLocations[position] &&
         BallPosition.x <= ObstacleLocations[position] + 50 &&
-        BallPosition.y <= ObstacleLocations[position + 1] + 10) {
+        BallPosition.y >= ObstacleLocations[position + 1]) {
+            console.log("bottom");
             Down = true;
     }
     //top
-    else if (BallPosition.x + 10 >= ObstacleLocations[position] &&
+    if (BallPosition.x + 10 >= ObstacleLocations[position] &&
         BallPosition.x <= ObstacleLocations[position] + 50 &&
-        BallPosition.y + 10 >= ObstacleLocations[position + 1]) {
+        BallPosition.y + 10 <= ObstacleLocations[position + 1]) {
+            console.log("top")
             Down = false;
     }
     //left and right
-    else if ((BallPosition.x + 10 <= ObstacleLocations[position] || BallPosition.x >= ObstacleLocations[position] + 50) &&
+    if ((BallPosition.x + 10 <= ObstacleLocations[position] || BallPosition.x >= ObstacleLocations[position]) &&
         BallPosition.y + 10 >= ObstacleLocations[position + 1] &&
-        BallPosition.y <= ObstacleLocations[position + 1] + 10) {
+        BallPosition.y <= ObstacleLocations[position + 1]) {
             Slope.x = Reverse(Slope.x);
     }
 
@@ -180,9 +182,9 @@ var ObstacleLocations = Replace;
 
 //Slope
 var Slope = {
-    y1: 1,
-    y2: 3,
-    y3: 5,
+    y1: 2,
+    y2: 4,
+    y3: 6,
     x: 10
 }
 
@@ -238,23 +240,11 @@ if (Choice === 1) {
 function BallMovement() {
     BallPosition.x += Slope.x;
     if (y3 === true) {
-        if (Down) {
-            BallPosition.y += Slope.y3;
-        } else {
-            BallPosition.y -= Slope.y3;
-        }
+        Down ? BallPosition.y += Slope.y3 : BallPosition.y -= Slope.y3
     } else if (y2 === true) {
-        if (Down) {
-            BallPosition.y += Slope.y2;
-        } else {
-            BallPosition.y -= Slope.y2;
-        }
+        Down ? BallPosition.y += Slope.y2 : BallPosition.y -= Slope.y2;
     } else if (y1 === true) {
-        if (Down) {
-            BallPosition.y += Slope.y1;
-        } else {
-            BallPosition.y -= Slope.y1;
-        }
+        Down ? BallPosition.y += Slope.y1 : BallPosition.y -= Slope.y1;
     }
 
     if (BallPosition.x > 790 || BallPosition.x < 0) {
@@ -346,10 +336,12 @@ document.onkeydown = (e) => {
     }
 }
 
-let rect = canvas.getBoundingClientRect();
-canvas.onmousemove = (e) => {
-    let PosX = e.clientX - rect.left;
-    if (PosX > 0 && PosX < canvas.width) {
-        HumanX = PosX;
+let rect = canvas.getBoundingClientRect().left;
+document.onmousemove = (e) => {
+    HumanX = e.clientX - rect - 30;
+    if (HumanX < 0) {
+        HumanX = 0;
+    } else if (HumanX > 800) {
+        HumanX = 800;
     }
 }
