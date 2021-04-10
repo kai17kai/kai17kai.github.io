@@ -166,9 +166,11 @@ context.fillText("Press Space To Start", 210, 300);
 let done = false;
 let rectTop = canvas.getBoundingClientRect().top;
 document.addEventListener("mousemove", (e) => {
-    let PosY = e.clientY - rectTop - 30;
-    if (PosY >= -1 && PosY + 60 <= 600) {
-        Human = PosY;
+    Human = e.clientY - rectTop - 30;
+    if (Human < 0) {
+        Human = 0;
+    } else if (Human + 60 > 600) {
+        Human = 540;
     }
 });
 
