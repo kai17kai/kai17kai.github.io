@@ -39,7 +39,7 @@ function Game() {
 
     document.getElementById("high").innerHTML = "HighScore: " + highScore(0);
 
-    let controls = setInterval(() => {
+    setInterval(() => {
         if (gamepad) {
             let gp = navigator.getGamepads()[0];
             if (gp.buttons[0].pressed || gp.buttons[13].pressed || gp.axes[1] >= 0.75 || gp.axes[3] >= 0.75) {
@@ -133,7 +133,7 @@ function Game() {
     food.x = x - playerSize / 2;
     food.y = y - playerSize / 2;
 
-    let up = false, down = false, right = false, left = false;
+    let up = false, down = false, right = false, left = false, paused = false;
     let PrizeAudio = new Audio();
     PrizeAudio.src = "audio.mp3"
     window.onkeydown = (e) => {
@@ -166,6 +166,17 @@ function Game() {
                     left=true;
                 }
                 break;
+            case "q":
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                if (paused) {
+                    paused = false;
+                    game = setInterval(d, speed);
+                } else {
+                    paused = true;
+                    clearInterval(game);
+                    context.font = 'bold 48px serif';
+                    context.fillText("Paused", canvas.width / 2, canvas.height / 2);
+                }
         }
     }
 
