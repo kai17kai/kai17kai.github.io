@@ -341,7 +341,7 @@ document.onmousemove = (e) => {
     HumanX = e.clientX - rect - 30;
     if (HumanX < 0) {
         HumanX = 0;
-    } else if (HumanX > 800) {
-        HumanX = 800;
+    } else if (HumanX > 740) {
+        HumanX = 740;
     }
 }
