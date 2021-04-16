@@ -5,9 +5,6 @@ class Blocks {
     AddBlock = (type) => {
         console.log(type);
         if (type === 0) { //straight block
-            for (let i = 1; i <= 6; ++i) {
-                if ()
-            }
             this.blocks.push(new Block([[0, 2],[0, 3],[0, 4],[0, 5],[0,6],[0, 7]], "cyan"));
         } else if (type === 1) { //cube
             this.blocks.push(new Block([[0,4],[0,5],[1,4],[1,5]], "yellow"));
@@ -21,12 +18,27 @@ class Blocks {
     };
 
     Check = () => {
+        for (let i = 0; i < this.blocks.length; ++i) {
+            if (this.blocks[i].CanMove) {
+                console.log(this.blocks[i].positions.length);
+                for (let iBlock = 0; iBlock < this.blocks[i].positions.length; ++iBlock) {
+                    if (this.blocks[i].positions[iBlock][0] === 14) {
+                        this.blocks[i].CanMove = false;
+                        let choice = Math.floor(Math.random() * 5)
+                        test.AddBlock(choice);
+                    }
+                }
+            }
+        }
+        /*
         this.blocks.forEach(element => {
             if (element.CanMove) {
                 let YMax = 0;
+                let XMax = 0;
                 for (let i = 0; i < element.positions.length; ++i) {
                     if (element.positions[i][0] > YMax) {
                         YMax = element.positions[i][0];
+                        XMax = element.positions[i][1];
                     }
                 }
                 let amount = 0;
@@ -49,6 +61,7 @@ class Blocks {
                 }
             }
         });
+        */
     };
 
     MoveRight = () => {
