@@ -8,17 +8,25 @@
         <title>Mix That Cup</title>
         <link rel="stylesheet" type="text/css" href="../GameStyling.css" />
         <style>
-            div {
-                display: flex;
-            }
-
             img {
                 transform:rotate(180deg);
             }
 
+            p {
+                display: block;
+                text-align: center;
+            }
+
             #game {
+                display: flex;
                 flex-direction: row;
                 justify-content: space-around;
+            }
+
+            @keyframes MoveUp {
+                to {
+                    transform: translate(0px, 4em);
+                }
             }
         </style>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -37,33 +45,21 @@
         </a>
         <button onclick="window.location.reload()">Restart</button>
         <div id="game">
-            <img class="cup" id="1" src="./cup.png" />
-            <img class="cup" id="2" src="./cup.png" />
-            <img class="cup" id="3" src="./cup.png" />
+            <div>
+                <img class="cup" id="1" src="./cup.png" />
+            </div>
+            <div>
+                <img class="cup" id="2" src="./cup.png" />
+            </div>
+            <div>
+                <img class="cup" id="3" src="./cup.png" />
+            </div>
         </div>
-        <p id="result"> </p>
         <h4>Rules</h4>
         <p>This is a very simple game. You have 3 cups and you are trying to guess which one has the ball. 
             If you guess correctly, you win. If you guess incorrectly, you lose. You can play this game multiple times.
             Good Luck!
         </p>
-        <script>
-            let answer = Math.floor(Math.random() * 3) + 1;
-            for (let i = 1; i <= 3; ++i) {
-            document.getElementById(String(i)).onclick = () => {
-                    if (Number(document.getElementById(String(i)).id) == answer) {
-                        document.getElementById("result").innerHTML = "You have won the game";
-                        for (let i = 1; i <= 3; ++i) {
-                            document.getElementById(String(i)).onclick = null;
-                        }
-                    } else {
-                        document.getElementById("result").innerHTML = "You have lost the game";
-                        for (let i = 1; i <= 3; ++i) {
-                            document.getElementById(String(i)).onclick = null;
-                        }
-                    }
-                }
-            }
-        </script>
+        <script src="cup.js"></script>
     </body>
 </html>
