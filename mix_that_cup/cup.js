@@ -10,14 +10,14 @@ for (let i = 0; i < cups.length; ++i) {
             pTag.appendChild(pText);
             cups[i].parentElement.insertBefore(pTag, cups[i]);
             for (let j = 0; j < 3; ++j) {
-                cups[i].onclick = null;
+                cups[j].onclick = null;
             }
         } else {
             let pText = document.createTextNode("You have lost the game");
             pTag.appendChild(pText);
             cups[i].parentElement.insertBefore(pTag, cups[i]);
             for (let j = 0; j < 3; ++j) {
-                cups[i].onclick = null;
+                cups[j].onclick = null;
             }
         }
     }
