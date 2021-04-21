@@ -1,7 +1,6 @@
 let cups = Array.from(document.getElementsByClassName("cup"));
 let answer = Math.floor(Math.random() * 3);
 
-
 for (let i = 0; i < cups.length; ++i) {
     cups[i].onclick = (e) => {
         cups[i].parentElement.style.animation = "MoveUp 0.2s forwards"
