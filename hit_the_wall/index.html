@@ -59,7 +59,7 @@
                 document.getElementById("p").innerHTML = "You Have Hit The Wall " + String(Score) + " Times";
             }
 
-            function Movement(e) {
+            document.onkeydown = (e) => {
                 if (e.key === "w" || e.key === "ArrowUp") {
                     Up = true;
                 } else if (e.key === "s" || e.key === "ArrowDown") {
@@ -69,9 +69,7 @@
                 } else if (e.key === "a" || e.key === "ArrowLeft") {
                     Left = true;
                 }
-            }
-
-            document.addEventListener("keydown", Movement);
+            };
             document.onkeyup = (e) => {
                 if (e.key === "w" || e.key === "ArrowUp") {
                     Up = false;
