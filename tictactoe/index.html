@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Tic Tac Toe</title>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="kyle, ciurczak, tic tac toe">
+        <meta name="description" content="Come here to play a game of tic tac toe, by yourself or with your friend">
+        <link type="text/css" rel="stylesheet" href="../GameStyling.css">
+        <style>
+            grid {
+                display: grid;
+                align-items: center;
+                justify-content: center;
+                grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+                gap: 30px;
+                padding: 10px;
+            }
+
+            div {
+                text-align: center;
+                line-height: 25vh;
+                background-color: white;
+                height: 25vh;
+                width: inherit;
+                font-size: 25vh;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="../"><button>Main Menu</button></a>
+        <a href=""><button>Restart</button></a>
+        <grid>
+            <div data-x="0" data-y="0"></div>
+            <div data-x="1" data-y="0"></div>
+            <div data-x="2" data-y="0"></div>
+            <div data-x="0" data-y="1"></div>
+            <div data-x="1" data-y="1"></div>
+            <div data-x="2" data-y="1"></div>
+            <div data-x="0" data-y="2"></div>
+            <div data-x="1" data-y="2"></div>
+            <div data-x="2" data-y="2"></div>
+        </grid>
+        <input type="checkbox" id="choice"><label for="choice">Computer</label>
+        <h4 id="win"></h4>
+        <h4>Rules</h4>
+        <p>
+            This is just a simple game of tic tac toe. You can either play with friends or agaisnt the computer. Waring, the computer is something that is not to be messed with.
+            To input your move, just press on the area you want to place your move.
+        </p>
+        <script src="./tictactoe.js"></script>
+    </body>
+</html>
