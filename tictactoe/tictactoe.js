@@ -20,6 +20,7 @@ let Win = false;
 //add click to all spots
 spots.forEach(element => {
     element.onclick = () => {
+        if (!element.innerHTML) {
             let x = Number(element.getAttribute("data-x"));
             let y = Number(element.getAttribute("data-y"));
             if (Player > 0) {
@@ -41,8 +42,9 @@ spots.forEach(element => {
                 })
                 Win = true;
             }
-            Player = -Player;
             element.onclick = null;
+            Player = -Player;
+        }
     }
 })
 
