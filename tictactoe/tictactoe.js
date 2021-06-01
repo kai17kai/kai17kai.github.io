@@ -8,10 +8,26 @@ let board = Array(3).fill().map(() => Array(3).fill(0));
 let Player = 1;
 
 //get user input for computer or not
-let input = document.getElementById("choice");
-let Computer = false;
+var input = document.getElementById("choice");
 input.onchange = (e) => {
     Computer = Boolean(e.target.checked);
+    if (Computer) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?computer=1';
+        window.history.pushState({ path: newurl }, '', newurl);
+    } else {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({ path: newurl }, '', newurl);
+    }
+}
+
+//get url of the search
+const urlParams = new URLSearchParams(window.location.search);
+let Computer = parseInt(urlParams.get("computer"));
+if(isNaN(Computer)) {
+    Computer = false;
+} else if (Computer === 1) {
+    Computer = true;
+    input.checked = true;
 }
 
 //if there is a win or not
@@ -142,7 +158,7 @@ function evaluate(board, depth) {
     return 0;
 }
 
-function minimax(board, depth, isMax) {
+function minimax(board, depth, isMax, beta, alpha) {
     let score = evaluate(board, depth);
     if (score === 10 - depth || score === -10 + depth) {
         return score;
@@ -158,8 +174,12 @@ function minimax(board, depth, isMax) {
             for (let j = 0; j < 3; ++j) {
                 if (board[i][j] === 0) {
                     board[i][j] = 1;
-                    best = Math.max(best, minimax(board, depth + 1, false));
+                    best = Math.max(best, minimax(board, depth + 1, false, 1000, -1000));
                     board[i][j] = 0;
+                    alpha = Math.max(alpha, best);
+                    if (beta <= alpha) {
+                        i = j = 2;
+                    }
                 }
             }
         }
@@ -170,8 +190,12 @@ function minimax(board, depth, isMax) {
             for (let j = 0; j < 3; ++j) {
                 if (board[i][j] === 0) {
                     board[i][j] = 2;
-                    best = Math.min(best, minimax(board, depth + 1, true));
+                    best = Math.min(best, minimax(board, depth + 1, true, 1000, -1000));
                     board[i][j] = 0;
+                    beta = Math.min(beta, best);
+                    if (beta <= alpha) {
+                        i = j = 2;
+                    }
                 }
             }
         }
@@ -190,7 +214,7 @@ function findBestMove(board) {
         for (let j = 0; j < 3; ++j) {
             if (board[i][j] === 0) {
                 board[i][j] = 2
-                let moveVal = minimax(board, 0, true);
+                let moveVal = minimax(board, 0, true, 1000, -1000);
                 board[i][j] = 0
 
                 if (moveVal < bestVal) {
