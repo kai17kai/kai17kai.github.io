@@ -7,27 +7,54 @@ let board = Array(3).fill().map(() => Array(3).fill(0));
 //turn
 let Player = 1;
 
+//url
+const urlParams = new URLSearchParams(window.location.search);
+
+//choose who goes first
+let OrderChooser = document.querySelectorAll("input[name=order]");
+for (const rb of OrderChooser) {
+    rb.addEventListener("change", (e) => {
+        if (!board.includes(1) && !board.includes(2)) {
+            Player = Number(e.target.value);
+            urlParams.set("order", e.target.value);
+            window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${urlParams}`));
+        }
+    })
+}
+
 //get user input for computer or not
-var input = document.getElementById("choice");
+let input = document.getElementById("choice");
 input.onchange = (e) => {
     Computer = Boolean(e.target.checked);
     if (Computer) {
-        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?computer=1';
-        window.history.pushState({ path: newurl }, '', newurl);
+        urlParams.set("computer", 1);
+        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${urlParams}`));
     } else {
-        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-        window.history.pushState({ path: newurl }, '', newurl);
+        urlParams.delete("computer");
+        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${urlParams}`));
     }
 }
 
-//get url of the search
-const urlParams = new URLSearchParams(window.location.search);
+//if computer is playing
 let Computer = parseInt(urlParams.get("computer"));
 if(isNaN(Computer)) {
     Computer = false;
 } else if (Computer === 1) {
     Computer = true;
     input.checked = true;
+}
+
+//if computer is first
+let order = parseInt(urlParams.get("order"));
+if (isNaN(order)) {
+    Player = 1
+} else {
+    Player = order;
+    for (const rb of OrderChooser) {
+        if (Number(rb.getAttribute("value")) == order) {
+            rb.setAttribute("checked", "true");
+        }
+    }
 }
 
 //if there is a win or not
