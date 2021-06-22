@@ -18,3 +18,10 @@ a {
 html {
     touch-action: manipulation;
 }
+
+#rules {
+    background-color: white;
+    border: 5px solid;
+    border-radius: 20%;
+    width: fit-content;
+}

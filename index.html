@@ -129,16 +129,11 @@
                 </a>
             </div>
             <div class="game">
-                <a href="./coded_games/Speedy/Speedy (windows).zip" download="Speedy.zip" id="SWindow">
+                <a href="./coded_games/Speedy/Speedy (windows).zip" download="Speedy.zip" id="speedy">
                     <p>
-                        Speedy (.exe in zip)
+                        Speedy
                     </p>
                 </a>
-                <!--
-                <a href="./coded_games/Speedy/Speedy.zip" download id="SMac">
-                    <p>Speedy</p>
-                </a>
-                -->
             </div>
         </div>
         </div>
@@ -147,16 +142,14 @@
         </a>
         <p style="font-size: xx-small;">Made By Kyle Ciurczak</p>
         <script>
-            /*
             function Speedy() {
-                let Window = document.getElementById("SWindow");
-                let Mac = document.getElementById("SMac");
+                let download = document.getElementById("speedy");
                 let os = GetOs();
                 if (os != 3) {
                     if (os === 1) {
-                        Mac.style.display = "none";
+                        download.setAttribute("href", "./coded_games/Speedy/Speedy (windows).zip")
                     } else if (os === 2) {
-                        Window.style.display = "none";
+                        download.setAttribute("href", "./coded_games/Speedy/Speedy (mac).zip")
                     }
                 }
 
@@ -176,7 +169,6 @@
                 }
             }
             Speedy();
-            */
         </script>
     </body>
 </html>
