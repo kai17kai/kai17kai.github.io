@@ -23,7 +23,7 @@ img {
 }
 
 body {
-    background-image: linear-gradient(to left, rgb(107, 202, 170), blueviolet);
+    background-image: url(./backgroud.png);
 }
 
 .Items {

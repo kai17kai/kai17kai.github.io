@@ -7,7 +7,7 @@ let spotSize = square_side / 50;
 const context = canvas.getContext("2d");
 
 //board
-let board = Array(50).fill().map(() => Array(50).fill(0));
+let board = Array(50).fill().map(() => Array(50).fill().map(() => Array(2).fill(0)));
 
 //past board state
 let pastBoard = board;
@@ -28,7 +28,7 @@ for (const control of controls.children) {
             board = pastBoard;
             DrawBoard();
         } else if (control.id === "clear") {
-            board = Array(50).fill().map(() => Array(50).fill(0));
+            board = Array(50).fill().map(() => Array(50).fill().map(() => Array(2).fill(0)));
             simulation = false;
             DrawBoard();
         }
@@ -44,17 +44,19 @@ let drag = false;
 //see if user moved
 let moved = false;
 
+//get canvas bounds
+let rect = canvas.getBoundingClientRect();
+
 canvas.onmouseup = (e) => {
     drag = moved;
-    const rect = canvas.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
+    let x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    let y = (e.clientY - rect.top) * (canvas.height / rect.height);
     x = Math.floor(x / spotSize);
     y = Math.floor(y / spotSize);
     if (!drag) { 
-        board[y][x] === 0 ? board[y][x] = 1 : board[y][x] = 0
+        board[y][x][0] ^= 1;
     } else {
-        board[y][x] = 1;
+        board[y][x][0] = 1;
         drag = false;
     }
     moved = false;
@@ -70,12 +72,11 @@ canvas.onmousedown = () => {
 canvas.onmousemove = (e) => {
     if (drag) {
         moved = true;
-        const rect = canvas.getBoundingClientRect();
-        let x = e.clientX - rect.left;
-        let y = e.clientY - rect.top;
+        let x = (e.clientX - rect.left) * (canvas.width / rect.width);
+        let y = (e.clientY - rect.top) * (canvas.height / rect.height);
         x = Math.floor(x / spotSize);
         y = Math.floor(y / spotSize);
-        board[y][x] = 1;
+        board[y][x][0] = 1;
         pastBoard = board;
         DrawBoard();
     }
@@ -85,7 +86,7 @@ function DrawBoard() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < 50; ++i) {
         for (let j = 0; j < 50; ++j) {
-            context.fillStyle = colors[board[i][j]];
+            context.fillStyle = colors[board[i][j][0]];
             context.fillRect(j * spotSize + 5, i * spotSize + 5, spotSize - 5, spotSize - 5);
         }
     }
@@ -118,23 +119,23 @@ function SeeAroundPos(position) {
 
 let GameSimulation = setInterval(() => {
     if (simulation) {
-        let tempBoard = Array(50).fill().map(() => Array(50).fill(0));
+        let tempBoard = Array(50).fill().map(() => Array(50).fill().map(() => Array(2).fill(0)));
         for (let i = 0; i < 50; ++i) {
             for (let j = 0; j < 50; ++j) {
                 const OpenPositions = SeeAroundPos(i * 50 + j);
                 let AliveAmount = 0;
                 for (const position of OpenPositions) {
-                    if (board[position[0]][position[1]] === 1) {AliveAmount += 1}
+                    if (board[position[0]][position[1]][0] === 1) {AliveAmount += 1}
                 }
-                if (board[i][j] === 0) {
+                if (board[i][j][0] === 0) {
                     if (AliveAmount === 3) {
-                        tempBoard[i][j] = 1;
+                        tempBoard[i][j][0] = 1;
                     }
                 } else {
                     if (AliveAmount > 3 || AliveAmount < 2) {
-                        tempBoard[i][j] = 0;
+                        tempBoard[i][j][0] = 0;
                     } else if (AliveAmount === 2 || AliveAmount === 3) {
-                        tempBoard[i][j] = 1;
+                        tempBoard[i][j][0] = 1;
                     }
                 }
             }
@@ -150,6 +151,7 @@ window.onresize = () => {
     canvas.setAttribute('width', (square_side + 5).toString());
     canvas.setAttribute('height',(square_side + 5).toString());
     spotSize = square_side / 50;
+    rect = canvas.getBoundingClientRect();
     DrawBoard();
 }
 
