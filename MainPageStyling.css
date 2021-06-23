@@ -23,6 +23,7 @@ img {
 }
 
 body {
+    background-repeat: repeat;
     background-image: url(./backgroud.png);
 }
 

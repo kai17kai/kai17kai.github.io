@@ -8,6 +8,7 @@ canvas {
 }
 
 body {
+    background-repeat: repeat;
     background-image: url(./backgroud.png);
 }
 
@@ -20,8 +21,5 @@ html {
 }
 
 #rules {
-    background-color: white;
-    border: 5px solid;
-    border-radius: 20%;
-    width: fit-content;
+    color: white;
 }

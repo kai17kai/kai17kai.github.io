@@ -47,21 +47,37 @@ let moved = false;
 //get canvas bounds
 let rect = canvas.getBoundingClientRect();
 
+//if shift is clicked or not
+let shift = false;
+
+//if mouse is out of canvas bounds
+let OffMap = false;
+
+document.onkeydown = (e) => {
+    shift = e.shiftKey
+}
+
+document.onkeyup = (e) => {
+    shift = e.shiftKey
+}
+
 canvas.onmouseup = (e) => {
     drag = moved;
-    let x = (e.clientX - rect.left) * (canvas.width / rect.width);
-    let y = (e.clientY - rect.top) * (canvas.height / rect.height);
-    x = Math.floor(x / spotSize);
-    y = Math.floor(y / spotSize);
-    if (!drag) { 
-        board[y][x][0] ^= 1;
-    } else {
-        board[y][x][0] = 1;
-        drag = false;
+    if (!shift) {
+        let x = (e.clientX - rect.left)
+        let y = (e.clientY - rect.top)
+        x = Math.floor(x / spotSize);
+        y = Math.floor(y / spotSize);
+        if (!drag) { 
+            board[y][x][0] ^= 1;
+        } else {
+            board[y][x][0] = 1;
+            drag = false;
+        }
+        pastBoard = board;
+        DrawBoard();
     }
     moved = false;
-    pastBoard = board;
-    DrawBoard();
 }
 
 canvas.onmousedown = () => {
@@ -72,11 +88,15 @@ canvas.onmousedown = () => {
 canvas.onmousemove = (e) => {
     if (drag) {
         moved = true;
-        let x = (e.clientX - rect.left) * (canvas.width / rect.width);
-        let y = (e.clientY - rect.top) * (canvas.height / rect.height);
+        let x = (e.clientX - rect.left);
+        let y = (e.clientY - rect.top);
         x = Math.floor(x / spotSize);
         y = Math.floor(y / spotSize);
-        board[y][x][0] = 1;
+        if (!shift) {
+            board[y][x][0] = 1;
+        } else {
+            board[y][x][0] = 0;
+        }
         pastBoard = board;
         DrawBoard();
     }
