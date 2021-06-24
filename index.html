@@ -17,6 +17,34 @@
 
             gtag('config', 'G-MK9GP0V1QC');
         </script>
+        <script>
+            function Speedy() {
+                let download = document.getElementById("speedy");
+                let os = GetOs();
+                if (os != 3) {
+                    if (os === 1) {
+                        download.setAttribute("href", "./coded_games/Speedy/Speedy (windows).zip")
+                    } else if (os === 2) {
+                        download.setAttribute("href", "./coded_games/Speedy/Speedy (mac).zip")
+                    }
+                }
+
+                function GetOs() {
+                    if (window.navigator.userAgent.indexOf("Windows NT 10.0")!= -1) return 1;
+                    else if (window.navigator.userAgent.indexOf("Windows NT 6.3") != -1) return 1;
+                    else if (window.navigator.userAgent.indexOf("Windows NT 6.2") != -1) return 1;
+                    else if (window.navigator.userAgent.indexOf("Windows NT 6.1") != -1) return 1;
+                    else if (window.navigator.userAgent.indexOf("Windows NT 6.0") != -1) return 1;
+                    else if (window.navigator.userAgent.indexOf("Windows NT 5.1") != -1) return 1;
+                    else if (window.navigator.userAgent.indexOf("Windows NT 5.0") != -1) return 1;
+                    else if (window.navigator.userAgent.indexOf("Mac") != -1) return 2;
+                    else {
+                        alert("Your device is not compatible with the game.");
+                        return 3;
+                    }
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="Header">
@@ -129,7 +157,7 @@
                 </a>
             </div>
             <div class="game">
-                <a href="./coded_games/Speedy/Speedy (windows).zip" download="Speedy.zip" id="speedy">
+                <a href="./coded_games/Speedy/Speedy (windows).zip" download="Speedy.zip" id="speedy" onclick="Speedy()">
                     <p>
                         Speedy
                     </p>
@@ -141,34 +169,5 @@
             <button>Contact Us</button>
         </a>
         <p style="font-size: xx-small;">Made By Kyle Ciurczak</p>
-        <script>
-            function Speedy() {
-                let download = document.getElementById("speedy");
-                let os = GetOs();
-                if (os != 3) {
-                    if (os === 1) {
-                        download.setAttribute("href", "./coded_games/Speedy/Speedy (windows).zip")
-                    } else if (os === 2) {
-                        download.setAttribute("href", "./coded_games/Speedy/Speedy (mac).zip")
-                    }
-                }
-
-                function GetOs() {
-                    if (window.navigator.userAgent.indexOf("Windows NT 10.0")!= -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 6.3") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 6.2") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 6.1") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 6.0") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 5.1") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 5.0") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Mac") != -1) return 2;
-                    else {
-                        alert("Your device is not compatible with the game.");
-                        return 3;
-                    }
-                }
-            }
-            Speedy();
-        </script>
     </body>
 </html>
