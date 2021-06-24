@@ -61,7 +61,7 @@ document.onkeyup = (e) => {
     shift = e.shiftKey
 }
 
-canvas.onmouseup = (e) => {
+canvas.onpointerup = (e) => {
     drag = moved;
     if (!shift) {
         let x = (e.clientX - rect.left)
@@ -80,12 +80,12 @@ canvas.onmouseup = (e) => {
     moved = false;
 }
 
-canvas.onmousedown = () => {
+canvas.onpointerdown = () => {
     simulation = false;
     drag = true;
 }
 
-canvas.onmousemove = (e) => {
+canvas.onpointermove = (e) => {
     if (drag) {
         moved = true;
         let x = (e.clientX - rect.left);
