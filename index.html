@@ -18,7 +18,7 @@
             gtag('config', 'G-MK9GP0V1QC');
         </script>
         <script>
-            function Speedy() {
+            function Speedy(e) {
                 let download = document.getElementById("speedy");
                 let os = GetOs();
                 if (os != 3) {
@@ -27,6 +27,8 @@
                     } else if (os === 2) {
                         download.setAttribute("href", "./coded_games/Speedy/Speedy (mac).zip")
                     }
+                } else {
+                    e.preventDefault();
                 }
 
                 function GetOs() {
