@@ -28,7 +28,7 @@
                         download.setAttribute("href", "./coded_games/Speedy/Speedy (mac).zip")
                     }
                 } else {
-                    return false;
+                    e.preventDefault();
                 }
 
                 function GetOs() {
@@ -159,7 +159,7 @@
                 </a>
             </div>
             <div class="game">
-                <a href="./coded_games/Speedy/Speedy (windows).zip" download="Speedy.zip" id="speedy" onclick="Speedy()">
+                <a href="./coded_games/Speedy/Speedy (windows).zip" download="Speedy.zip" id="speedy" onclick="Speedy(event)">
                     <p>
                         Speedy
                     </p>
