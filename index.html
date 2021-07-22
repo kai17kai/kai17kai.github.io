@@ -18,31 +18,29 @@
             gtag('config', 'G-MK9GP0V1QC');
         </script>
         <script>
-            function Speedy(e) {
-                let download = document.getElementById("speedy");
+            //get os of user
+            function GetOs() {
+                if (window.navigator.userAgent.indexOf("Windows NT 10.0")!= -1) return 1;
+                else if (window.navigator.userAgent.indexOf("Windows NT 6.3") != -1) return 1;
+                else if (window.navigator.userAgent.indexOf("Windows NT 6.2") != -1) return 1;
+                else if (window.navigator.userAgent.indexOf("Windows NT 6.1") != -1) return 1;
+                else if (window.navigator.userAgent.indexOf("Windows NT 6.0") != -1) return 1;
+                else if (window.navigator.userAgent.indexOf("Windows NT 5.1") != -1) return 1;
+                else if (window.navigator.userAgent.indexOf("Windows NT 5.0") != -1) return 1;
+                else if (window.navigator.userAgent.indexOf("Mac") != -1) return 2;
+                else {
+                    alert("Your device is not compatible with the game.");
+                    return 3;
+                }
+            }
+
+            function DownloadCheck(download) {
                 let os = GetOs();
                 if (os != 3) {
                     if (os === 1) {
-                        download.setAttribute("href", "./coded_games/Speedy/Speedy (windows).zip")
+                        download.setAttribute("href", "./coded_games/" + download.id + "/windows.zip")
                     } else if (os === 2) {
-                        download.setAttribute("href", "./coded_games/Speedy/Speedy (mac).zip")
-                    }
-                } else {
-                    e.preventDefault();
-                }
-
-                function GetOs() {
-                    if (window.navigator.userAgent.indexOf("Windows NT 10.0")!= -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 6.3") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 6.2") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 6.1") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 6.0") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 5.1") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Windows NT 5.0") != -1) return 1;
-                    else if (window.navigator.userAgent.indexOf("Mac") != -1) return 2;
-                    else {
-                        alert("Your device is not compatible with the game.");
-                        return 3;
+                        download.setAttribute("href", "./coded_games/" + download.id + "/mac.zip")
                     }
                 }
             }
@@ -147,19 +145,19 @@
         </div>
         <div class="Items">
             <div class="game">
-                <a href="coded_games/Maze Game (windows).zip" download>
+                <a href="coded_games/maze_game/windows.zip" onclick="DownloadCheck(this)" id="maze_game" download="Maze Game.zip">
                     <p>Maze Game(.exe file in zip)</p>
                 </a>
             </div>
             <div class="game">
-                <a href="./coded_games/Get The Worm (windows).zip" download>
+                <a href="./coded_games/get_the_worm/windows.zip" onclick="DownloadCheck(this)" id="get_the_worm" download="Get The Worm.zip">
                     <p>
                         Get The Worm(.exe file in zip)
                     </p>
                 </a>
             </div>
             <div class="game">
-                <a href="./coded_games/Speedy/Speedy (windows).zip" download="Speedy.zip" id="speedy" onclick="Speedy(event)">
+                <a href="./coded_games/speedy/windows.zip" onclick="DownloadCheck(this)" id="speedy" download="Speedy.zip">
                     <p>
                         Speedy
                     </p>
