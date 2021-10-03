@@ -182,15 +182,19 @@ window.onkeydown = (e) => {
         switch (e.key.toLocaleLowerCase(), e.key) {
             case "w": case "ArrowUp":
                 Player.y = Player.MoveUp(Player.y);
+                e.preventDefault();
                 break;
             case "s": case "ArrowDown":
                 Player.y = Player.MoveDown(Player.y);
+                e.preventDefault();
                 break;
             case "d": case "ArrowRight":
                 Player.x = Player.MoveRight(Player.x);
+                e.preventDefault();
                 break;
             case "a": case "ArrowLeft":
                 Player.x = Player.MoveLeft(Player.x);
+                e.preventDefault();
                 break;
             case "r":
                 location.reload();
