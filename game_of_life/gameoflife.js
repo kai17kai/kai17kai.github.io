@@ -87,6 +87,7 @@ canvas.onpointerdown = () => {
 
 canvas.onpointermove = (e) => {
     if (drag) {
+        e.preventDefault();
         moved = true;
         let x = (e.clientX - rect.left);
         let y = (e.clientY - rect.top);
