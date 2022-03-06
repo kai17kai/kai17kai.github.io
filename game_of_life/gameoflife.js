@@ -7,7 +7,7 @@ let spotSize = square_side / 50;
 const context = canvas.getContext("2d");
 
 //board
-let board = Array(50).fill().map(() => Array(50).fill().map(() => Array(2).fill(0)));
+let board = Array(50).fill().map(() => Array(50).fill(0));
 
 //past board state
 let pastBoard = board;
@@ -28,7 +28,7 @@ for (const control of controls.children) {
             board = pastBoard;
             DrawBoard();
         } else if (control.id === "clear") {
-            board = Array(50).fill().map(() => Array(50).fill().map(() => Array(2).fill(0)));
+            board = Array(50).fill().map(() => Array(50).fill(0));
             simulation = false;
             DrawBoard();
         }
@@ -54,11 +54,11 @@ let shift = false;
 let OffMap = false;
 
 document.onkeydown = (e) => {
-    shift = e.shiftKey
+    shift = e.shiftKey;
 }
 
 document.onkeyup = (e) => {
-    shift = e.shiftKey
+    shift = e.shiftKey;
 }
 
 canvas.onpointerup = (e) => {
@@ -69,9 +69,9 @@ canvas.onpointerup = (e) => {
         x = Math.floor(x / spotSize);
         y = Math.floor(y / spotSize);
         if (!drag) { 
-            board[y][x][0] ^= 1;
+            board[y][x] ^= 1;
         } else {
-            board[y][x][0] = 1;
+            board[y][x] = 1;
             drag = false;
         }
         pastBoard = board;
@@ -94,9 +94,9 @@ canvas.onpointermove = (e) => {
         x = Math.floor(x / spotSize);
         y = Math.floor(y / spotSize);
         if (!shift) {
-            board[y][x][0] = 1;
+            board[y][x] = 1;
         } else {
-            board[y][x][0] = 0;
+            board[y][x] = 0;
         }
         pastBoard = board;
         DrawBoard();
@@ -107,7 +107,7 @@ function DrawBoard() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < 50; ++i) {
         for (let j = 0; j < 50; ++j) {
-            context.fillStyle = colors[board[i][j][0]];
+            context.fillStyle = colors[board[i][j]];
             context.fillRect(j * spotSize + 5, i * spotSize + 5, spotSize - 5, spotSize - 5);
         }
     }
@@ -140,23 +140,23 @@ function SeeAroundPos(position) {
 
 let GameSimulation = setInterval(() => {
     if (simulation) {
-        let tempBoard = Array(50).fill().map(() => Array(50).fill().map(() => Array(2).fill(0)));
+        let tempBoard = Array(50).fill().map(() => Array(50).fill(0));;
         for (let i = 0; i < 50; ++i) {
             for (let j = 0; j < 50; ++j) {
                 const OpenPositions = SeeAroundPos(i * 50 + j);
                 let AliveAmount = 0;
                 for (const position of OpenPositions) {
-                    if (board[position[0]][position[1]][0] === 1) {AliveAmount += 1}
+                    if (board[position[0]][position[1]] === 1) {AliveAmount += 1}
                 }
-                if (board[i][j][0] === 0) {
+                if (board[i][j] === 0) {
                     if (AliveAmount === 3) {
-                        tempBoard[i][j][0] = 1;
+                        tempBoard[i][j] = 1;
                     }
                 } else {
                     if (AliveAmount > 3 || AliveAmount < 2) {
-                        tempBoard[i][j][0] = 0;
+                        tempBoard[i][j] = 0;
                     } else if (AliveAmount === 2 || AliveAmount === 3) {
-                        tempBoard[i][j][0] = 1;
+                        tempBoard[i][j] = 1;
                     }
                 }
             }
