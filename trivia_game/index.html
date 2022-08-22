@@ -3,10 +3,29 @@
     <head>
         <title>Trivia Game</title>
         <link type="text/css" rel="stylesheet" href="../GameStyling.css">
+        <script src="./trivia.js" defer></script>
     </head>
     <body>
-        <h1>Question:</h1>
-        <p id="question"></p>
-        <script src="./trivia.js"></script>
+        <button id="button">Get Question</button>
+        <select id="difficultly">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+        <h3 id="question"></h3>
+        <button class="answers"></button>
+        <button class="answers"></button>
+        <button class="answers"></button>
+        <button class="answers"></button>
+        <div id="correct" style="display:none;">
+            <h3>
+                You got the correct answer. You have gotten <div class="amountCorrect" style="display:inline;">0</div> correct. Press <i>Get Question</i> to get the next question.
+            </h3>
+        </div>
+        <div id="incorrect" style="display:none;">
+            <h3>
+                You have gotten the question incorrect. You have gotten <div class="amountCorrect" style="display:inline;">0</div> correct. Press <i>Get Question</i> to get the next question.
+            </h3>
+        </div>
     </body>
 </html>
