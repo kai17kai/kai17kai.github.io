@@ -19,7 +19,7 @@ fetch("./words_alpha.txt")
         while (ChosenWord.length > 10) {
             ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
         }
-        ChosenWord = ChosenWord.splice(0, -2);
+        ChosenWord = ChosenWord.substring(0, ChosenWord.length - 1);
         start();
     })
     .catch(error => {
