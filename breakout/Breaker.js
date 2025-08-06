@@ -45,7 +45,7 @@ function Start() {
     });
 
     //creates pong
-    var Pong = Bodies.rectangle(375, 350, 10, 10, {
+    var Pong = Bodies.rectangle(Math.floor(Math.random() * 801), 350, 10, 10, {
         inertia: Infinity,
         friction: 0
     });
@@ -119,10 +119,10 @@ function Start() {
             if (pair.bodyA.label === "obstacle") {
                 Composite.remove(engine.world, pair.bodyA);
                 if (normal.x != 0) {
-                    velocity.x = Math.sign(normal.x) * -2 + Math.sign(normal.x) * score * -0.5;
+                    velocity.x = Math.sign(normal.x) * -2;
                 }
                 if (normal.y != 0) {
-                    velocity.y = Math.sign(normal.y) * -2 + Math.sign(normal.x) * score * -0.5;
+                    velocity.y = Math.sign(normal.y) * -2;
                 }
                 Matter.Body.setVelocity(Pong, velocity);
 
@@ -131,23 +131,23 @@ function Start() {
                 currentHighScore.innerText = "High Score: " + highScore(score);
             } else if (pair.bodyA.label === "player") {
                 if (normal.x != 0) {
-                    velocity.x = Math.sign(normal.x) * -2 + Math.sign(normal.x) * score * -0.5;
+                    velocity.x = Math.sign(normal.x) * -2;
                 }
                 if (normal.y != 0) {
-                    velocity.y = Math.sign(normal.y) * -2 + Math.sign(normal.x) * score * -0.5;
+                    velocity.y = Math.sign(normal.y) * -2;
                 }
                 Matter.Body.setVelocity(Pong, velocity);
             } else if (pair.bodyA.label === "top" || pair.bodyB.label === "top") {
-                velocity.y = 2 + score * 0.5;
+                velocity.y = 2;
                 Matter.Body.setVelocity(Pong, velocity);
                 console.log(velocity);
                 console.log("top");
             } else if (pair.bodyA.label === "right" || pair.bodyB.label === "right") {
-                velocity.x = -2 - score * 0.5;
+                velocity.x = -2;
                 Matter.Body.setVelocity(Pong, velocity);
                 console.log("right");
             } else if (pair.bodyA.label === "left" || pair.bodyB.label === "left") {
-                velocity.x = 2 + score * 0.5;
+                velocity.x = 2;
                 Matter.Body.setVelocity(Pong, velocity);
                 console.log("left");
             } else if (pair.bodyA.label === "bottom" || pair.bodyB.label === "bottom") {
