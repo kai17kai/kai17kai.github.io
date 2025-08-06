@@ -10,7 +10,7 @@ context.font = " 20px Arial";
 
 //Creates arrays that holds the word list, right guess, and wrong guess
 var WordList
-fetch("./words_alpha.text")
+fetch("./words_alpha.txt")
     .then((res) => res.text())
     .then(text => {
         console.log(text);
