@@ -13,6 +13,7 @@ var WordList
 fetch("./words_alpha.text")
     .then((res) => res.text())
     .then(text => {
+        console.log(text);
         WordList = text.split("\n");
         ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
         start();
