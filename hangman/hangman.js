@@ -14,6 +14,15 @@ fetch("./words_alpha.text")
     .then((res) => res.text())
     .then(text => {
         WordList = text.split("\n");
+        if (WordList.length() == 0) {
+            WordList = ["midfield","prescribed","torches","visually","alright","trainer","disease","moderation","northern","village","substance","proponents","conversion","elapsed","betrayal","lectures","promoter","indictment","inflated","subsidiary","annoyed","accordingly","publish",
+"unaware","dashing","republic","eyebrows","underground","helicopter","tagging","merging","feminist","assertion","scramble","southward","annoyed","bowling","perhaps","truckers","municipal","uncover","lectures","playback","displeasure","textbook","catering","shortfall",
+"vacancies","proceeds","unbiased","Australia","torment","whenever","reservoir","sensory","candidates","northeastern","rousing","effectively","mouthed","defense","essentially","assumption","patrolling","medicines",
+"trooper","considered","measurement","durable","solidly","circled","utterance","confusing","lurking","agreeable","ringing","dreamed","donation","desperation","severity","trustee","fatalities","financing","terrace",
+"automaker","creators","expansive","whenever","projection","license","library","constraints","annoyed","comeback","thinner","unaware","unnecessarily","shortfall","suppression","provoke","safeguard","personally","exhaustive","delegates","undertaking","homemade","prisons",
+,"handling","lectures","whisper","uncover","southwest","undecided","applicable","royalty","proponents","pitched","Frankenstein","vacancies","guitars","mountainous","spouses","Salisbury","deliberately","advantages","royalties","avoidance","precipitation","violently","Bulgaria",
+"patrons","inviting","commentaries","greener","breathless","ammunition","required","horrors","touchdown","parliament","notebook","duration","inspect","blossom","baskets","brushed","telecoms","baptized","purchasing","unqualified","constituted","destruction","bonding","slaughter"];
+        }
         ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
         start();
     });
