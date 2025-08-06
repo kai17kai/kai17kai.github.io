@@ -25,16 +25,11 @@ const context = canvas.getContext("2d");
 var death = true;
 
 function Start() {
-    if (death) {
-        death = false;
-    } else {
-        return;
-    }
     //creates obstacles
     var Obstacles = new Array();
     for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 9; j++) {
-            Obstacles.push(Bodies.rectangle(80 + 80 * j, 50 + 60 * i, 50, 10, { 
+            Obstacles.push(Bodies.rectangle(80 + 80 * j, 50 + 65 * i, 50, 10, { 
                 isStatic: true,
                 label: "obstacle",
                 friction: 0
@@ -55,6 +50,7 @@ function Start() {
         friction: 0
     });
     var velocity = Matter.Vector.create(2, 2);
+    velocity.x *= Math.floor(Math.random() * 2) === 1 ? 1 : -1;
     Matter.Body.setVelocity(Pong, velocity);
 
     //creates walls
@@ -123,10 +119,10 @@ function Start() {
             if (pair.bodyA.label === "obstacle") {
                 Composite.remove(engine.world, pair.bodyA);
                 if (normal.x != 0) {
-                    velocity.x = Math.sign(normal.x) * -2;
+                    velocity.x = Math.sign(normal.x) * -2 + Math.sign(normal.x) * score * -0.5;
                 }
                 if (normal.y != 0) {
-                    velocity.y = Math.sign(normal.y) * -2
+                    velocity.y = Math.sign(normal.y) * -2 + Math.sign(normal.x) * score * -0.5;
                 }
                 Matter.Body.setVelocity(Pong, velocity);
 
@@ -135,23 +131,23 @@ function Start() {
                 currentHighScore.innerText = "High Score: " + highScore(score);
             } else if (pair.bodyA.label === "player") {
                 if (normal.x != 0) {
-                    velocity.x = Math.sign(normal.x) * -2;
+                    velocity.x = Math.sign(normal.x) * -2 + Math.sign(normal.x) * score * -0.5;
                 }
                 if (normal.y != 0) {
-                    velocity.y = Math.sign(normal.y) * -2;
+                    velocity.y = Math.sign(normal.y) * -2 + Math.sign(normal.x) * score * -0.5;
                 }
                 Matter.Body.setVelocity(Pong, velocity);
             } else if (pair.bodyA.label === "top" || pair.bodyB.label === "top") {
-                velocity.y = 2;
+                velocity.y = 2 + score * 0.5;
                 Matter.Body.setVelocity(Pong, velocity);
                 console.log(velocity);
                 console.log("top");
             } else if (pair.bodyA.label === "right" || pair.bodyB.label === "right") {
-                velocity.x = -2;
+                velocity.x = -2 - score * 0.5;
                 Matter.Body.setVelocity(Pong, velocity);
                 console.log("right");
             } else if (pair.bodyA.label === "left" || pair.bodyB.label === "left") {
-                velocity.x = 2;
+                velocity.x = 2 + score * 0.5;
                 Matter.Body.setVelocity(Pong, velocity);
                 console.log("left");
             } else if (pair.bodyA.label === "bottom" || pair.bodyB.label === "bottom") {
@@ -174,6 +170,30 @@ function Death() {
     death = true;
 }
 
+function Timer() {
+    if (death) {
+        death = false;
+    } else {
+        return;
+    }
+    let seconds = 5;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = "white";
+    context.font = "40px Arial";
+    context.fillText(seconds.toString(), 350, 300);
+    let ID = setInterval(() => {
+        seconds -= 1;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = "white";
+        context.font = "40px Arial";
+        context.fillText(seconds.toString(), 350, 300);
+        if (seconds == 0) {
+            Start();
+            clearInterval(ID);
+        }
+    }, 1000);
+}
+
 context.fillStyle = "white";
 context.font = "40px Arial";
 context.fillText("Press Space To Start", 200, 300);
@@ -181,7 +201,7 @@ let done = false;
 document.onkeydown = (e) => {
     if (e.key == " " && done === false) {
         e.preventDefault();
-        Start();
+        Timer();
         done = true;
     }
 }
