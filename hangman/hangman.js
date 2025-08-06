@@ -95,7 +95,7 @@ function start() {
             context.lineTo(430, 270);
             context.stroke();
             context.fillText("You Have Lost To The Easiest Game Ever.", 220, 400);
-            let phrase = "The Word was: " + ChosenWord.join("");
+            let phrase = "The Word was: " + ChosenWord;
             context.fillText(phrase, 400 - (phrase.length * 5), 450);
             context.fillText("Press y to restart", 310, 500);
             NotOver = false;
