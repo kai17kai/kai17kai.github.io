@@ -9,49 +9,19 @@ context.fillStyle = "rgb(0, 0, 0)";
 context.font = " 20px Arial";
 
 //Creates arrays that holds the word list, right guess, and wrong guess
-var WordList = ["midfield","prescribed","torches","visually","alright","trainer","disease","moderation","northern","village","substance","proponents","conversion","elapsed","betrayal","lectures","promoter","indictment","inflated","subsidiary","annoyed","accordingly","publish",
-"unaware","dashing","republic","eyebrows","underground","helicopter","tagging","merging","feminist","assertion","scramble","southward","annoyed","bowling","perhaps","truckers","municipal","uncover","lectures","playback","displeasure","textbook","catering","shortfall",
-"vacancies","proceeds","unbiased","Australia","torment","whenever","reservoir","sensory","candidates","northeastern","rousing","effectively","mouthed","defense","essentially","assumption","patrolling","medicines",
-"trooper","considered","measurement","durable","solidly","circled","utterance","confusing","lurking","agreeable","ringing","dreamed","donation","desperation","severity","trustee","fatalities","financing","terrace",
-"automaker","creators","expansive","whenever","projection","license","library","constraints","annoyed","comeback","thinner","unaware","unnecessarily","shortfall","suppression","provoke","safeguard","personally","exhaustive","delegates","undertaking","homemade","prisons",
-,"handling","lectures","whisper","uncover","southwest","undecided","applicable","royalty","proponents","pitched","Frankenstein","vacancies","guitars","mountainous","spouses","Salisbury","deliberately","advantages","royalties","avoidance","precipitation","violently","Bulgaria",
-"patrons","inviting","commentaries","greener","breathless","ammunition","required","horrors","touchdown","parliament","notebook","duration","inspect","blossom","baskets","brushed","telecoms","baptized","purchasing","unqualified","constituted","destruction","bonding","slaughter"];
+var WordList
+fetch("./words_alpha.text")
+    .then((res) => res.text())
+    .then(text => {
+        WordList = text.split("\n");
+        ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
+        start();
+    });
 var alphabet = "abcdefghijklemnopqrstuvwxyz";
 var RightGuess = new Array();
 var WrongGuess = new Array();
 var NotOver = true;
 var ChosenWord;
-
-function Word() {
-    try {
-        $.getJSON("https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&includePartOfSpeech=noun%2Cadjective%2Cverb%2Cadverb&minCorpusCount=20000&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=7&maxLength=16&limit=1&api_key=cfbdvci39k77upfq2dy0jidgnyumjnz98tx0n37716m8gbbgy", function(data) {
-            let done = false;
-            if (/[A-Z]/.test(data[0].word)) {
-                done = true;
-            }
-            ChosenWord = Array.from(data[0].word);
-            ChosenWord.forEach(element => {
-                if (!(alphabet.includes(element))) {
-                    done = true;
-                }
-            });
-            if (!(done)) {
-                start();
-            } else {
-                Word();
-            }
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
-            start();
-        });
-    }
-    catch {
-        ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
-        start();
-    }
-}
-Word();
 function start() {
     var LinePositions = [];
     var UsePositions = [];
