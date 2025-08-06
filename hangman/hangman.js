@@ -14,12 +14,12 @@ fetch("./words_alpha.txt")
     .then((res) => res.text())
     .then(text => {
         console.log(text);
-        text.replaceAll("\r", "");
         WordList = text.split("\n");
         ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
         while (ChosenWord.length > 10) {
             ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
         }
+        ChosenWord = ChosenWord.splice(0, -2);
         start();
     })
     .catch(error => {
