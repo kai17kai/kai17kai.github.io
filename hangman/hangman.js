@@ -19,11 +19,11 @@ fetch("./words_alpha.txt")
         while (ChosenWord.length > 10) {
             ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
         }
-        ChosenWord = ChosenWord.substring(0, ChosenWord.length - 1);
+        ChosenWord = ChosenWord.toString().substring(0, ChosenWord.toString().length - 2);
         start();
     })
     .catch(error => {
-        console.log(error);
+        console.error(error);
         WordList = ["midfield","prescribed","torches","visually","alright","trainer","disease","moderation","northern","village","substance","proponents","conversion","elapsed","betrayal","lectures","promoter","indictment","inflated","subsidiary","annoyed","accordingly","publish",
 "unaware","dashing","republic","eyebrows","underground","helicopter","tagging","merging","feminist","assertion","scramble","southward","annoyed","bowling","perhaps","truckers","municipal","uncover","lectures","playback","displeasure","textbook","catering","shortfall",
 "vacancies","proceeds","unbiased","Australia","torment","whenever","reservoir","sensory","candidates","northeastern","rousing","effectively","mouthed","defense","essentially","assumption","patrolling","medicines",
