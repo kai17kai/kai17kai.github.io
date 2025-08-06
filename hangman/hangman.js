@@ -16,6 +16,9 @@ fetch("./words_alpha.txt")
         console.log(text);
         WordList = text.split("\n");
         ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
+        while (ChosenWord.length > 10) {
+            ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
+        }
         start();
     })
     .catch(error => {
