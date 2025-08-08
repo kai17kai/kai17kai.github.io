@@ -8,7 +8,7 @@ canvas {
 }
 
 body {
-    background-repeat: repeat;
+    background-size: cover;
     background-image: url(./backgroud.png);
 }
 

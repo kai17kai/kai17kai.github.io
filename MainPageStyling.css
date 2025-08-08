@@ -23,11 +23,12 @@ img {
 }
 
 body {
-    background-repeat: repeat;
+    background-size: cover;
     background-image: url(./backgroud.png);
 }
 
 .Items {
+    position: relative;
     display: flex;
     justify-content:space-evenly;
     flex-wrap: wrap;
@@ -40,7 +41,7 @@ p {
 }
 
 p:hover {
-    color:rgb(23, 223, 234)
+    color:rgb(0, 0, 0)
 }
 
 a {
@@ -54,3 +55,22 @@ a {
     display: flex;
     justify-content: center;
 }
+
+.Name {
+    position: absolute;
+    bottom: 30%;
+    left: 10.5%;
+}
+
+    /*
+#Title {
+    text-align: center;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: flex-start;
+}
+    */
