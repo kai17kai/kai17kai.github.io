@@ -19,7 +19,7 @@ fetch("./words_alpha.txt")
         while (ChosenWord.length > 10) {
             ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
         }
-        console.log(ChosenWord);
+        ChosenWord = ChosenWord.replace("\r", "");
         start();
     })
     .catch(error => {
