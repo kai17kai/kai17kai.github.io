@@ -19,7 +19,7 @@ fetch("./words_alpha.txt")
         while (ChosenWord.length > 10) {
             ChosenWord = WordList[Math.floor(Math.random() * WordList.length)];
         }
-        ChosenWord = ChosenWord.toString().substring(0, ChosenWord.toString().length - 2);
+        console.log(ChosenWord);
         start();
     })
     .catch(error => {
@@ -42,8 +42,6 @@ var ChosenWord;
 function start() {
     var LinePositions = [];
     var UsePositions = [];
-
-    var length = ChosenWord.length;
 
     for (let i = 0; i < ChosenWord.length; ++i) {
         LinePositions.push((400 - (length * 30 / 2)) + (i * 30))
