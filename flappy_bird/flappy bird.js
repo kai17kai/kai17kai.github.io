@@ -1,7 +1,7 @@
 'use strict';
 
 //function for high score
-function highScore(min, sec) {
+function highScore(min, sec, reset) {
     var minTime = 0, secTime = 0;
     try { 
         minTime = parseFloat(localStorage.time.split(":")[0]);
@@ -26,6 +26,9 @@ function highScore(min, sec) {
         }
         if (min-minTime > 0) {
             minTime = min;
+        }
+        if (reset) {
+            secTime = 0;
         }
         
         secTime > 9 ? localStorage.time = '' + minTime + ":" + secTime : localStorage.time = '' + minTime + ":0" + secTime
@@ -68,10 +71,16 @@ context.font = "20px Arial";
 
 let time = () => {
     sectime += 1;
+    let reset = false;
     if (sectime > 59) {
         sectime = 0;
         mintime += 1;
+        reset = true;
     }
+    context.fillStyle = "black";
+    sectime < 10 ? context.fillText(`Time: ${mintime}:0${sectime}`, 0, 30) : context.fillText(`Time: ${mintime}:${sectime}`, 0, 30);
+    highScore(mintime, sectime, reset);
+    context.fillText("High Score: " + localStorage.time, 0, 50);
 
     if (sectime % 10 == 0) {
         clearInterval(Visibility);
@@ -165,11 +174,6 @@ const Game = () => {
             context.drawImage(Allie_Image, 2048, 0, 1024, 1024, 100, Player, 100, 100);
         }
     }
-    
-    context.fillStyle = "black";
-    sectime < 10 ? context.fillText(`Time: ${mintime}:0${sectime}`, 0, 30) : context.fillText(`Time: ${mintime}:${sectime}`, 0, 30);
-    highScore(mintime, sectime);
-    context.fillText("High Score: " + localStorage.time, 0, 50);
 
     if (Player >= canvas.height || Player <= 0) {
         dead();
