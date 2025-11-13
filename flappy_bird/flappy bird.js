@@ -77,10 +77,8 @@ let time = () => {
         mintime += 1;
         reset = true;
     }
-    context.fillStyle = "black";
-    sectime < 10 ? context.fillText(`Time: ${mintime}:0${sectime}`, 0, 30) : context.fillText(`Time: ${mintime}:${sectime}`, 0, 30);
+
     highScore(mintime, sectime, reset);
-    context.fillText("High Score: " + localStorage.time, 0, 50);
 
     if (sectime % 10 == 0) {
         clearInterval(Visibility);
@@ -174,6 +172,10 @@ const Game = () => {
             context.drawImage(Allie_Image, 2048, 0, 1024, 1024, 100, Player, 100, 100);
         }
     }
+
+    context.fillStyle = "black";
+    sectime < 10 ? context.fillText(`Time: ${mintime}:0${sectime}`, 0, 30) : context.fillText(`Time: ${mintime}:${sectime}`, 0, 30);
+    context.fillText("High Score: " + localStorage.time, 0, 50);
 
     if (Player >= canvas.height || Player <= 0) {
         dead();
